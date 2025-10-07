@@ -1,0 +1,186 @@
+// Exercise 5: Animation and Effects
+// Practice with CSS animations, transitions, and JavaScript animations
+
+console.log("💪 Exercise 5: Animation and Effects");
+console.log("==================================");
+
+// Exercise 1: CSS transitions
+console.log("\n1. CSS Transitions:");
+// TODO: Create a function called setupCSSTransitions that:
+// - Applies CSS transitions to elements
+// - Triggers transitions with JavaScript
+// - Manages transition timing and easing
+// - Handles transition events and callbacks
+// Hint: Use CSS transition properties and transition events
+
+function setupCSSTransitions() {
+    // Your code here
+}
+
+// Test your function
+setupCSSTransitions();
+
+// Exercise 2: CSS animations
+console.log("\n2. CSS Animations:");
+// TODO: Create a function called setupCSSAnimations that:
+// - Creates and applies CSS animations
+// - Controls animation playback with JavaScript
+// - Manages animation states and timing
+// - Handles animation events and callbacks
+// Hint: Use CSS animation properties and animation events
+
+function setupCSSAnimations() {
+    // Your code here
+}
+
+// Test your function
+setupCSSAnimations();
+
+// Exercise 3: JavaScript animations
+console.log("\n3. JavaScript Animations:");
+// TODO: Create a function called setupJavaScriptAnimations that:
+// - Implements JavaScript-based animations
+// - Uses requestAnimationFrame for smooth animations
+// - Manages animation timing and easing functions
+// - Provides animation control and state management
+// Hint: Use requestAnimationFrame and custom easing functions
+
+function setupJavaScriptAnimations() {
+    // Your code here
+}
+
+// Test your function
+setupJavaScriptAnimations();
+
+// Exercise 4: Animation sequencing
+console.log("\n4. Animation Sequencing:");
+// TODO: Create a function called setupAnimationSequencing that:
+// - Sequences multiple animations in order
+// - Manages animation delays and timing
+// - Provides animation chaining and queuing
+// - Handles complex animation workflows
+// Hint: Use Promise-based animation sequencing
+
+function setupAnimationSequencing() {
+    // Your code here
+}
+
+// Test your function
+setupAnimationSequencing();
+
+// Exercise 5: Animation easing and timing
+console.log("\n5. Animation Easing and Timing:");
+// TODO: Create a function called setupAnimationEasing that:
+// - Implements various easing functions
+// - Applies easing to animations
+// - Manages animation timing curves
+// - Provides smooth animation transitions
+// Hint: Use easing functions like ease-in, ease-out, ease-in-out
+
+function setupAnimationEasing() {
+    // Your code here
+}
+
+// Test your function
+setupAnimationEasing();
+
+// Exercise 6: Animation performance optimization
+console.log("\n6. Animation Performance Optimization:");
+// TODO: Create a function called setupAnimationPerformance that:
+// - Optimizes animations for performance
+// - Uses transform and opacity for smooth animations
+// - Implements animation throttling and debouncing
+// - Monitors animation performance metrics
+// Hint: Use transform properties and performance monitoring
+
+function setupAnimationPerformance() {
+    // Your code here
+}
+
+// Test your function
+setupAnimationPerformance();
+
+// Exercise 7: Animation state management
+console.log("\n7. Animation State Management:");
+// TODO: Create a function called setupAnimationStateManagement that:
+// - Manages animation states and transitions
+// - Handles animation state persistence
+// - Provides animation state synchronization
+// - Manages complex animation state machines
+// Hint: Use state management patterns for animations
+
+function setupAnimationStateManagement() {
+    // Your code here
+}
+
+// Test your function
+setupAnimationStateManagement();
+
+// Exercise 8: Animation event handling
+console.log("\n8. Animation Event Handling:");
+// TODO: Create a function called setupAnimationEventHandling that:
+// - Handles animation start, end, and iteration events
+// - Manages animation event callbacks
+// - Provides animation event delegation
+// - Handles custom animation events
+// Hint: Use animation events and event delegation
+
+function setupAnimationEventHandling() {
+    // Your code here
+}
+
+// Test your function
+setupAnimationEventHandling();
+
+// Exercise 9: Animation accessibility
+console.log("\n9. Animation Accessibility:");
+// TODO: Create a function called setupAnimationAccessibility that:
+// - Implements accessible animations
+// - Respects user motion preferences
+// - Provides animation controls for users
+// - Ensures animations don't cause accessibility issues
+// Hint: Use prefers-reduced-motion and accessibility controls
+
+function setupAnimationAccessibility() {
+    // Your code here
+}
+
+// Test your function
+setupAnimationAccessibility();
+
+// Exercise 10: Animation testing and debugging
+console.log("\n10. Animation Testing and Debugging:");
+// TODO: Create a function called setupAnimationTesting that:
+// - Provides animation testing utilities
+// - Implements animation debugging tools
+// - Monitors animation performance and issues
+// - Provides animation validation and testing
+// Hint: Use testing utilities and debugging tools
+
+function setupAnimationTesting() {
+    // Your code here
+}
+
+// Test your function
+setupAnimationTesting();
+
+console.log("\n🎉 Exercise 5 Complete!");
+console.log("=====================");
+console.log("Great job! You've practiced animation and effects.");
+console.log("Key concepts practiced:");
+console.log("- CSS transitions and timing");
+console.log("- CSS animations and keyframes");
+console.log("- JavaScript animations with requestAnimationFrame");
+console.log("- Animation sequencing and chaining");
+console.log("- Animation easing and timing functions");
+console.log("- Animation performance optimization");
+console.log("- Animation state management and persistence");
+console.log("- Animation event handling and callbacks");
+console.log("- Animation accessibility and user preferences");
+console.log("- Animation testing and debugging tools");
+
+console.log("\n📝 Next Steps:");
+console.log("1. Review your solutions");
+console.log("2. Try the exercises again with different values");
+console.log("3. Move on to Exercise 6: Advanced DOM Techniques");
+console.log("4. Ask questions if you need help");

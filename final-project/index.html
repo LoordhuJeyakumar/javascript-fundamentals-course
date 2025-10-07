@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Todo List - Final Project</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="app-title">
+                <span class="app-icon">📝</span>
+                My Todo List
+            </h1>
+            <p class="app-subtitle">Stay organized and productive</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Todo Input Section -->
+            <section class="todo-input-section">
+                <div class="input-container">
+                    <input 
+                        type="text" 
+                        id="todoInput" 
+                        class="todo-input" 
+                        placeholder="What needs to be done?"
+                        maxlength="200"
+                        aria-label="Add new todo"
+                    >
+                    <button id="addBtn" class="add-btn" aria-label="Add todo">
+                        <span class="add-icon">+</span>
+                    </button>
+                </div>
+                <div class="input-error" id="inputError" role="alert" aria-live="polite"></div>
+            </section>
+
+            <!-- Todo Controls -->
+            <section class="todo-controls">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all" aria-pressed="true">
+                        All
+                        <span class="filter-count" id="allCount">0</span>
+                    </button>
+                    <button class="filter-btn" data-filter="active" aria-pressed="false">
+                        Active
+                        <span class="filter-count" id="activeCount">0</span>
+                    </button>
+                    <button class="filter-btn" data-filter="completed" aria-pressed="false">
+                        Completed
+                        <span class="filter-count" id="completedCount">0</span>
+                    </button>
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="clearCompleted" class="clear-btn" disabled>
+                        Clear Completed
+                    </button>
+                    <button id="toggleAll" class="toggle-all-btn" title="Toggle all todos">
+                        Toggle All
+                    </button>
+                </div>
+            </section>
+
+            <!-- Todo Stats -->
+            <section class="todo-stats">
+                <div class="stats-container">
+                    <span class="stats-text" id="todoCount">0 items left</span>
+                    <span class="stats-text" id="completionRate">0% complete</span>
+                </div>
+            </section>
+
+            <!-- Todo List -->
+            <section class="todo-list-section">
+                <ul id="todoList" class="todo-list" role="list" aria-label="Todo list">
+                    <!-- Todo items will be added here dynamically -->
+                </ul>
+                
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">📋</div>
+                    <h3 class="empty-title">No todos yet</h3>
+                    <p class="empty-message">Add your first todo above to get started!</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p class="footer-text">
+                    Built with ❤️ for JavaScript Fundamentals Course
+                </p>
+                <div class="footer-links">
+                    <button id="exportBtn" class="footer-btn" title="Export todos">
+                        Export
+                    </button>
+                    <button id="importBtn" class="footer-btn" title="Import todos">
+                        Import
+                    </button>
+                    <input type="file" id="importFile" accept=".json" style="display: none;">
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Loading...</p>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Scripts -->
+    <script src="utils.js"></script>
+    <script src="storage-manager.js"></script>
+    <script src="todo-manager.js"></script>
+    <script src="ui-controller.js"></script>
+    <script src="event-handler.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
