@@ -253,8 +253,8 @@ api-docs/
 # Course-Specific Files
 # ===========================================
 # Student work directories (if you want to exclude them)
-student-work/
-student-submissions/
+# student-work/
+# student-submissions/
 
 # Backup files
 *.bak
