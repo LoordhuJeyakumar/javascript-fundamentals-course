@@ -1,0 +1,33 @@
+body{
+    background-color:#1E1B18;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
+    }
+    .mainContainer,.subContainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    #countDown{
+        margin: 0;
+        font-size: min(30em, 40vw);
+        max-width: 100vw;
+        text-align: center;
+        color: #D8315B;
+        
+    }
+    @media (min-width: 576px) {
+        #countDown{
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            transform: translate(0,-50%);
+            font-size: min(30em, 40vw);
+            max-width: 100vw;
+            text-align: center;
+            color: #D8315B;
+            
+        }
+    }
+    

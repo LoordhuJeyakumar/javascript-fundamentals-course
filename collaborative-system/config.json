@@ -1,0 +1,33 @@
+{
+  "system": {
+    "name": "JavaScript Learning Collaborative System",
+    "version": "1.0.0",
+    "created": "2025-10-08T06:52:24.450Z"
+  },
+  "features": {
+    "studentSubmissions": true,
+    "peerReview": true,
+    "studyGroups": true,
+    "autoGrading": true,
+    "teacherDashboard": true
+  },
+  "settings": {
+    "maxFileSize": "10MB",
+    "allowedFileTypes": [
+      ".js",
+      ".md",
+      ".txt",
+      ".json"
+    ],
+    "maxStudentsPerGroup": 8,
+    "autoGradeEnabled": true,
+    "peerReviewRequired": false
+  },
+  "paths": {
+    "studentWork": "student-work",
+    "collaborative": "collaborative",
+    "solutions": "solutions",
+    "backups": "backups",
+    "reports": "reports"
+  }
+}

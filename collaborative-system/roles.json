@@ -1,0 +1,34 @@
+{
+  "student": {
+    "permissions": [
+      "submit_work",
+      "view_own_progress",
+      "request_peer_review",
+      "review_peer_work",
+      "join_study_groups",
+      "create_study_groups"
+    ]
+  },
+  "teacher": {
+    "permissions": [
+      "view_all_submissions",
+      "grade_submissions",
+      "view_student_progress",
+      "generate_reports",
+      "manage_students",
+      "view_class_statistics",
+      "auto_grade_submissions",
+      "manage_study_groups"
+    ]
+  },
+  "admin": {
+    "permissions": [
+      "system_administration",
+      "backup_data",
+      "restore_data",
+      "cleanup_system",
+      "manage_all_users",
+      "system_maintenance"
+    ]
+  }
+}

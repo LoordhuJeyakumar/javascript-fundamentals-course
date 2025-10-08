@@ -1,0 +1,40 @@
+name: Welcome New Students
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Welcome new student
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const isSubmission = issue.title.includes('[EXERCISE]') || issue.title.includes('[ASSIGNMENT]');
+            
+            if (isSubmission) {
+              const comment = `## 👋 Welcome to the JavaScript Learning Course!
+              
+              Thank you for your submission! Here's what happens next:
+              
+              1. **Review**: Your submission will be reviewed by the teacher
+              2. **Feedback**: You'll receive detailed feedback and a grade
+              3. **Progress**: Your progress will be tracked in the system
+              
+              **Tips for success**:
+              - Make sure your code is well-commented
+              - Test your code before submitting
+              - Ask questions if you need help
+              
+              Good luck with your learning journey! 🚀`;
+              
+              github.rest.issues.createComment({
+                issue_number: issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            }
