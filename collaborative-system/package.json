@@ -1,0 +1,39 @@
+{
+  "name": "javascript-learning-collaborative-system",
+  "version": "1.0.0",
+  "description": "A comprehensive collaborative learning system for JavaScript fundamentals course",
+  "main": "collaboration-hub.js",
+  "scripts": {
+    "start": "node collaboration-hub.js",
+    "setup": "node setup.js",
+    "student": "node student-submission.js",
+    "teacher": "node teacher-dashboard.js",
+    "grade": "node auto-grader.js",
+    "peer-review": "node peer-review.js",
+    "test": "node setup.js"
+  },
+  "keywords": [
+    "javascript",
+    "learning",
+    "education",
+    "collaborative",
+    "peer-review",
+    "grading",
+    "student-management"
+  ],
+  "author": "JavaScript Learning Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/javascript-fundamentals-course"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/javascript-fundamentals-course/issues"
+  },
+  "homepage": "https://github.com/your-org/javascript-fundamentals-course#readme"
+}

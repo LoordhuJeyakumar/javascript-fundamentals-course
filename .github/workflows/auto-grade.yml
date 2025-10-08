@@ -1,0 +1,72 @@
+name: Auto-Grade Submissions
+
+on:
+  pull_request:
+    paths:
+      - 'student-work/**'
+    types: [opened, synchronize]
+
+jobs:
+  grade:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+          
+      - name: Install dependencies
+        run: |
+          cd collaborative-system
+          npm install
+          
+      - name: Run Auto-Grader
+        id: grade
+        run: |
+          cd collaborative-system
+          echo "Running auto-grader on PR"
+          node auto-grader.js || echo "Auto-grader completed with warnings"
+          
+      - name: Comment Results
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            // Look for grading results
+            const resultsPath = 'collaborative-system/grading-results.json';
+            if (fs.existsSync(resultsPath)) {
+              const results = JSON.parse(fs.readFileSync(resultsPath, 'utf8'));
+              
+              const comment = `## 🤖 Auto-Grading Results
+              
+              **Overall Score**: ${results.overallScore}/100
+              
+              **Feedback**:
+              ${results.feedback.map(f => `- ${f}`).join('\n')}
+              
+              **Files Graded**: ${results.files.length}
+              
+              ---
+              *This is an automated grading result. Please review and provide additional feedback if needed.*`;
+              
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            } else {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: '## 🤖 Auto-Grader
+
+Auto-grader completed. Please check the logs for any issues.'
+              });
+            }

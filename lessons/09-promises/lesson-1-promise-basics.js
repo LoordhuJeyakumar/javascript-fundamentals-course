@@ -30,6 +30,8 @@ let successPromise = new Promise((resolve, reject) => {
     setTimeout(() => {
         resolve("Operation completed successfully!");
     }, 1000);
+    
+
 });
 
 console.log("Created a Promise that will resolve in 1 second");

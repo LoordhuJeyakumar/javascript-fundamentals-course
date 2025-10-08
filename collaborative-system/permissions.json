@@ -1,0 +1,33 @@
+{
+  "files": {
+    "student-submission.js": {
+      "executable": true
+    },
+    "teacher-dashboard.js": {
+      "executable": true
+    },
+    "auto-grader.js": {
+      "executable": true
+    },
+    "peer-review.js": {
+      "executable": true
+    },
+    "collaboration-hub.js": {
+      "executable": true
+    }
+  },
+  "directories": {
+    "student-work": {
+      "writable": true
+    },
+    "collaborative": {
+      "writable": true
+    },
+    "backups": {
+      "writable": true
+    },
+    "reports": {
+      "writable": true
+    }
+  }
+}
