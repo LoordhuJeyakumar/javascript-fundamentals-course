@@ -308,7 +308,7 @@ awaitPromiseAll().then((results) => {
 console.log("\n📚 10. Await with Promise.race()");
 console.log("--------------------------------");
 
-// Await with Promise.race()
+// Await with Promise.race() => returns the first resolved promise
 async function awaitPromiseRace() {
     console.log("Starting Promise.race() example");
     

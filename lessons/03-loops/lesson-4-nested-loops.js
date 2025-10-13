@@ -11,8 +11,9 @@ console.log("----------------------------");
 console.log("Creating a 3x3 grid:");
 for (let i = 1; i <= 3; i++) {
     let row = "";
+    /* This code snippet is part of a nested loop structure that is creating a 3x3 grid. */
     for (let j = 1; j <= 3; j++) {
-        row += `(${i},${j}) `;
+        row += `(${i},${j}) `; // row = row + `(${i},${j}) `;
     }
     console.log(row);
 }

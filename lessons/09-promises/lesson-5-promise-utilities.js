@@ -110,7 +110,7 @@ withTimeout(slowOperation, 1000)
         console.log("Timeout test error:", error.message);
     });
 
-// 5. Promise.allSettled() - All Results
+// 5. Promise.allSettled() - All Results ==> returns all results, regardless of success or failure
 console.log("\n📚 5. Promise.allSettled() - All Results");
 console.log("--------------------------------------");
 
@@ -147,7 +147,7 @@ console.log("---------------------------------");
 console.log("Promise.any() returns the first Promise to resolve successfully");
 console.log("It only rejects if all Promises reject");
 
-// Basic Promise.any() usage
+// Basic Promise.any() usage ==> returns the first resolved promise or rejects if all promises reject
 let anyPromises = [
     new Promise((resolve, reject) => {
         setTimeout(() => {

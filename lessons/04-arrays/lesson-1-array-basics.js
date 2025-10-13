@@ -13,11 +13,11 @@ let emptyArray = [];
 console.log("Empty array:", emptyArray);
 
 // Array with initial values
-let fruits = ["apple", "banana", "orange"];
+let fruits = ["apple", "banana", "orange"]; // length => 3
 console.log("Fruits array:", fruits);
 
 // Array with mixed data types
-let mixedArray = [1, "hello", true, null, undefined];
+let mixedArray = [1, "hello", true, null, undefined, {name:"JOhn"}, []];
 console.log("Mixed array:", mixedArray);
 
 // Array using Array constructor
@@ -55,10 +55,10 @@ console.log("Animals array:", animals);
 console.log("Array length:", animals.length);
 
 // Length changes when array is modified
-animals.push("hamster");
+animals.push("hamster"); // add a new element to the end
 console.log("After push - length:", animals.length);
 
-animals.pop();
+animals.pop(); // remove the last element
 console.log("After pop - length:", animals.length);
 
 // 4. Modifying Array Elements
@@ -71,6 +71,9 @@ console.log("Original scores:", scores);
 // Modify existing element
 scores[2] = 90;
 console.log("After modifying index 2:", scores);
+
+scores[7] = 100;
+console.log("After adding at index 7:", scores);
 
 // Add new element at specific index
 scores[5] = 95;
@@ -92,7 +95,8 @@ for (let i = 0; i < numbers2.length; i++) {
 // Using for...of loop
 console.log("Using for...of loop:");
 for (let number of numbers2) {
-    console.log(`Value: ${number}`);
+    console.log(`Value: ${number} Index: ${numbers2.indexOf(number)}`);
+    
 }
 
 // 6. Array Methods Overview
@@ -103,10 +107,10 @@ let items = ["book", "pen", "pencil"];
 console.log("Original items:", items);
 
 // Adding elements
-items.push("eraser"); // Add to end
+items.push("eraser"); // Add to end of the array
 console.log("After push:", items);
 
-items.unshift("ruler"); // Add to beginning
+items.unshift("ruler"); // Add to beginning of the array
 console.log("After unshift:", items);
 
 // Removing elements
@@ -125,7 +129,7 @@ let array2 = [4, 5, 6];
 let array3 = [7, 8, 9];
 
 // Using concat method
-let combined = array1.concat(array2, array3);
+let combined = array1.concat(array2, array3, [10, 11, 12]);
 console.log("Combined arrays:", combined);
 
 // Using spread operator
@@ -153,7 +157,8 @@ console.log("\n📚 9. Checking if Something is an Array");
 console.log("------------------------------------");
 
 let testArray = [1, 2, 3];
-let testString = "hello";
+let testString = "hello".split("");
+console.log("Test string:", testString);
 let testObject = { a: 1, b: 2 };
 
 console.log("Array.isArray([1,2,3]):", Array.isArray(testArray));
@@ -203,8 +208,12 @@ let highest = studentGrades[0];
 let lowest = studentGrades[0];
 
 for (let grade of studentGrades) {
-    if (grade > highest) highest = grade;
-    if (grade < lowest) lowest = grade;
+    if (grade > highest) {
+        highest = grade;
+    }
+    if (grade < lowest) {
+        lowest = grade;
+    }
 }
 
 console.log("Highest grade:", highest);
