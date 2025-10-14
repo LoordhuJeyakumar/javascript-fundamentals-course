@@ -21,9 +21,55 @@ console.log("1 2 3 4 5");
 console.log("\n2. Multiplication Table:");
 console.log("Create a 5x5 multiplication table");
 
+
+/* 
+Sudo code and detailed explanation for printing a 5x5 multiplication table:
+
+1. We want to print a table where each row and column shows the product of their respective indices. 
+   For example, row 1 shows 1×1  1×2  1×3  1×4  1×5, row 2 shows 2×1  2×2 ... etc.
+2. Use an outer loop to represent each row, from 1 to 5.
+3. For each row, set up an empty string to accumulate the values for that row.
+4. Use an inner loop for the columns, also from 1 to 5.
+5. Multiply the current row number (from outer loop) by the column number (from inner loop).
+6. Format the product with spaces for neat alignment.
+7. Append each product to the row string.
+8. After the inner loop finishes, print the whole row string (one row of the table).
+9. Repeat for all 5 rows.
+
+Detailed Comments:
+
+- Outer loop: runs 5 times, representing each row `i` of the table (i = 1 to 5)
+- Inner loop: for each row `i`, runs 5 times for columns `j` (j = 1 to 5)
+- For each (i, j) combination, compute the product i * j. This gives us the value for that cell.
+- Formatting (`padStart(3)` in the code) aligns numbers into columns for easy reading.
+- Row string accumulates values, then is printed after all columns are added.
+
+Example of what the output looks like (with correct alignment):
+  1   2   3   4   5 
+  2   4   6   8  10 
+  3   6   9  12  15 
+  4   8  12  16  20 
+  5  10  15  20  25 
+*/
+
 // TODO: Create nested loops to print multiplication table
 // Hint: Use i * j for each cell
 // Your code here
+
+//Outer loop that handle rows
+for (let outer_i = 1; outer_i <= 5; outer_i++) {
+    //Inner loop that handle columns
+    let row_string = "";
+    for (let inner_j = 1; inner_j <= 5; inner_j++) {
+      const product = outer_i * inner_j;
+
+      row_string += product.toString().padStart(3) + " "; //Append the formatted product to the row string
+    }   
+    console.log(row_string);
+
+}
+
+
 
 // Exercise 3: Star Pattern
 console.log("\n3. Star Pattern:");

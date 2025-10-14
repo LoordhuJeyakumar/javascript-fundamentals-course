@@ -68,18 +68,18 @@ console.log("Original numbers:", numbers2);
 
 // Extract from index to end
 let fromIndex2 = numbers2.slice(2);
-console.log("slice(2):", fromIndex2);
+console.log("slice(2):", fromIndex2); //[30, 40, 50, 60, 70]
 
 // Extract from start to end (exclusive)
-let from2To5 = numbers2.slice(2, 5);
+let from2To5 = numbers2.slice(2, 5); //[30, 40, 50]
 console.log("slice(2, 5):", from2To5);
 
 // Extract last 3 elements
-let lastThree = numbers2.slice(-3);
+let lastThree = numbers2.slice(-3); //[50, 60, 70]
 console.log("slice(-3):", lastThree);
 
 // Extract from -4 to -2
-let negativeSlice = numbers2.slice(-4, -2);
+let negativeSlice = numbers2.slice(-4, -2); //[40, 50]
 console.log("slice(-4, -2):", negativeSlice);
 
 // 5. concat() Method - Combine Arrays

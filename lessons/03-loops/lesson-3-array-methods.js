@@ -29,7 +29,7 @@ numbers.forEach(number => {
     console.log(`Number: ${number}`);
 });
 
-// 3. map Method
+// 3. map Method = > transform each element and return a new array
 console.log("\n📚 3. map Method");
 console.log("----------------");
 
@@ -61,7 +61,7 @@ let expensiveProducts = products.map(product => ({
 }));
 console.log("Expensive products:", expensiveProducts);
 
-// 5. filter Method
+// 5. filter Method => select elements that meet criteria and return a new array
 console.log("\n📚 5. filter Method");
 console.log("------------------");
 
@@ -91,7 +91,16 @@ console.log("IT employees:", itEmployees);
 let highEarners = employees.filter(emp => emp.salary > 70000);
 console.log("High earners:", highEarners);
 
-// 7. reduce Method
+// 7. reduce Method => combine elements into single value and return a new array
+// Detailed explanation:
+// 1. The reduce method takes a callback function and an initial value.
+// 2. The callback function takes two arguments: the accumulator and the current element.
+// 3. The accumulator is the value that is returned from the previous iteration.
+// 4. The current element is the value that is being processed.
+// 5. The initial value is the value that is returned from the first iteration.
+// 6. The reduce method returns a single value.
+
+
 console.log("\n📚 7. reduce Method");
 console.log("------------------");
 
@@ -120,7 +129,7 @@ console.log("Total sales:", totalSales);
 let averageSales = totalSales / sales.length;
 console.log("Average sales:", averageSales);
 
-// 9. find and findIndex Methods
+// 9. find and findIndex Methods => find first element that meets criteria and retun the element
 console.log("\n📚 9. find and findIndex Methods");
 console.log("--------------------------------");
 
@@ -136,16 +145,17 @@ console.log("User older than 28:", user);
 let userIndex = users.findIndex(u => u.name === "Bob");
 console.log("Index of Bob:", userIndex);
 
-// 10. some and every Methods
+// 10. some and every Methods => check if any/all elements meet criteria and return a boolean
 console.log("\n📚 10. some and every Methods");
 console.log("-----------------------------");
 
-let ages = [25, 30, 35, 40];
+let ages = [25, 30, 35, 40, 15];
 console.log("Ages:", ages);
-
-let hasAdult = ages.some(age => age >= 18);
+//some method will return true if any of the elements meet the criteria
+let hasAdult = ages.some(age => age >= 18); 
 console.log("Has adult (>=18):", hasAdult);
 
+//every method will return true if all of the elements meet the criteria
 let allAdults = ages.every(age => age >= 18);
 console.log("All adults (>=18):", allAdults);
 
