@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lesson 2 — Solution</title><link rel="stylesheet" href="course.css"></head>
+<body class="wrap">
+  <header class="site-header"><h1>Lesson 2 — Solutions</h1><p class="lead">Example implementations for the exercises.</p></header>
+  <main class="wrap">
+    <pre style="background:#071727;padding:12px;border-radius:6px;color:var(--text);">// removeItem implementation
+function removeItem(index){
+  const list = document.getElementById('list');
+  const item = list.children[index];
+  if(item) list.removeChild(item);
+}
+
+// insertBefore implementation
+function insertBeforeSecond(text){
+  const list = document.getElementById('list');
+  const li = document.createElement('li');
+  li.textContent = text;
+  if(list.children[1]){
+    list.insertBefore(li, list.children[1]);
+  } else {
+    list.appendChild(li);
+  }
+}
+
+// replaceChild implementation
+function replaceSecond(text){
+  const list = document.getElementById('list');
+  const li = document.createElement('li');
+  li.textContent = text;
+  if(list.children[1]){
+    list.replaceChild(li, list.children[1]);
+  }
+}
+</pre>
+    <p><a href="lesson-2.html">Back to lesson</a></p>
+  </main>
+</body>
+</html>

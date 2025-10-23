@@ -68,7 +68,7 @@ let gameBoard = [
 console.log("Original game board:", gameBoard);
 
 // Modify specific element
-gameBoard[1][1] = "X";
+gameBoard[1][1] = "O";
 console.log("After modifying [1][1]:", gameBoard);
 
 // Add new row
@@ -147,7 +147,7 @@ for (let row of matrix) {
 }
 console.log("Total elements:", count);
 
-// 6. Matrix Transpose
+// 6. Matrix Transpose => Swap rows and columns
 console.log("\n📚 6. Matrix Transpose");
 console.log("--------------------");
 
@@ -217,7 +217,29 @@ for (let x = 0; x < 2; x++) {
         }
     }
 }
-console.log("3D Array (cube):", cube);
+console.log("3D Array (cube):", cube); 
+/* 
+[ 
+    [ [ 0, 1 ], [ 2, 3 ] ], 
+    [ [ 4, 5 ], [ 6, 7 ] ] 
+
+]
+
+
+x  |  y  |  z  |  Value (x4 + y2 + z)
+---+-----+-----+---------------------
+0  |  0  |  0  |  0                  
+0  |  0  |  1  |  1                  
+0  |  1  |  0  |  2                  
+0  |  1  |  1  |  3                  
+1  |  0  |  0  |  4                  
+1  |  0  |  1  |  5                  
+1  |  1  |  0  |  6                  
+1  |  1  |  1  |  7                  
+
+*/
+
+
 
 // Access 3D array elements
 console.log("Element at [0][0][0]:", cube[0][0][0]);

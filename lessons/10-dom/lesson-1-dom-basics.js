@@ -155,6 +155,14 @@ class Element {
         this.attributes = new Map();
         this.children = [];
         this.parentElement = null;
+        // Minimal classList wrapper to mimic browser Element.classList
+        this.classList = {
+            contains: (c) => this.hasClass(c),
+            add: (c) => this.addClass(c),
+            remove: (c) => this.removeClass(c)
+        };
+        // Minimal dataset support
+        this.dataset = {};
     }
     
     // Get attribute value
@@ -523,12 +531,14 @@ console.log("--------------------------");
 
 // Check for modern DOM methods
 function checkDOMSupport() {
+    // Avoid referencing `document` directly in non-browser environments (Node)
+    const hasDocument = typeof document !== 'undefined' && document;
     const support = {
-        querySelector: typeof document.querySelector === 'function',
-        querySelectorAll: typeof document.querySelectorAll === 'function',
-        addEventListener: typeof document.addEventListener === 'function',
-        classList: typeof document.createElement('div').classList === 'object',
-        dataset: typeof document.createElement('div').dataset === 'object'
+        querySelector: hasDocument ? typeof document.querySelector === 'function' : false,
+        querySelectorAll: hasDocument ? typeof document.querySelectorAll === 'function' : false,
+        addEventListener: hasDocument ? typeof document.addEventListener === 'function' : false,
+        classList: hasDocument ? typeof document.createElement('div').classList === 'object' : false,
+        dataset: hasDocument ? typeof document.createElement('div').dataset === 'object' : false
     };
     
     console.log("DOM method support:");

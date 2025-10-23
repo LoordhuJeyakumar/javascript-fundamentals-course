@@ -112,7 +112,14 @@ let product = numbers2.reduce((total, num) => total * num, 1);
 console.log("Product:", product);
 
 // Find maximum number
+
 let max = numbers2.reduce((max, num) => num > max ? num : max, numbers2[0]);
+
+let min = numbers2.reduce((min, num) =>{
+    let min = numbers2[0];
+    return num < min ? num : min;
+}, numbers2[0]);
+
 console.log("Maximum:", max);
 
 // Count even numbers

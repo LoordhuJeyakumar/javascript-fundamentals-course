@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced DOM Events | JavaScript Fundamentals</title>
+    <link rel="stylesheet" href="src/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <h1><i class="fas fa-bolt"></i> Advanced DOM Events</h1>
+
+        <!-- Event Propagation Demo -->
+        <section id="propagation-demo">
+            <h2><i class="fas fa-stream"></i> Event Propagation</h2>
+            <div class="event-box outer">
+                <p>Outer (Click me!)</p>
+                <div class="event-box middle">
+                    <p>Middle (Click me!)</p>
+                    <div class="event-box inner">
+                        <p>Inner (Click me!)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="controls">
+                <label>
+                    <input type="checkbox" id="useCapture"> Use Capture Phase
+                </label>
+                <label>
+                    <input type="checkbox" id="stopPropagation"> Stop Propagation
+                </label>
+            </div>
+            <div id="propagationLog" class="event-log">
+                <h3>Event Log</h3>
+                <div class="log-content"></div>
+            </div>
+        </section>
+
+        <!-- Event Delegation Demo -->
+        <section id="delegation-demo">
+            <h2><i class="fas fa-sitemap"></i> Event Delegation</h2>
+            <div class="dynamic-list">
+                <button id="addItem">
+                    <i class="fas fa-plus"></i> Add Item
+                </button>
+                <ul id="delegationList">
+                    <li>
+                        Item 1
+                        <button class="edit"><i class="fas fa-edit"></i></button>
+                        <button class="delete"><i class="fas fa-trash"></i></button>
+                    </li>
+                </ul>
+            </div>
+            <div id="delegationLog" class="event-log">
+                <h3>Action Log</h3>
+                <div class="log-content"></div>
+            </div>
+        </section>
+
+        <!-- Custom Events Demo -->
+        <section id="custom-events">
+            <h2><i class="fas fa-puzzle-piece"></i> Custom Events</h2>
+            <div class="notification-system">
+                <div class="controls">
+                    <button id="triggerInfo">
+                        <i class="fas fa-info-circle"></i> Info Event
+                    </button>
+                    <button id="triggerWarning">
+                        <i class="fas fa-exclamation-triangle"></i> Warning Event
+                    </button>
+                    <button id="triggerError">
+                        <i class="fas fa-times-circle"></i> Error Event
+                    </button>
+                </div>
+                <div id="notificationArea"></div>
+            </div>
+        </section>
+
+        <!-- Interactive Form Demo -->
+        <section id="form-events">
+            <h2><i class="fas fa-check-circle"></i> Form Events</h2>
+            <form id="interactiveForm" novalidate>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" required 
+                           pattern="[a-zA-Z0-9]+" minlength="3">
+                    <div class="validation-feedback"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                    <div class="validation-feedback"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required 
+                           minlength="8">
+                    <div class="validation-feedback"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="interests">Interests</label>
+                    <select id="interests" multiple>
+                        <option value="js">JavaScript</option>
+                        <option value="html">HTML</option>
+                        <option value="css">CSS</option>
+                        <option value="node">Node.js</option>
+                    </select>
+                    <div class="validation-feedback"></div>
+                </div>
+
+                <button type="submit">Submit Form</button>
+            </form>
+            <div id="formLog" class="event-log">
+                <h3>Form Events Log</h3>
+                <div class="log-content"></div>
+            </div>
+        </section>
+
+        <!-- Keyboard Events Demo -->
+        <section id="keyboard-events">
+            <h2><i class="fas fa-keyboard"></i> Keyboard Events</h2>
+            <div class="keyboard-demo">
+                <div class="key-display">Press any key...</div>
+                <div class="shortcuts">
+                    <p>Try these shortcuts:</p>
+                    <ul>
+                        <li>Ctrl + S</li>
+                        <li>Ctrl + Z</li>
+                        <li>Shift + Arrow Keys</li>
+                    </ul>
+                </div>
+                <div id="keyboardLog" class="event-log">
+                    <h3>Keyboard Log</h3>
+                    <div class="log-content"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="src/script.js"></script>
+</body>
+</html>

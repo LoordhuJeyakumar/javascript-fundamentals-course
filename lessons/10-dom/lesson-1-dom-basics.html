@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lesson 1 — DOM Basics</title>
+  <link rel="stylesheet" href="lesson-1-styles.css">
+</head>
+<body>
+  <header class="page-header">
+    <h1>Lesson 1: DOM Basics</h1>
+    <p class="subtitle">Interactive browser version — open the console area below to view output.</p>
+  </header>
+
+  <main class="content">
+    <section class="controls">
+      <button id="run-script">Run Lesson Script</button>
+      <button id="clear-console">Clear Console</button>
+    </section>
+
+    <section class="console-area" aria-live="polite">
+      <pre id="console-output"></pre>
+    </section>
+
+    <section class="lesson-shell">
+      <h2>Lesson Script</h2>
+      <p>This page loads the lesson script and captures its console output so learners can run it in the browser.
+         The original lesson script is <code>lesson-1-dom-basics.js</code> and should live in the same folder.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    // Redirect console.log to on-page console
+    (function () {
+      const output = document.getElementById('console-output');
+      function writeLine() {
+        const args = Array.from(arguments).map(a => {
+          try { return JSON.stringify(a); } catch (e) { return String(a); }
+        }).join(' ');
+        output.textContent += args + '\n';
+        output.scrollTop = output.scrollHeight;
+      }
+
+      const origLog = console.log;
+      console.log = function () {
+        origLog.apply(console, arguments);
+        writeLine.apply(null, arguments);
+      };
+
+      document.getElementById('run-script').addEventListener('click', () => {
+        // Load the lesson script dynamically
+        const script = document.createElement('script');
+        script.src = 'lesson-1-dom-basics.js';
+        script.onload = () => console.log('\n[Script loaded successfully]');
+        script.onerror = () => console.log('[Error loading script]');
+        document.body.appendChild(script);
+      });
+
+      document.getElementById('clear-console').addEventListener('click', () => {
+        output.textContent = '';
+      });
+    }());
+  </script>
+</body>
+</html>

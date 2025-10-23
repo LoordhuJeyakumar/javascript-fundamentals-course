@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lesson 3 — Event Handling (Full)</title>
+  <link rel="stylesheet" href="course.css">
+</head>
+<body>
+  <header class="site-header wrap"><h1>Lesson 3 — Event Handling</h1><p class="lead">Events, propagation, delegation and custom events — interactive.</p></header>
+
+  <main class="wrap grid">
+    <article class="sandbox">
+      <h2>Event Delegation & Custom Events</h2>
+      <div class="editor">
+        <div class="panels">
+          <textarea id="html">&lt;div id="app"&gt;
+  &lt;div id="buttons"&gt;
+    &lt;button data-index="0"&gt;Button 0&lt;/button&gt;
+    &lt;button data-index="1"&gt;Button 1&lt;/button&gt;
+    &lt;button data-index="2"&gt;Button 2&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div id="log"&gt;&lt;/div&gt;
+&lt;/div&gt;</textarea>
+          <textarea id="css">#app{padding:12px}#buttons button{margin:6px}#log{margin-top:12px;background:#071727;padding:8px;border-radius:6px;color:var(--text)}</textarea>
+          <textarea id="js">const buttons = document.getElementById('buttons');
+const log = document.getElementById('log');
+
+function writeLog(){
+  const args = Array.from(arguments).map(a=>typeof a==='object'?JSON.stringify(a):String(a)).join(' ');
+  log.innerHTML += '&gt; ' + args + '<br>';
+}
+
+// Event delegation
+buttons.addEventListener('click', (e)=>{
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  writeLog('Clicked button', btn.dataset.index);
+  // dispatch a custom event with detail
+  const ev = new CustomEvent('item:selected', {detail:{index:btn.dataset.index, label:btn.textContent}});
+  document.dispatchEvent(ev);
+});
+
+// Listen for custom event
+document.addEventListener('item:selected', (e)=>{
+  writeLog('Custom event received:', e.detail);
+});
+
+// Add a dynamic button to demonstrate delegated handling
+const dynamic = document.createElement('button');
+dynamic.textContent = 'Dynamic';
+dynamic.dataset.index = 'dynamic';
+buttons.appendChild(dynamic);
+</textarea>
+        </div>
+        <div class="controls">
+          <button id="run">Run</button>
+          <button id="reset">Reset</button>
+          <a class="button" href="lesson-3-solution.html" target="_blank">Solution</a>
+        </div>
+      </div>
+
+      <div class="preview"><iframe id="preview" sandbox="allow-scripts"></iframe></div>
+
+      <section class="lesson-shell">
+        <h3>Exercises</h3>
+        <ol>
+          <li>Detach the delegated listener with <code>removeEventListener</code>.</li>
+          <li>Implement capturing listener that logs before bubbling handlers.</li>
+          <li>Trigger <code>item:selected</code> from another part of the page and handle it.</li>
+        </ol>
+      </section>
+    </article>
+
+    <nav class="lessons"><h2>Lessons</h2><ol><li><a href="index.html">Home</a></li><li><a href="lesson-1.html">1</a></li><li><a href="lesson-2.html">2</a></li><li>3 — Event Handling</li></ol></nav>
+  </main>
+
+  <script src="course.js"></script>
+</body>
+</html>

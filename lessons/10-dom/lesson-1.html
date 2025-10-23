@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lesson 1 — DOM Basics (Interactive)</title>
+  <link rel="stylesheet" href="course.css">
+</head>
+<body>
+  <header class="site-header wrap">
+    <h1>Lesson 1 — DOM Basics</h1>
+    <p class="lead">Learn the Document Object Model with live editable examples and exercises.</p>
+  </header>
+
+  <main class="wrap grid">
+    <article class="sandbox">
+      <h2>Try it: Create & Inspect Elements</h2>
+      <p>Use the editor to create markup, add styles and a script that manipulates the DOM. Click <strong>Run</strong> to execute.</p>
+
+      <div class="editor">
+        <div class="panels">
+          <textarea id="html" placeholder="HTML">&lt;div id=\"greeting\"&gt;Hello&lt;/div&gt;</textarea>
+          <textarea id="css" placeholder="CSS">#greeting{padding:12px;background:#e8f3ff;border-radius:6px;color:#042029}</textarea>
+          <textarea id="js" placeholder="JavaScript">const el = document.getElementById('greeting');
+el.textContent += ' — the DOM updated me!';
+const btn = document.createElement('button');
+btn.textContent = 'Click me';
+btn.addEventListener('click', ()=> alert('Button clicked!'));
+el.appendChild(btn);</textarea>
+        </div>
+        <div class="controls">
+          <button id="run">Run</button>
+          <button id="reset">Reset</button>
+        </div>
+      </div>
+
+      <div class="preview">
+        <iframe id="preview" sandbox="allow-scripts"></iframe>
+      </div>
+
+      <section class="lesson-shell">
+        <h3>Exercises</h3>
+        <ol>
+          <li>Create a new element with <code>document.createElement</code> and insert it before the greeting.</li>
+          <li>Add a class to the greeting and style it using the CSS panel.</li>
+          <li>Query the greeting using <code>querySelector</code> and log its <code>innerHTML</code> to the console.</li>
+        </ol>
+      </section>
+    </article>
+
+    <nav class="lessons">
+      <h2>Lessons</h2>
+      <ol>
+        <li><a href="index.html">Course home</a></li>
+        <li><a href="lesson-2.html">2 — Creating & Inserting Elements</a></li>
+        <li><a href="lesson-3.html">3 — Event Handling</a></li>
+        <li><a href="lesson-4.html">4 — Forms & Inputs</a></li>
+        <li><a href="lesson-5.html">5 — Styling & Animation</a></li>
+        <li><a href="lesson-6.html">6 — Advanced DOM Techniques</a></li>
+        <li><a href="lesson-7.html">7 — BOM & Navigator/Window APIs</a></li>
+      </ol>
+    </nav>
+  </main>
+
+  <script src="course.js"></script>
+</body>
+</html>

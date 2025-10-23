@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced DOM APIs | JavaScript Fundamentals</title>
+    <link rel="stylesheet" href="src/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <h1><i class="fas fa-microscope"></i> Advanced DOM APIs</h1>
+
+        <!-- MutationObserver Demo -->
+        <section id="mutation-demo">
+            <h2><i class="fas fa-code-branch"></i> MutationObserver</h2>
+            
+            <div class="demo-container">
+                <div id="observedContent" class="observed-element">
+                    <h3>Observed Content</h3>
+                    <p>Try modifying this content!</p>
+                    <button id="addElement">Add Element</button>
+                    <button id="modifyAttribute">Modify Attribute</button>
+                    <button id="removeElement">Remove Element</button>
+                </div>
+
+                <div class="mutation-log">
+                    <h3>Mutation Log</h3>
+                    <div id="mutationLog" class="log-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- IntersectionObserver Demo -->
+        <section id="intersection-demo">
+            <h2><i class="fas fa-eye"></i> IntersectionObserver</h2>
+            
+            <div class="demo-container">
+                <div class="scroll-container">
+                    <div class="scroll-content">
+                        <div class="lazy-image" data-src="https://picsum.photos/300/200?random=1">
+                            <div class="placeholder">Image 1</div>
+                        </div>
+                        <div class="lazy-image" data-src="https://picsum.photos/300/200?random=2">
+                            <div class="placeholder">Image 2</div>
+                        </div>
+                        <div class="lazy-image" data-src="https://picsum.photos/300/200?random=3">
+                            <div class="placeholder">Image 3</div>
+                        </div>
+                        <!-- More images will be added dynamically -->
+                    </div>
+                </div>
+
+                <div class="intersection-log">
+                    <h3>Visibility Log</h3>
+                    <div id="intersectionLog" class="log-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ResizeObserver Demo -->
+        <section id="resize-demo">
+            <h2><i class="fas fa-expand-arrows-alt"></i> ResizeObserver</h2>
+            
+            <div class="demo-container">
+                <div class="resize-container">
+                    <div id="resizeElement" class="resize-element">
+                        <div class="resize-content">
+                            <h3>Resizable Element</h3>
+                            <p>Drag the corner to resize!</p>
+                        </div>
+                        <div class="size-info"></div>
+                    </div>
+                    <div class="resize-controls">
+                        <button id="toggleSize">Toggle Size</button>
+                    </div>
+                </div>
+
+                <div class="resize-log">
+                    <h3>Resize Log</h3>
+                    <div id="resizeLog" class="log-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Selection Demo -->
+        <section id="selection-demo">
+            <h2><i class="fas fa-search"></i> Advanced Selection</h2>
+            
+            <div class="demo-container">
+                <div class="selection-playground">
+                    <div class="level-1" data-level="1">
+                        Level 1
+                        <div class="level-2" data-level="2">
+                            Level 2
+                            <div class="level-3" data-level="3">
+                                Level 3
+                                <div class="level-4" data-level="4">Level 4</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="selection-controls">
+                    <input type="text" id="selectorInput" 
+                           placeholder="Enter CSS selector">
+                    <button id="testSelector">Test Selector</button>
+                    <button id="findClosest">Find Closest</button>
+                    <button id="testMatches">Test Matches</button>
+                </div>
+
+                <div class="selection-log">
+                    <h3>Selection Results</h3>
+                    <div id="selectionLog" class="log-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Custom Elements Demo -->
+        <section id="custom-elements-demo">
+            <h2><i class="fas fa-puzzle-piece"></i> Custom Elements</h2>
+            
+            <div class="demo-container">
+                <custom-tooltip text="This is a custom tooltip!">
+                    <button>Hover me!</button>
+                </custom-tooltip>
+
+                <custom-modal id="demoModal">
+                    <h3 slot="header">Custom Modal</h3>
+                    <div slot="content">
+                        <p>This is a custom modal component using shadow DOM.</p>
+                    </div>
+                    <div slot="footer">
+                        <button>Close</button>
+                    </div>
+                </custom-modal>
+
+                <button id="showModal">Show Modal</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Templates -->
+    <template id="tooltip-template">
+        <style>
+            .tooltip {
+                position: relative;
+                display: inline-block;
+            }
+            .tooltip-text {
+                position: absolute;
+                bottom: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #333;
+                color: white;
+                padding: 0.5rem;
+                border-radius: 4px;
+                font-size: 0.9rem;
+                opacity: 0;
+                transition: opacity 0.2s;
+                pointer-events: none;
+            }
+            :host(:hover) .tooltip-text {
+                opacity: 1;
+            }
+        </style>
+        <div class="tooltip">
+            <slot></slot>
+            <div class="tooltip-text"></div>
+        </div>
+    </template>
+
+    <template id="modal-template">
+        <style>
+            .modal {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 1rem;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                z-index: 1000;
+                display: none;
+            }
+            .modal.active {
+                display: block;
+            }
+            .backdrop {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.5);
+                display: none;
+            }
+            .backdrop.active {
+                display: block;
+            }
+            .modal-header {
+                border-bottom: 1px solid #eee;
+                padding-bottom: 0.5rem;
+                margin-bottom: 1rem;
+            }
+            .modal-footer {
+                border-top: 1px solid #eee;
+                padding-top: 1rem;
+                margin-top: 1rem;
+                text-align: right;
+            }
+        </style>
+        <div class="backdrop"></div>
+        <div class="modal">
+            <div class="modal-header">
+                <slot name="header"></slot>
+            </div>
+            <div class="modal-content">
+                <slot name="content"></slot>
+            </div>
+            <div class="modal-footer">
+                <slot name="footer"></slot>
+            </div>
+        </div>
+    </template>
+
+    <script src="src/script.js"></script>
+</body>
+</html>

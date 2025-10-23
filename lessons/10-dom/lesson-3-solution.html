@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lesson 3 Solution</title><link rel="stylesheet" href="course.css"></head><body class="wrap"><header class="site-header"><h1>Lesson 3 — Solutions</h1></header><main class="wrap"><pre style="background:#071727;padding:12px;border-radius:6px;color:var(--text)">// Example: remove delegated listener
+const buttons = document.getElementById('buttons');
+function handler(e){ const btn = e.target.closest('button'); if(!btn) return; console.log('clicked', btn.dataset.index); }
+buttons.addEventListener('click', handler);
+// later...
+buttons.removeEventListener('click', handler);
+
+// Capturing example
+document.getElementById('buttons').addEventListener('click', (e)=>console.log('capturing'), true);
+
+// Dispatching example
+document.dispatchEvent(new CustomEvent('item:selected', {detail:{index:1}}));
+</pre><p><a href="lesson-3-full.html">Back to lesson</a></p></main></body></html>

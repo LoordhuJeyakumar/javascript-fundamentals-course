@@ -8,7 +8,7 @@ console.log("=================================================================")
 console.log("\n📚 1. Loop Performance Comparison");
 console.log("----------------------------------");
 
-let testArray = Array.from({length: 1000}, (_, i) => i);
+let testArray = Array.from({length: 1000}, (_, i) => i); // [0,1,2,3,4,5,6,7,8,9,10,...,999]
 
 console.log("Testing different loop types with 1000 elements:");
 
@@ -74,6 +74,7 @@ let students = [
 ];
 
 console.log("Inefficient - creating objects inside loop:");
+console.time("Inefficient loop");
 let inefficientResults = [];
 for (let i = 0; i < students.length; i++) {
     let student = students[i];
@@ -84,8 +85,9 @@ for (let i = 0; i < students.length; i++) {
     };
     inefficientResults.push(result);
 }
-
+console.timeEnd("Inefficient loop");
 console.log("Efficient - pre-calculating values:");
+console.time("Efficient loop");
 let efficientResults = [];
 let statusMap = { true: "Passed", false: "Failed" };
 let messageTemplate = (name, passed, grade) => `Student ${name} ${passed ? "passed" : "failed"} with grade ${grade}`;
@@ -99,7 +101,7 @@ for (let i = 0; i < students.length; i++) {
     };
     efficientResults.push(result);
 }
-
+console.timeEnd("Efficient loop");
 console.log("Results:", efficientResults);
 
 // 4. Using Appropriate Loop Types
@@ -141,10 +143,11 @@ console.log("Even values:", evens);
 console.log("\n📚 5. Breaking Out of Loops Early");
 console.log("--------------------------------");
 
-let searchArray = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+let searchArray = [7, 3, 5, 1, 9, 11, 13, 15, 17, 19];
 let target = 7;
 
 console.log("Finding target without optimization:");
+console.time("Inefficient loop");
 let found = false;
 let position = -1;
 for (let i = 0; i < searchArray.length; i++) {
@@ -154,17 +157,22 @@ for (let i = 0; i < searchArray.length; i++) {
     }
 }
 console.log(`Found ${target} at position ${position}`);
-
+console.timeEnd("Inefficient loop");
 console.log("\nFinding target with early break:");
+console.time("Efficient loop");
+found = false;
 let optimizedPosition = -1;
 for (let i = 0; i < searchArray.length; i++) {
+
+    if (found) break;
     if (searchArray[i] === target) {
+        found = true;
         optimizedPosition = i;
-        break; // Exit early when found
+        break; // Exit early when found 
     }
 }
 console.log(`Found ${target} at position ${optimizedPosition}`);
-
+console.timeEnd("Efficient loop");
 // 6. Loop Unrolling
 console.log("\n📚 6. Loop Unrolling");
 console.log("------------------");
@@ -178,7 +186,7 @@ for (let i = 0; i < unrollArray.length; i++) {
 }
 console.log(`Sum: ${normalSum}`);
 
-console.log("\nUnrolled loop (for small arrays):");
+console.log("\nUnrolled loop (for small arrays):"); 
 let unrolledSum = 0;
 let i = 0;
 while (i < unrollArray.length - 3) {

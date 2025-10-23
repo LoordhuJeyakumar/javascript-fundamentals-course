@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Lesson 2 — Element Creation & Modification</title>
+	<link rel="stylesheet" href="course.css">
+</head>
+<body>
+	<header class="site-header wrap">
+		<h1>Lesson 2 — Element Creation & Modification</h1>
+		<p class="lead">Create, modify and manage elements dynamically.</p>
+	</header>
+
+	<main class="wrap grid">
+		<article class="sandbox">
+			<h2>Try it: Build a dynamic list</h2>
+			<p>Use the editor to create elements, set attributes, clone nodes and replace children.</p>
+
+			<div class="editor">
+				<div class="panels">
+					<textarea id="html">&lt;div id="app"&gt;
+	&lt;h3&gt;My Dynamic List&lt;/h3&gt;
+	&lt;ul id="list"&gt;&lt;/ul&gt;
+&lt;/div&gt;</textarea>
+					<textarea id="css">#app{padding:12px}#list{padding-left:18px}</textarea>
+					<textarea id="js">const app = document.getElementById('app');
+const list = document.getElementById('list');
+
+function addItem(text){
+	const li = document.createElement('li');
+	li.textContent = text;
+	li.setAttribute('data-added','true');
+	list.appendChild(li);
+}
+
+function init(){
+	addItem('First item');
+	addItem('Second item');
+	// Clone the first item
+	const first = list.children[0].cloneNode(true);
+	first.textContent = 'Cloned item';
+	list.appendChild(first);
+}
+
+init();</textarea>
+				</div>
+				<div class="controls">
+					<button id="run">Run</button>
+					<button id="reset">Reset</button>
+					<a class="button" href="lesson-2-solution.html" target="_blank">View Solution</a>
+				</div>
+			</div>
+
+			<div class="preview">
+				<iframe id="preview" sandbox="allow-scripts"></iframe>
+			</div>
+
+			<section class="lesson-shell">
+				<h3>Exercises</h3>
+				<ol>
+					<li>Create a function <code>removeItem(index)</code> that removes an item at a given index.</li>
+					<li>Implement <code>insertBefore</code> to add an item before the second list item.</li>
+					<li>Use <code>replaceChild</code> to replace the second item with a new node.</li>
+				</ol>
+			</section>
+		</article>
+
+		<nav class="lessons">
+			<h2>Lessons</h2>
+			<ol>
+				<li><a href="index.html">Course home</a></li>
+				<li><a href="lesson-1.html">1 — DOM Basics</a></li>
+				<li>2 — Element Creation & Modification (this page)</li>
+				<li><a href="lesson-3.html">3 — Event Handling</a></li>
+			</ol>
+		</nav>
+	</main>
+
+	<script src="course.js"></script>
+</body>
+</html>

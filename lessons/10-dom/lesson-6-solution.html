@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lesson 6 Solution</title><link rel="stylesheet" href="course.css"></head><body class="wrap"><header class="site-header"><h1>Lesson 6 — Solutions</h1></header><main class="wrap"><pre style="background:#071727;padding:12px;border-radius:6px;color:var(--text)
+">// observedAttributes example
+class MyGreeting extends HTMLElement{
+  static get observedAttributes(){ return ['name']; }
+  constructor(){ super(); this.root = this.attachShadow({mode:'open'}); this.root.innerHTML = '<div></div>'; }
+  connectedCallback(){ this.update(); }
+  attributeChangedCallback(){ this.update(); }
+  update(){ this.root.querySelector('div').textContent = 'Hello ' + (this.getAttribute('name')||'Guest'); }
+}
+customElements.define('my-greeting', MyGreeting);
+
+// IntersectionObserver example
+const obs = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting) console.log('visible', e.target); }); });
+// obs.observe(document.querySelector('selector'));
+</pre><p><a href="lesson-6-full.html">Back to lesson</a></p></main></body></html>

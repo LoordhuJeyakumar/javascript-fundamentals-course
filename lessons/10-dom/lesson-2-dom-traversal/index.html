@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Traversal | JavaScript Fundamentals</title>
+    <link rel="stylesheet" href="src/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <h1><i class="fas fa-sitemap"></i> DOM Traversal</h1>
+
+        <!-- Tree Navigation Demo -->
+        <section id="tree-demo">
+            <h2><i class="fas fa-tree"></i> DOM Tree Navigation</h2>
+            <div class="tree-container" id="familyTree">
+                <div class="node parent-node">
+                    <span>Root</span>
+                    <div class="children">
+                        <div class="node">
+                            <span>Child 1</span>
+                            <div class="children">
+                                <div class="node"><span>Grandchild 1.1</span></div>
+                                <div class="node"><span>Grandchild 1.2</span></div>
+                            </div>
+                        </div>
+                        <div class="node">
+                            <span>Child 2</span>
+                            <div class="children">
+                                <div class="node"><span>Grandchild 2.1</span></div>
+                                <div class="node"><span>Grandchild 2.2</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="controls">
+                <button id="highlightParent"><i class="fas fa-arrow-up"></i> Show Parent</button>
+                <button id="highlightChildren"><i class="fas fa-arrow-down"></i> Show Children</button>
+                <button id="highlightSiblings"><i class="fas fa-arrows-left-right"></i> Show Siblings</button>
+            </div>
+            <div id="nodeInfo" class="info-panel">
+                <h3>Node Information</h3>
+                <pre></pre>
+            </div>
+        </section>
+
+        <!-- Node Types Demo -->
+        <section id="node-types-demo">
+            <h2><i class="fas fa-code-branch"></i> Node Types</h2>
+            <div class="node-types-container">
+                <div id="elementNode">Element Node</div>
+                <!-- This is a comment node -->
+                Text nodes and
+                <strong>element nodes</strong>
+                mixed together
+            </div>
+            <div class="info-panel">
+                <h3>Node Analysis</h3>
+                <div id="nodeTypeInfo"></div>
+            </div>
+        </section>
+
+        <!-- Dynamic Navigation -->
+        <section id="dynamic-navigation">
+            <h2><i class="fas fa-list"></i> Dynamic List Navigation</h2>
+            <div class="list-container">
+                <ul id="dynamicList">
+                    <li>Item 1
+                        <ul>
+                            <li>Sub-item 1.1</li>
+                            <li>Sub-item 1.2</li>
+                        </ul>
+                    </li>
+                    <li>Item 2
+                        <ul>
+                            <li>Sub-item 2.1</li>
+                            <li>Sub-item 2.2</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="controls">
+                <button id="addItem"><i class="fas fa-plus"></i> Add Item</button>
+                <button id="moveUp"><i class="fas fa-arrow-up"></i> Move Up</button>
+                <button id="moveDown"><i class="fas fa-arrow-down"></i> Move Down</button>
+                <button id="indent"><i class="fas fa-indent"></i> Indent</button>
+                <button id="outdent"><i class="fas fa-outdent"></i> Outdent</button>
+            </div>
+        </section>
+
+        <!-- Practice Exercise -->
+        <section id="practice">
+            <h2><i class="fas fa-graduation-cap"></i> Practice Exercise</h2>
+            <div class="exercise-container">
+                <div id="elementInspector">
+                    <h3>Element Inspector</h3>
+                    <div class="sample-content">
+                        <p>Click any element to inspect its:</p>
+                        <ul>
+                            <li>Parent</li>
+                            <li>Children</li>
+                            <li>Siblings</li>
+                        </ul>
+                        <div class="nested">
+                            <span>Nested content</span>
+                            <em>for practice</em>
+                        </div>
+                    </div>
+                </div>
+                <div id="inspectorOutput" class="info-panel">
+                    <h3>Element Information</h3>
+                    <pre></pre>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="src/script.js"></script>
+</body>
+</html>

@@ -33,7 +33,15 @@ console.log("----------------------------------------");
 let name = "John";
 console.log("Initial name:", name);
 
-// Reassignment
+let city; // variable declaration
+console.log("City:", city);
+city = "New York"; // variable assignment
+console.log("City:", city);
+
+city = "Los Angeles"; // variable reassignment
+console.log("City:", city);
+
+
 name = "Jane";
 console.log("Reassigned name:", name);
 
@@ -84,7 +92,12 @@ function demonstrateScoping() {
     // console.log("Block const outside block:", blockConst); // Error
 }
 
+console.log("Outside function:");
+console.log("Funtion Var", functionVar);
+
+
 demonstrateScoping();
+
 
 // 4. Hoisting
 console.log("\n📚 4. Hoisting");
@@ -100,8 +113,8 @@ var hoistedVar = "I'm hoisted";
 console.log("var after declaration:", hoistedVar);
 
 // let hoisting (Temporal Dead Zone)
-// console.log("let before declaration:", hoistedLet); // ReferenceError
-let hoistedLet = "I'm hoisted but not initialized";
+ console.log("let before declaration:", hoistedLet); // ReferenceError
+// let hoistedLet = "I'm hoisted but not initialized";
 console.log("let after declaration:", hoistedLet);
 
 // 5. Variable Naming Conventions
@@ -135,11 +148,11 @@ console.log("------------------------------");
 
 // Different data types
 let stringVar = "Hello, World!";
-let numberVar = 42;
-let booleanVar = true;
-let nullVar = null;
+let numberVar = 42;// 0.1, 1e10, 1.23e-10, 0b1010, 0o123, 0x1A
+let booleanVar = true; // true, false
+let nullVar = null; 
 let undefinedVar = undefined;
-let objectVar = { name: "John", age: 30 };
+let objectVar = { "name": "John", "age": 30 };
 let arrayVar = [1, 2, 3, 4, 5];
 
 console.log("Different variable types:");
@@ -157,6 +170,11 @@ console.log("----------------------------------");
 
 // Multiple variable declaration
 let a = 1, b = 2, c = 3;
+
+// let a = 1;
+// let b = 2;
+// let c = 3;
+
 console.log("Multiple variables:", a, b, c);
 
 // Destructuring assignment
@@ -167,12 +185,13 @@ console.log("Destructured variables:", x, y, z);
 let { firstName, lastName } = { firstName: "John", lastName: "Doe" };
 console.log("Object destructuring:", firstName, lastName);
 
-// 8. Variable Shadowing
+// 8. Variable Shadowing => when a variable with the same name is declared in a inner scope, it shadows the outer scope variable => use let instead of var to avoid this
+
+
 console.log("\n📚 8. Variable Shadowing");
 console.log("----------------------");
 
 let shadowVar = "I'm the outer variable";
-
 function demonstrateShadowing() {
     let shadowVar = "I'm the inner variable";
     console.log("Inner shadowVar:", shadowVar);
@@ -235,8 +254,9 @@ commonMistake();
 console.log("\n📚 11. Modern JavaScript Variable Features");
 console.log("----------------------------------------");
 
-// Template literals
-let templateVar = `Hello, ${name}!`;
+// Template literals = use backticks to create a string and use ${variable} to insert a variable into the string
+let name2 = "John";
+let templateVar = `Hello, ${name2}!`; // "hello," + name2 + "!"
 console.log("Template literal:", templateVar);
 
 // Computed property names

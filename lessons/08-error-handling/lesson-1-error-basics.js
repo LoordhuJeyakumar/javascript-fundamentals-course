@@ -135,6 +135,15 @@ try {
 console.log("\n📚 6. Error Propagation and Bubbling");
 console.log("-----------------------------------");
 
+/* Error propagation -> If an error is not caught in a function, it propagates up the call stack to the caller function.
+   This continues until the error is caught or reaches the global scope. 
+
+
+   bubbling -> Errors can bubble up through multiple layers of function calls, allowing higher-level functions to handle errors from lower-level functions.
+
+
+*/
+
 function level1() {
     console.log("Level 1: Starting");
     level2();
@@ -149,7 +158,7 @@ function level2() {
 
 function level3() {
     console.log("Level 3: Starting");
-    throw new Error("Error in level 3");
+    //throw new Error("Error in level 3");
     console.log("Level 3: Completed");
 }
 
@@ -201,8 +210,8 @@ function safeArrayAccess(arr, index) {
 
 let numbers = [1, 2, 3, 4, 5];
 console.log("Safe array access:");
-console.log("Index 2:", safeArrayAccess(numbers, 2));
-console.log("Index 10:", safeArrayAccess(numbers, 10));
+console.log("Index 2:", safeArrayAccess(numbers, 2));// 3   
+console.log("Index 10:", safeArrayAccess(numbers, 10)); // null
 console.log("Invalid index:", safeArrayAccess(numbers, "a"));
 
 // Scenario 3: JSON parsing

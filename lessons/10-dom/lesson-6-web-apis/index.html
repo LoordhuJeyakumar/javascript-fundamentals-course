@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web APIs | JavaScript Fundamentals</title>
+    <link rel="stylesheet" href="src/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <h1><i class="fas fa-plug"></i> Web APIs Explorer</h1>
+
+        <!-- Storage APIs Demo -->
+        <section id="storage-demo">
+            <h2><i class="fas fa-database"></i> Storage APIs</h2>
+            
+            <div class="demo-container">
+                <div class="storage-controls">
+                    <div class="input-group">
+                        <input type="text" id="storageKey" placeholder="Key">
+                        <input type="text" id="storageValue" placeholder="Value">
+                        <button id="saveToStorage">Save to Storage</button>
+                    </div>
+                    <div class="storage-type">
+                        <label>
+                            <input type="radio" name="storageType" value="localStorage" checked>
+                            LocalStorage
+                        </label>
+                        <label>
+                            <input type="radio" name="storageType" value="sessionStorage">
+                            SessionStorage
+                        </label>
+                    </div>
+                </div>
+
+                <div class="storage-display">
+                    <h3>Stored Data</h3>
+                    <div id="storageContent" class="data-content"></div>
+                </div>
+
+                <div class="storage-info">
+                    <h3>Storage Info</h3>
+                    <div id="storageInfo" class="info-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fetch API Demo -->
+        <section id="fetch-demo">
+            <h2><i class="fas fa-exchange-alt"></i> Fetch API</h2>
+            
+            <div class="demo-container">
+                <div class="fetch-controls">
+                    <input type="url" id="fetchUrl" placeholder="Enter URL">
+                    <select id="fetchMethod">
+                        <option value="GET">GET</option>
+                        <option value="POST">POST</option>
+                        <option value="PUT">PUT</option>
+                        <option value="DELETE">DELETE</option>
+                    </select>
+                    <textarea id="fetchBody" placeholder="Request body (JSON)"></textarea>
+                    <button id="sendRequest">Send Request</button>
+                    <button id="abortRequest">Abort</button>
+                </div>
+
+                <div class="response-display">
+                    <h3>Response</h3>
+                    <div id="responseContent" class="data-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Media APIs Demo -->
+        <section id="media-demo">
+            <h2><i class="fas fa-video"></i> Media APIs</h2>
+            
+            <div class="demo-container">
+                <div class="media-preview">
+                    <video id="videoPreview" autoplay muted></video>
+                    <audio id="audioPreview" controls></audio>
+                </div>
+
+                <div class="media-controls">
+                    <button id="startVideo">
+                        <i class="fas fa-video"></i> Start Video
+                    </button>
+                    <button id="startAudio">
+                        <i class="fas fa-microphone"></i> Start Audio
+                    </button>
+                    <button id="startRecording" disabled>
+                        <i class="fas fa-record-vinyl"></i> Start Recording
+                    </button>
+                    <button id="stopRecording" disabled>
+                        <i class="fas fa-stop"></i> Stop Recording
+                    </button>
+                </div>
+
+                <div class="recordings-list">
+                    <h3>Recordings</h3>
+                    <div id="recordingsList"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Device APIs Demo -->
+        <section id="device-demo">
+            <h2><i class="fas fa-mobile-alt"></i> Device APIs</h2>
+            
+            <div class="demo-container">
+                <div class="device-info">
+                    <div class="info-card" id="locationInfo">
+                        <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+                        <div class="info-content"></div>
+                        <button id="getLocation">Get Location</button>
+                    </div>
+
+                    <div class="info-card" id="orientationInfo">
+                        <h3><i class="fas fa-compass"></i> Orientation</h3>
+                        <div class="info-content"></div>
+                    </div>
+
+                    <div class="info-card" id="batteryInfo">
+                        <h3><i class="fas fa-battery-half"></i> Battery</h3>
+                        <div class="info-content"></div>
+                    </div>
+
+                    <div class="info-card" id="networkInfo">
+                        <h3><i class="fas fa-wifi"></i> Network</h3>
+                        <div class="info-content"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real-time APIs Demo -->
+        <section id="realtime-demo">
+            <h2><i class="fas fa-bolt"></i> Real-time APIs</h2>
+            
+            <div class="demo-container">
+                <div class="websocket-demo">
+                    <h3>WebSocket Echo Test</h3>
+                    <div class="chat-container">
+                        <div id="chatMessages" class="messages"></div>
+                        <div class="input-group">
+                            <input type="text" id="messageInput" placeholder="Type a message">
+                            <button id="sendMessage">Send</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sse-demo">
+                    <h3>Server-Sent Events</h3>
+                    <div id="sseContent" class="data-content"></div>
+                    <button id="startSSE">Start SSE</button>
+                    <button id="stopSSE">Stop SSE</button>
+                </div>
+
+                <div class="notification-demo">
+                    <h3>Push Notifications</h3>
+                    <button id="requestNotification">Request Permission</button>
+                    <button id="sendNotification">Send Test Notification</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="src/script.js"></script>
+</body>
+</html>

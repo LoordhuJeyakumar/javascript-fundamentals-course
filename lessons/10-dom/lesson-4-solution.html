@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lesson 4 Solution</title><link rel="stylesheet" href="course.css"></head><body class="wrap"><header class="site-header"><h1>Lesson 4 — Solutions</h1></header><main class="wrap"><pre style="background:#071727;padding:12px;border-radius:6px;color:var(--text)">// Real-time validation example
+const email = document.querySelector('input[name="email"]');
+const submit = document.querySelector('button[type="submit"]');
+function validate(){
+  const ok = email.checkValidity();
+  if(ok){ email.style.borderColor = 'lime'; submit.disabled = false; } else { email.style.borderColor = 'red'; submit.disabled = true; }
+}
+email.addEventListener('input', validate);
+validate();
+
+// localStorage example
+form.addEventListener('submit', (e)=>{ e.preventDefault(); const data = Object.fromEntries(new FormData(form).entries()); const arr = JSON.parse(localStorage.getItem('submissions')||'[]'); arr.push(data); localStorage.setItem('submissions', JSON.stringify(arr)); });
+</pre><p><a href="lesson-4-full.html">Back to lesson</a></p></main></body></html>

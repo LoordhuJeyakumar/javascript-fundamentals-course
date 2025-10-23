@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Basics</title>
+    <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+    <div id="app">
+        <h1>DOM Basics</h1>
+        
+        <section id="selection-demo">
+            <h2>Element Selection</h2>
+            <div class="demo-box">Click elements to select them</div>
+            <p class="highlight">This is a highlighted paragraph</p>
+            <p class="highlight">Another highlighted paragraph</p>
+            <ul id="demo-list">
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ul>
+        </section>
+
+        <section id="manipulation-demo">
+            <h2>DOM Manipulation</h2>
+            <div id="content-box">Original Content</div>
+            <button id="change-content">Change Content</button>
+            <button id="toggle-class">Toggle Class</button>
+            <button id="add-item">Add Item</button>
+        </section>
+
+        <section id="events-demo">
+            <h2>Event Handling</h2>
+            <input type="text" id="input-field" placeholder="Type something...">
+            <div id="event-output">Events will be logged here</div>
+        </section>
+    </div>
+    <script src="src/script.js"></script>
+</body>
+</html>

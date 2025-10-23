@@ -8,22 +8,23 @@ console.log("==================================================");
 console.log("\n📚 1. Basic Array Destructuring");
 console.log("-----------------------------");
 
-let colors = ["red", "green", "blue"];
+let colors = ["red", "green", "blue", "yellow", "purple"];
 console.log("Colors array:", colors);
 
 // Basic destructuring
-let [firstColor, secondColor, thirdColor] = colors;
+let [firstColor, secondColor, thirdColor, , someColor] = colors;
 console.log("First color:", firstColor);
 console.log("Second color:", secondColor);
 console.log("Third color:", thirdColor);
+console.log("Some color:", someColor);
 
 // Destructuring with fewer variables
 let [primary, secondary] = colors;
 console.log("Primary:", primary, "Secondary:", secondary);
 
 // Destructuring with more variables than array elements
-let [a, b, c, d] = colors;
-console.log("a:", a, "b:", b, "c:", c, "d:", d); // d is undefined
+let [a, b, c, d, e, f] = colors;
+console.log("a:", a, "b:", b, "c:", c, "d:", d, "e:", e, "f:", f); // f is undefined
 
 // 2. Skipping Elements
 console.log("\n📚 2. Skipping Elements");
@@ -162,7 +163,7 @@ let people = [
 ];
 
 // Destructure array and object properties
-let [{ name: firstPerson }, { name: secondPerson }, { name: thirdPerson }] = people;
+let [{ name:firstPerson }, { name: secondPerson }, { name: thirdPerson }] = people;
 console.log("First person:", firstPerson);
 console.log("Second person:", secondPerson);
 console.log("Third person:", thirdPerson);
@@ -201,6 +202,14 @@ console.log(`RGB Color - Red: ${red}, Green: ${green}, Blue: ${blue}`);
 
 // Convert RGB to hex
 function rgbToHex([r, g, b]) {
+
+    console.log(`Converting RGB(${r}, ${g}, ${b}) to Hex`);
+    console.log(r.toString(16));
+    console.log(g.toString(16));
+    console.log(b.toString(16));
+
+    console.log(`#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`);
+
     return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
 }
 

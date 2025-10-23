@@ -1,0 +1,116 @@
+{
+    "lessonGrading": {
+        "lesson-1-dom-basics": {
+            "totalPoints": 100,
+            "exercises": {
+                "selector-basics": {
+                    "points": 20,
+                    "tests": ["querySelector", "getElementById", "getElementsByClassName"]
+                },
+                "dom-manipulation": {
+                    "points": 30,
+                    "tests": ["createElement", "appendChild", "removeChild"]
+                },
+                "event-handling": {
+                    "points": 30,
+                    "tests": ["addEventListener", "removeEventListener"]
+                },
+                "traversal": {
+                    "points": 20,
+                    "tests": ["parentNode", "children", "nextSibling"]
+                }
+            }
+        },
+        "lesson-5-advanced-apis": {
+            "totalPoints": 100,
+            "exercises": {
+                "content-observer": {
+                    "points": 25,
+                    "tests": ["mutationObserver", "trackChanges", "undoRedo"]
+                },
+                "smart-gallery": {
+                    "points": 25,
+                    "tests": ["intersectionObserver", "lazyLoading", "errorHandling"]
+                },
+                "responsive-components": {
+                    "points": 25,
+                    "tests": ["resizeObserver", "adaptiveLayout", "performance"]
+                },
+                "shadow-components": {
+                    "points": 25,
+                    "tests": ["customElements", "shadowDOM", "eventHandling"]
+                }
+            }
+        },
+        "lesson-6-web-apis": {
+            "totalPoints": 100,
+            "exercises": {
+                "offline-notes": {
+                    "points": 20,
+                    "tests": ["localStorage", "offlineSupport", "syncFeature"]
+                },
+                "media-recorder": {
+                    "points": 20,
+                    "tests": ["mediaCapture", "recording", "playback"]
+                },
+                "location-service": {
+                    "points": 20,
+                    "tests": ["geolocation", "mapping", "distanceCalc"]
+                },
+                "realtime-chat": {
+                    "points": 20,
+                    "tests": ["websocket", "messaging", "notifications"]
+                },
+                "network-aware": {
+                    "points": 20,
+                    "tests": ["networkInfo", "adaptation", "offlineMode"]
+                }
+            }
+        }
+    },
+    "gradingCriteria": {
+        "functionality": {
+            "weight": 0.6,
+            "description": "Core features working as specified"
+        },
+        "codeQuality": {
+            "weight": 0.2,
+            "description": "Code organization, comments, and best practices"
+        },
+        "performance": {
+            "weight": 0.1,
+            "description": "Efficient implementation and resource usage"
+        },
+        "browserSupport": {
+            "weight": 0.1,
+            "description": "Works across specified browsers"
+        }
+    },
+    "submissionRequirements": {
+        "files": [
+            "index.html",
+            "src/",
+            "tests/",
+            "README.md"
+        ],
+        "testing": {
+            "framework": "jest",
+            "coverage": {
+                "statements": 80,
+                "branches": 70,
+                "functions": 80,
+                "lines": 80
+            }
+        },
+        "linting": {
+            "tool": "eslint",
+            "config": ".eslintrc.json"
+        }
+    },
+    "feedback": {
+        "automated": true,
+        "includeTestResults": true,
+        "includeCoverageSummary": true,
+        "includePerformanceMetrics": true
+    }
+}

@@ -1,0 +1,236 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --warning-color: #f1c40f;
+    --error-color: #e74c3c;
+    --background-color: #f8f9fa;
+    --text-color: #2c3e50;
+    --border-color: #e9ecef;
+    --shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+#app {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: white;
+}
+
+h1, h2, h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Demo Container */
+.demo-container {
+    display: grid;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+/* MutationObserver Demo */
+.observed-element {
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    min-height: 200px;
+}
+
+.mutation-log {
+    background: var(--background-color);
+    padding: 1rem;
+    border-radius: 6px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* IntersectionObserver Demo */
+.scroll-container {
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+}
+
+.scroll-content {
+    padding: 1rem;
+}
+
+.lazy-image {
+    margin: 1rem 0;
+    background: var(--background-color);
+    border-radius: 6px;
+    overflow: hidden;
+    min-height: 200px;
+    position: relative;
+}
+
+.placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+.lazy-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.lazy-image img.loaded {
+    opacity: 1;
+}
+
+/* ResizeObserver Demo */
+.resize-container {
+    display: grid;
+    gap: 1rem;
+}
+
+.resize-element {
+    min-height: 200px;
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    resize: both;
+    overflow: auto;
+    position: relative;
+}
+
+.size-info {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    background: rgba(0,0,0,0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+/* Advanced Selection Demo */
+.selection-playground {
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+}
+
+.selection-playground > div {
+    padding: 1rem;
+    margin: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.selection-controls {
+    display: grid;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+#selectorInput {
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+/* Log Styles */
+.log-content {
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.log-content div {
+    padding: 0.5rem;
+    margin: 0.25rem 0;
+    background: white;
+    border-radius: 4px;
+    border-left: 3px solid var(--primary-color);
+}
+
+.log-content .error {
+    border-left-color: var(--error-color);
+}
+
+.log-content .warning {
+    border-left-color: var(--warning-color);
+}
+
+.log-content .success {
+    border-left-color: var(--secondary-color);
+}
+
+/* Button Styles */
+button {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+}
+
+/* Highlight Effects */
+.highlight {
+    animation: highlight 0.5s ease-out;
+}
+
+@keyframes highlight {
+    0% { background-color: var(--primary-color); }
+    100% { background-color: transparent; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .demo-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .selection-controls {
+        grid-template-columns: 1fr;
+    }
+    
+    button {
+        width: 100%;
+    }
+    
+    .resize-element {
+        resize: vertical;
+    }
+}

@@ -23,8 +23,8 @@ console.log("lastIndexOf(2):", lastIndex);
 let notFound = numbers.indexOf(10);
 console.log("indexOf(10):", notFound);
 
-// Search from specific index
-let fromIndex = numbers.indexOf(2, 2);
+// Search from specific index = > start from index 2 and find the first occurrence of 2
+let fromIndex = numbers.indexOf(3,4);
 console.log("indexOf(2, 2):", fromIndex);
 
 // 2. includes() Method - Check Element Existence
@@ -38,7 +38,7 @@ console.log("includes('green'):", colors.includes("green"));
 console.log("includes('purple'):", colors.includes("purple"));
 console.log("includes('red', 1):", colors.includes("red", 1)); // Start from index 1
 
-// 3. find() Method - Find First Matching Element
+// 3. find() Method - Find First Matching Element = > find the first 
 console.log("\n📚 3. find() Method - Find First Matching Element");
 console.log("------------------------------------------------");
 
@@ -134,6 +134,8 @@ console.log("-------------------------");
 let numbers2 = [10, 2, 40, 1, 5];
 console.log("Numbers to sort:", numbers2);
 
+console.log("Sort numerically (ascending):", numbers2.sort());
+
 // Sort numerically (ascending)
 let ascending = [...numbers2].sort((a, b) => a - b);
 console.log("Ascending sort:", ascending);
@@ -165,7 +167,21 @@ console.log("Employees:", employees);
 let bySalary = [...employees].sort((a, b) => a.salary - b.salary);
 console.log("Sort by salary (ascending):", bySalary);
 
-// Sort by name (alphabetical)
+// Sort by name (alphabetical) = > sort the employees by name in alphabetical order
+// localeCompare is used to compare strings in a locale-sensitive way
+
+/* 
+const a = "réservé"; // With accents, lowercase
+const b = "RESERVE"; // No accents, uppercase
+
+console.log(a.localeCompare(b));
+// Expected output: 1
+console.log(a.localeCompare(b, "en", { sensitivity: "base" }));
+// Expected output: 0
+
+
+*/
+
 let byName = [...employees].sort((a, b) => a.name.localeCompare(b.name));
 console.log("Sort by name:", byName);
 

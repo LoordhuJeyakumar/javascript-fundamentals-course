@@ -121,7 +121,7 @@ function processUserData(userId, userData) {
 
 console.log("Error inheritance and chaining:");
 try {
-    processUserData("", { name: "John" });
+    processUserData(1, { name: "John" });
 } catch (error) {
     console.log("Chained error:");
     console.log("Name:", error.name);

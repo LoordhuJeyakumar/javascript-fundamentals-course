@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lesson 5 Solution</title><link rel="stylesheet" href="course.css"></head><body class="wrap"><header class="site-header"><h1>Lesson 5 — Solutions</h1></header><main class="wrap"><pre style="background:#071727;padding:12px;border-radius:6px;color:var(--text)">// Example: keyframes trigger
+const el = document.getElementById('box');
+el.style.animation = 'pulse 800ms ease-in-out';
+
+/* in CSS */
+/* @keyframes pulse { 0%{transform:scale(1)} 50%{transform:scale(1.2)} 100%{transform:scale(1)} } */
+
+// requestAnimationFrame example
+let start;
+function step(ts){ if(!start) start = ts; const progress = ts-start; el.style.transform = 'translateX('+Math.sin(progress/200)*20+'px)'; if(progress < 2000) requestAnimationFrame(step); }
+requestAnimationFrame(step);
+</pre><p><a href="lesson-5-full.html">Back to lesson</a></p></main></body></html>

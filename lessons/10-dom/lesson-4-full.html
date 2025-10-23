@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lesson 4 — Forms & Inputs</title><link rel="stylesheet" href="course.css"></head>
+<body>
+  <header class="site-header wrap"><h1>Lesson 4 — Forms & Inputs</h1><p class="lead">Handle forms, validation and submission.</p></header>
+  <main class="wrap grid">
+    <article class="sandbox">
+      <h2>Try it: Build a simple sign-up form</h2>
+      <div class="editor">
+        <div class="panels">
+          <textarea id="html">&lt;form id="signup"&gt;
+  &lt;label&gt;Name: &lt;input name="name" required /&gt;&lt;/label&gt;
+  &lt;label&gt;Email: &lt;input name="email" type="email" required /&gt;&lt;/label&gt;
+  &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+&lt;div id="result"&gt;&lt;/div&gt;</textarea>
+          <textarea id="css">form{display:flex;flex-direction:column;gap:8px;max-width:360px}label{display:flex;justify-content:space-between}</textarea>
+          <textarea id="js">const form = document.getElementById('signup');
+const result = document.getElementById('result');
+form.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const data = new FormData(form);
+  const obj = Object.fromEntries(data.entries());
+  result.textContent = JSON.stringify(obj, null, 2);
+});
+</textarea>
+        </div>
+        <div class="controls">
+          <button id="run">Run</button>
+          <button id="reset">Reset</button>
+          <a class="button" href="lesson-4-solution.html" target="_blank">Solution</a>
+        </div>
+      </div>
+      <div class="preview"><iframe id="preview" sandbox="allow-scripts"></iframe></div>
+      <section class="lesson-shell"><h3>Exercises</h3><ol><li>Add real-time validation for the email field.</li><li>Disable submit until the form is valid.</li><li>Store submitted data into localStorage and show persisted entries.</li></ol></section>
+    </article>
+    <nav class="lessons"><h2>Lessons</h2><ol><li><a href="index.html">Home</a></li><li><a href="lesson-1.html">1</a></li><li><a href="lesson-2.html">2</a></li><li><a href="lesson-3-full.html">3</a></li><li>4 — Forms</li></ol></nav>
+  </main>
+  <script src="course.js"></script>
+</body>
+</html>

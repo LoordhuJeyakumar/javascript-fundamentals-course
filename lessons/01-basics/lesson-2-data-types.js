@@ -35,9 +35,9 @@ console.log("NaN:", nanVar, typeof nanVar);
 // String type
 let stringVar = "Hello, World!";
 let singleQuoteVar = 'Single quotes';
-let templateVar = `Template literal with ${numberVar}`;
+let templateVar = `Template literal with ${numberVar}`; // Template literals are a new way to create strings in ES6 => `${variable}`
 let multilineVar = `This is a
-multiline string`;
+multiline string`; // Multiline strings are a new way to create strings in ES6 => `string`
 
 console.log("String examples:");
 console.log("Double quotes:", stringVar, typeof stringVar);
@@ -65,11 +65,11 @@ let uninitializedVar;
 console.log("Undefined:", undefinedVar, typeof undefinedVar);
 console.log("Uninitialized:", uninitializedVar, typeof uninitializedVar);
 
-// Symbol type (ES6)
+// Symbol type (ES6) => Unique identifier for objects
 let symbolVar = Symbol("description");
-let symbolVar2 = Symbol("description");
+let symbolVar2 = Symbol("description"); // Symbols are unique and immutable
 console.log("Symbol:", symbolVar, typeof symbolVar);
-console.log("Symbol equality:", symbolVar === symbolVar2); // false
+console.log("Symbol equality:", symbolVar === symbolVar2); // false => Symbols are unique and immutable
 
 // 2. Reference Data Types
 console.log("\n📚 2. Reference Data Types");
@@ -106,7 +106,7 @@ function functionVar() {
     return "I'm a function";
 }
 
-let arrowFunctionVar = () => "I'm an arrow function";
+const arrowFunctionVar = () => "I'm an arrow function"; // Arrow functions are a new way to write functions in ES6 => () => { return statement; }
 
 console.log("Function examples:");
 console.log("Function:", functionVar, typeof functionVar);
@@ -123,22 +123,23 @@ console.log("3. Object.prototype.toString.call() - More accurate type checking")
 
 // typeof operator
 console.log("typeof examples:");
-console.log("typeof 42:", typeof 42);
-console.log("typeof 'hello':", typeof 'hello');
-console.log("typeof true:", typeof true);
-console.log("typeof null:", typeof null);
+console.log("typeof 42:", typeof 42); // number
+console.log("typeof 'hello':", typeof 'hello'); // string
+console.log("typeof true:", typeof true); // boolean
+console.log("typeof null:", typeof null); // null
 console.log("typeof undefined:", typeof undefined);
-console.log("typeof {}:", typeof {});
-console.log("typeof []:", typeof []);
-console.log("typeof function(){}:", typeof function(){});
+console.log("typeof {}:", typeof {}); // object
+console.log("typeof []:", typeof []); // array
+console.log("typeof function(){}:", typeof function(){}); // function
 
 // instanceof operator
 console.log("instanceof examples:");
-console.log("[] instanceof Array:", [] instanceof Array);
-console.log("{} instanceof Object:", {} instanceof Object);
-console.log("function(){} instanceof Function:", function(){} instanceof Function);
+console.log("[] instanceof Array:", [] instanceof Array); // true
+console.log("{} instanceof Object:", {} instanceof Object); // true
+console.log("function(){} instanceof Function:", function(){} instanceof Function); // true
 
-// Object.prototype.toString.call()
+// Object.prototype.toString.call() 
+/* Prototype is a way to add methods to an object prototype => Object.prototype.toString.call(object) */
 console.log("toString.call() examples:");
 console.log("toString.call(42):", Object.prototype.toString.call(42));
 console.log("toString.call('hello'):", Object.prototype.toString.call('hello'));
@@ -147,6 +148,22 @@ console.log("toString.call(null):", Object.prototype.toString.call(null));
 console.log("toString.call(undefined):", Object.prototype.toString.call(undefined));
 console.log("toString.call({}):", Object.prototype.toString.call({}));
 console.log("toString.call([]):", Object.prototype.toString.call([]));
+
+
+const person = {
+    name: "John",
+    age: 30,
+    isActive: true,
+    greet: function() {
+        console.log(`Hello, my name is ${this.name}`);
+    }
+};
+
+const anotherPerson = {
+    name: "Jane",
+};
+
+person.greet.call(anotherPerson);
 
 // 4. Special Values
 console.log("\n📚 4. Special Values");
@@ -175,23 +192,23 @@ console.log("1 / 0:", 1 / 0);
 console.log("Infinity:", Infinity);
 console.log("-Infinity:", -Infinity);
 console.log("isFinite(Infinity):", isFinite(Infinity));
-console.log("isFinite(42):", isFinite(42));
-console.log("Number.isFinite(Infinity):", Number.isFinite(Infinity));
-console.log("Number.isFinite(42):", Number.isFinite(42));
+console.log("isFinite(42):", isFinite(42));// true
+console.log("Number.isFinite(Infinity):", Number.isFinite(Infinity));// false
+console.log("Number.isFinite(42):", Number.isFinite(42));// true
 
 // 5. Type Coercion
-console.log("\n📚 5. Type Coercion");
+console.log("\n📚 5. Type Coercion"); //+ => Type coercion is the process of converting a value from one type to another
 console.log("------------------");
 
 console.log("Type coercion examples:");
 console.log("String + Number:", "5" + 3); // "53"
 console.log("Number + String:", 5 + "3"); // "53"
-console.log("String + Boolean:", "5" + true); // "5true"
-console.log("Number + Boolean:", 5 + true); // 6
-console.log("String + null:", "5" + null); // "5null"
-console.log("Number + null:", 5 + null); // 5
-console.log("String + undefined:", "5" + undefined); // "5undefined"
-console.log("Number + undefined:", 5 + undefined); // NaN
+console.log("String + Boolean:", "5" + true); // "5true" => true is converted to "true"
+console.log("Number + Boolean:", 5 + true); // 6 => true is converted to 1
+console.log("String + null:", "5" + null); // "5null" => null is converted to "null"
+console.log("Number + null:", 5 + null); // 5 => null is converted to 0
+console.log("String + undefined:", "5" + undefined); // "5undefined" => undefined is converted to "undefined"
+console.log("Number + undefined:", 5 + undefined); // NaN => undefined is converted to NaN
 
 // 6. Type Conversion
 console.log("\n📚 6. Type Conversion");
@@ -227,12 +244,12 @@ console.log("Boolean({}):", Boolean({}));
 console.log("Boolean([]):", Boolean([]));
 
 // 7. Truthy and Falsy Values
-console.log("\n📚 7. Truthy and Falsy Values");
+console.log("\n📚 7. Truthy and Falsy Values"); // !! => == Converts a value to its boolean equivalent
 console.log("---------------------------");
 
 console.log("Falsy values (evaluate to false):");
 console.log("false:", !!false);
-console.log("0:", !!0);
+console.log("0:", !!0); // 0 is converted to false
 console.log("-0:", !!-0);
 console.log("0n:", !!0n);
 console.log("'' (empty string):", !!'');

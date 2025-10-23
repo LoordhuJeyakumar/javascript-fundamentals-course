@@ -19,7 +19,7 @@ console.log("Arithmetic operations:");
 console.log(`${a} + ${b} =`, a + b); // Addition
 console.log(`${a} - ${b} =`, a - b); // Subtraction
 console.log(`${a} * ${b} =`, a * b); // Multiplication
-console.log(`${a} / ${b} =`, a / b); // Division
+console.log(`${a} / ${b} =`, a / b); // Division ()
 console.log(`${a} % ${b} =`, a % b); // Modulus (remainder)
 console.log(`${a} ** ${b} =`, a ** b); // Exponentiation
 
@@ -40,6 +40,8 @@ console.log("*= (Multiply and assign), /= (Divide and assign), %= (Modulus and a
 
 let x = 5;
 console.log("Initial x:", x);
+
+x++; //=> x = x + 1
 
 x += 3; // x = x + 3
 console.log("After x += 3:", x);
@@ -114,7 +116,7 @@ let counter = 5;
 console.log("Initial counter:", counter);
 
 // Pre-increment
-console.log("++counter:", ++counter); // 6
+console.log("++counter:", ++counter); // 6 => 1 + 5 = 6
 console.log("counter after pre-increment:", counter); // 6
 
 // Post-increment
@@ -166,7 +168,7 @@ console.log("Bitwise operations:");
 console.log(`${numA} & ${numB}:`, numA & numB); // 1 (001)
 console.log(`${numA} | ${numB}:`, numA | numB); // 7 (111)
 console.log(`${numA} ^ ${numB}:`, numA ^ numB); // 6 (110)
-console.log(`~${numA}:`, ~numA); // -6
+console.log(`~${numA}:`, ~numA); // -6 (010)
 console.log(`${numA} << 1:`, numA << 1); // 10 (1010)
 console.log(`${numA} >> 1:`, numA >> 1); // 2 (10)
 

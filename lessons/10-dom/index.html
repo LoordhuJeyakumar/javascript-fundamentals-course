@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DOM & BOM — Course</title>
+  <link rel="stylesheet" href="course.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1>DOM & BOM — Interactive Course</h1>
+      <p class="lead">Hands-on lessons and sandboxed exercises for learning the Document and Browser Object Models.</p>
+    </div>
+  </header>
+
+  <main class="wrap grid">
+    <nav class="lessons">
+      <h2>Lessons</h2>
+      <ol>
+  <li><a href="lesson-1.html">1 — DOM Basics (interactive)</a></li>
+  <li><a href="lesson-2.html">2 — Creating & Inserting Elements</a></li>
+  <li><a href="lesson-3-full.html">3 — Event Handling</a></li>
+  <li><a href="lesson-4-full.html">4 — Forms & Inputs</a></li>
+  <li><a href="lesson-5-full.html">5 — Styling & Animation</a></li>
+  <li><a href="lesson-6-full.html">6 — Advanced DOM Techniques</a></li>
+  <li><a href="lesson-7-full.html">7 — BOM & Navigator/Window APIs</a></li>
+      </ol>
+    </nav>
+
+    <section class="sandbox">
+      <h2>Live Sandbox</h2>
+      <p>Write HTML/CSS/JS on the left and run it in a sandboxed iframe on the right. This is safe for teaching — the iframe is sandboxed to isolate student code.</p>
+
+      <div class="editor">
+        <div class="panels">
+          <textarea id="html" placeholder="&lt;!-- HTML --&gt;">&lt;div id=\"app\"&gt;Hello from sandbox&lt;/div&gt;</textarea>
+          <textarea id="css" placeholder="/* CSS */">body{font-family:system-ui,Segoe UI,Roboto,Arial;}#app{padding:12px;background:#eef}</textarea>
+          <textarea id="js" placeholder="// JavaScript">document.getElementById('app').textContent += ' — updated by script';</textarea>
+        </div>
+        <div class="controls">
+          <button id="run">Run</button>
+          <button id="reset">Reset</button>
+        </div>
+      </div>
+
+      <div class="preview">
+        <iframe id="preview" sandbox="allow-scripts"></iframe>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="course.js"></script>
+</body>
+</html>
