@@ -6,7 +6,7 @@ console.log("====================================");
 
 // Exercise 1: DOM performance optimization
 console.log("\n1. DOM Performance Optimization:");
-// TODO: Create a function called setupDOMPerformanceOptimization that:
+// Create a function called setupDOMPerformanceOptimization that:
 // - Implements DOM performance best practices
 // - Uses DocumentFragment for batch DOM operations
 // - Minimizes reflows and repaints
@@ -14,7 +14,147 @@ console.log("\n1. DOM Performance Optimization:");
 // Hint: Use DocumentFragment, batch operations, and performance monitoring
 
 function setupDOMPerformanceOptimization() {
-    // Your code here
+    // Create a demo container
+    const container = document.createElement('div');
+    container.id = 'performance-demo';
+    container.style.padding = '20px';
+    container.style.border = '2px solid #9C27B0';
+    container.style.borderRadius = '8px';
+    container.style.margin = '20px 0';
+    container.style.backgroundColor = '#f3e5f5';
+    
+    // Add title
+    const title = document.createElement('h3');
+    title.textContent = 'DOM Performance Optimization Demo';
+    title.style.color = '#9C27B0';
+    title.style.marginBottom = '15px';
+    container.appendChild(title);
+    
+    // Performance comparison buttons
+    const slowBtn = document.createElement('button');
+    slowBtn.textContent = 'Slow Method (Individual DOM Updates)';
+    slowBtn.style.padding = '8px 16px';
+    slowBtn.style.marginRight = '10px';
+    slowBtn.style.backgroundColor = '#f44336';
+    slowBtn.style.color = 'white';
+    slowBtn.style.border = 'none';
+    slowBtn.style.borderRadius = '4px';
+    slowBtn.style.cursor = 'pointer';
+    
+    const fastBtn = document.createElement('button');
+    fastBtn.textContent = 'Fast Method (DocumentFragment)';
+    fastBtn.style.padding = '8px 16px';
+    fastBtn.style.marginRight = '10px';
+    fastBtn.style.backgroundColor = '#4CAF50';
+    fastBtn.style.color = 'white';
+    fastBtn.style.border = 'none';
+    fastBtn.style.borderRadius = '4px';
+    fastBtn.style.cursor = 'pointer';
+    
+    const clearBtn = document.createElement('button');
+    clearBtn.textContent = 'Clear Results';
+    clearBtn.style.padding = '8px 16px';
+    clearBtn.style.backgroundColor = '#FF9800';
+    clearBtn.style.color = 'white';
+    clearBtn.style.border = 'none';
+    clearBtn.style.borderRadius = '4px';
+    clearBtn.style.cursor = 'pointer';
+    
+    // Results container
+    const resultsContainer = document.createElement('div');
+    resultsContainer.id = 'results-container';
+    resultsContainer.style.marginTop = '15px';
+    resultsContainer.style.padding = '10px';
+    resultsContainer.style.backgroundColor = '#f5f5f5';
+    resultsContainer.style.borderRadius = '4px';
+    resultsContainer.style.minHeight = '100px';
+    
+    // Slow method - individual DOM updates
+    slowBtn.addEventListener('click', function() {
+        const startTime = performance.now();
+        
+        // Clear previous results
+        resultsContainer.innerHTML = '';
+        
+        // Create elements one by one (slow)
+        for (let i = 0; i < 1000; i++) {
+            const div = document.createElement('div');
+            div.textContent = `Item ${i}`;
+            div.style.padding = '2px';
+            div.style.borderBottom = '1px solid #ddd';
+            resultsContainer.appendChild(div);
+        }
+        
+        const endTime = performance.now();
+        const duration = endTime - startTime;
+        
+        console.log(`Slow method took: ${duration.toFixed(2)}ms`);
+        
+        // Show performance info
+        const perfInfo = document.createElement('div');
+        perfInfo.textContent = `Slow method: ${duration.toFixed(2)}ms`;
+        perfInfo.style.color = '#f44336';
+        perfInfo.style.fontWeight = 'bold';
+        perfInfo.style.marginTop = '10px';
+        container.appendChild(perfInfo);
+    });
+    
+    // Fast method - DocumentFragment
+    fastBtn.addEventListener('click', function() {
+        const startTime = performance.now();
+        
+        // Clear previous results
+        resultsContainer.innerHTML = '';
+        
+        // Create DocumentFragment
+        const fragment = document.createDocumentFragment();
+        
+        // Create all elements in memory first
+        for (let i = 0; i < 1000; i++) {
+            const div = document.createElement('div');
+            div.textContent = `Item ${i}`;
+            div.style.padding = '2px';
+            div.style.borderBottom = '1px solid #ddd';
+            fragment.appendChild(div);
+        }
+        
+        // Single DOM update
+        resultsContainer.appendChild(fragment);
+        
+        const endTime = performance.now();
+        const duration = endTime - startTime;
+        
+        console.log(`Fast method took: ${duration.toFixed(2)}ms`);
+        
+        // Show performance info
+        const perfInfo = document.createElement('div');
+        perfInfo.textContent = `Fast method: ${duration.toFixed(2)}ms`;
+        perfInfo.style.color = '#4CAF50';
+        perfInfo.style.fontWeight = 'bold';
+        perfInfo.style.marginTop = '10px';
+        container.appendChild(perfInfo);
+    });
+    
+    // Clear results
+    clearBtn.addEventListener('click', function() {
+        resultsContainer.innerHTML = '';
+        // Remove performance info
+        const perfInfos = container.querySelectorAll('div[style*="fontWeight"]');
+        perfInfos.forEach(info => info.remove());
+    });
+    
+    // Add controls
+    const controls = document.createElement('div');
+    controls.style.marginBottom = '15px';
+    controls.appendChild(slowBtn);
+    controls.appendChild(fastBtn);
+    controls.appendChild(clearBtn);
+    container.appendChild(controls);
+    
+    container.appendChild(resultsContainer);
+    document.body.appendChild(container);
+    
+    console.log('DOM performance optimization setup complete');
 }
 
 // Test your function
@@ -182,5 +322,15 @@ console.log("- DOM testing and debugging tools");
 console.log("\n📝 Next Steps:");
 console.log("1. Review your solutions");
 console.log("2. Try the exercises again with different values");
-console.log("3. Move on to the DOM Manipulation assignments");
+console.log("3. Practice with real-world DOM scenarios");
 console.log("4. Ask questions if you need help");
+
+console.log("\n🎉 Exercise 6 Complete!");
+console.log("=====================");
+console.log("Great job! You've practiced advanced DOM techniques.");
+console.log("Key concepts practiced:");
+console.log("- DOM performance optimization");
+console.log("- Memory management and leak prevention");
+console.log("- DOM mutation observation");
+console.log("- Advanced DOM patterns and techniques");
+console.log("- Production-ready DOM code");

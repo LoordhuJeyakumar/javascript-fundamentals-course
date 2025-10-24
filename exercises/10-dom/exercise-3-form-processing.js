@@ -4,9 +4,15 @@
 console.log("💪 Exercise 3: Form Processing");
 console.log("============================");
 
+// Exercise 3: Form Processing
+// Practice with form handling, validation, and data processing
+
+console.log("💪 Exercise 3: Form Processing");
+console.log("============================");
+
 // Exercise 1: Basic form handling
 console.log("\n1. Basic Form Handling:");
-// TODO: Create a function called setupBasicFormHandling that:
+// Create a function called setupBasicFormHandling that:
 // - Handles form submission events
 // - Prevents default form submission
 // - Extracts form data using FormData API
@@ -14,7 +20,45 @@ console.log("\n1. Basic Form Handling:");
 // Hint: Use addEventListener on form submit and FormData constructor
 
 function setupBasicFormHandling() {
-    // Your code here
+    // Find all forms on the page
+    const forms = document.querySelectorAll('form');
+    
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+            
+            // Extract form data
+            const formData = new FormData(form);
+            const data = {};
+            
+            // Convert FormData to object
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            console.log('Form submitted with data:', data);
+            
+            // Show success message
+            const message = document.createElement('div');
+            message.textContent = 'Form submitted successfully!';
+            message.style.color = 'green';
+            message.style.padding = '10px';
+            message.style.border = '1px solid green';
+            message.style.borderRadius = '4px';
+            message.style.marginTop = '10px';
+            
+            form.appendChild(message);
+            
+            // Remove message after 3 seconds
+            setTimeout(() => {
+                if (message.parentNode) {
+                    message.parentNode.removeChild(message);
+                }
+            }, 3000);
+        });
+    });
+    
+    console.log('Basic form handling setup complete');
 }
 
 // Test your function
@@ -22,7 +66,7 @@ setupBasicFormHandling();
 
 // Exercise 2: Form validation
 console.log("\n2. Form Validation:");
-// TODO: Create a function called setupFormValidation that:
+// Create a function called setupFormValidation that:
 // - Validates form fields in real-time
 // - Shows validation errors to users
 // - Prevents submission of invalid forms
@@ -30,7 +74,110 @@ console.log("\n2. Form Validation:");
 // Hint: Use input events and validation methods
 
 function setupFormValidation() {
-    // Your code here
+    const forms = document.querySelectorAll('form');
+    
+    forms.forEach(form => {
+        const inputs = form.querySelectorAll('input, textarea, select');
+        
+        inputs.forEach(input => {
+            // Real-time validation on input
+            input.addEventListener('input', function() {
+                validateField(this);
+            });
+            
+            // Validation on blur
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+        });
+        
+        // Prevent form submission if invalid
+        form.addEventListener('submit', function(e) {
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!validateField(input)) {
+                    isValid = false;
+                }
+            });
+            
+            if (!isValid) {
+                e.preventDefault();
+                console.log('Form submission prevented - validation errors');
+            }
+        });
+    });
+    
+    console.log('Form validation setup complete');
+}
+
+function validateField(field) {
+    const value = field.value.trim();
+    const type = field.type;
+    const required = field.hasAttribute('required');
+    let isValid = true;
+    let errorMessage = '';
+    
+    // Required field validation
+    if (required && !value) {
+        isValid = false;
+        errorMessage = 'This field is required';
+    }
+    
+    // Email validation
+    if (type === 'email' && value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+            isValid = false;
+            errorMessage = 'Please enter a valid email address';
+        }
+    }
+    
+    // Password validation
+    if (type === 'password' && value) {
+        if (value.length < 8) {
+            isValid = false;
+            errorMessage = 'Password must be at least 8 characters';
+        }
+    }
+    
+    // Pattern validation
+    if (field.hasAttribute('pattern') && value) {
+        const pattern = new RegExp(field.getAttribute('pattern'));
+        if (!pattern.test(value)) {
+            isValid = false;
+            errorMessage = 'Please match the required format';
+        }
+    }
+    
+    // Show/hide error message
+    showFieldValidation(field, isValid, errorMessage);
+    
+    return isValid;
+}
+
+function showFieldValidation(field, isValid, errorMessage) {
+    // Remove existing error message
+    const existingError = field.parentNode.querySelector('.error-message');
+    if (existingError) {
+        existingError.remove();
+    }
+    
+    // Update field styling
+    field.classList.remove('valid', 'invalid');
+    field.classList.add(isValid ? 'valid' : 'invalid');
+    
+    // Add error message if invalid
+    if (!isValid && errorMessage) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.textContent = errorMessage;
+        errorDiv.style.color = 'red';
+        errorDiv.style.fontSize = '12px';
+        errorDiv.style.marginTop = '5px';
+        
+        field.parentNode.appendChild(errorDiv);
+    }
 }
 
 // Test your function
@@ -38,7 +185,7 @@ setupFormValidation();
 
 // Exercise 3: Dynamic form fields
 console.log("\n3. Dynamic Form Fields:");
-// TODO: Create a function called setupDynamicFormFields that:
+// Create a function called setupDynamicFormFields that:
 // - Adds and removes form fields dynamically
 // - Manages field dependencies and relationships
 // - Updates form validation when fields change
@@ -46,7 +193,92 @@ console.log("\n3. Dynamic Form Fields:");
 // Hint: Use DOM manipulation to add/remove elements
 
 function setupDynamicFormFields() {
-    // Your code here
+    // Find forms with dynamic field capabilities
+    const forms = document.querySelectorAll('form');
+    
+    forms.forEach(form => {
+        // Add "Add Field" buttons to forms
+        const addFieldBtn = document.createElement('button');
+        addFieldBtn.type = 'button';
+        addFieldBtn.textContent = 'Add Dynamic Field';
+        addFieldBtn.className = 'add-field-btn';
+        addFieldBtn.style.margin = '10px 0';
+        addFieldBtn.style.padding = '8px 16px';
+        addFieldBtn.style.backgroundColor = '#4CAF50';
+        addFieldBtn.style.color = 'white';
+        addFieldBtn.style.border = 'none';
+        addFieldBtn.style.borderRadius = '4px';
+        addFieldBtn.style.cursor = 'pointer';
+        
+        form.appendChild(addFieldBtn);
+        
+        // Create container for dynamic fields
+        const dynamicContainer = document.createElement('div');
+        dynamicContainer.className = 'dynamic-fields';
+        dynamicContainer.style.marginTop = '10px';
+        form.appendChild(dynamicContainer);
+        
+        let fieldCounter = 0;
+        
+        // Add field functionality
+        addFieldBtn.addEventListener('click', function() {
+            fieldCounter++;
+            
+            const fieldWrapper = document.createElement('div');
+            fieldWrapper.className = 'dynamic-field-wrapper';
+            fieldWrapper.style.display = 'flex';
+            fieldWrapper.style.alignItems = 'center';
+            fieldWrapper.style.marginBottom = '10px';
+            
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = `dynamicField_${fieldCounter}`;
+            input.placeholder = `Dynamic Field ${fieldCounter}`;
+            input.required = true;
+            input.style.flex = '1';
+            input.style.marginRight = '10px';
+            input.style.padding = '8px';
+            input.style.border = '1px solid #ccc';
+            input.style.borderRadius = '4px';
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.textContent = 'Remove';
+            removeBtn.className = 'remove-field-btn';
+            removeBtn.style.backgroundColor = '#f44336';
+            removeBtn.style.color = 'white';
+            removeBtn.style.border = 'none';
+            removeBtn.style.padding = '8px 12px';
+            removeBtn.style.borderRadius = '4px';
+            removeBtn.style.cursor = 'pointer';
+            
+            // Remove field functionality
+            removeBtn.addEventListener('click', function() {
+                fieldWrapper.remove();
+                updateFieldValidation(form);
+            });
+            
+            fieldWrapper.appendChild(input);
+            fieldWrapper.appendChild(removeBtn);
+            dynamicContainer.appendChild(fieldWrapper);
+            
+            // Add validation to new field
+            input.addEventListener('input', function() {
+                validateField(this);
+            });
+            
+            updateFieldValidation(form);
+        });
+    });
+    
+    console.log('Dynamic form fields setup complete');
+}
+
+function updateFieldValidation(form) {
+    const inputs = form.querySelectorAll('input, textarea, select');
+    inputs.forEach(input => {
+        validateField(input);
+    });
 }
 
 // Test your function
@@ -54,7 +286,7 @@ setupDynamicFormFields();
 
 // Exercise 4: Form data serialization
 console.log("\n4. Form Data Serialization:");
-// TODO: Create a function called setupFormSerialization that:
+// Create a function called setupFormSerialization that:
 // - Serializes form data to different formats (JSON, URL-encoded)
 // - Handles nested form data and arrays
 // - Manages file uploads and binary data
@@ -62,7 +294,91 @@ console.log("\n4. Form Data Serialization:");
 // Hint: Use FormData API and custom serialization logic
 
 function setupFormSerialization() {
-    // Your code here
+    const forms = document.querySelectorAll('form');
+    
+    forms.forEach(form => {
+        // Add serialization buttons
+        const serializationContainer = document.createElement('div');
+        serializationContainer.className = 'serialization-controls';
+        serializationContainer.style.marginTop = '15px';
+        serializationContainer.style.padding = '10px';
+        serializationContainer.style.border = '1px solid #ddd';
+        serializationContainer.style.borderRadius = '4px';
+        
+        const jsonBtn = document.createElement('button');
+        jsonBtn.type = 'button';
+        jsonBtn.textContent = 'Serialize to JSON';
+        jsonBtn.style.marginRight = '10px';
+        jsonBtn.style.padding = '8px 12px';
+        jsonBtn.style.backgroundColor = '#2196F3';
+        jsonBtn.style.color = 'white';
+        jsonBtn.style.border = 'none';
+        jsonBtn.style.borderRadius = '4px';
+        jsonBtn.style.cursor = 'pointer';
+        
+        const urlBtn = document.createElement('button');
+        urlBtn.type = 'button';
+        urlBtn.textContent = 'Serialize to URL';
+        urlBtn.style.marginRight = '10px';
+        urlBtn.style.padding = '8px 12px';
+        urlBtn.style.backgroundColor = '#FF9800';
+        urlBtn.style.color = 'white';
+        urlBtn.style.border = 'none';
+        urlBtn.style.borderRadius = '4px';
+        urlBtn.style.cursor = 'pointer';
+        
+        const outputDiv = document.createElement('div');
+        outputDiv.className = 'serialization-output';
+        outputDiv.style.marginTop = '10px';
+        outputDiv.style.padding = '10px';
+        outputDiv.style.backgroundColor = '#f5f5f5';
+        outputDiv.style.borderRadius = '4px';
+        outputDiv.style.fontFamily = 'monospace';
+        outputDiv.style.fontSize = '12px';
+        outputDiv.style.whiteSpace = 'pre-wrap';
+        
+        serializationContainer.appendChild(jsonBtn);
+        serializationContainer.appendChild(urlBtn);
+        serializationContainer.appendChild(outputDiv);
+        form.appendChild(serializationContainer);
+        
+        // JSON serialization
+        jsonBtn.addEventListener('click', function() {
+            const formData = new FormData(form);
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                if (data[key]) {
+                    // Handle multiple values (arrays)
+                    if (Array.isArray(data[key])) {
+                        data[key].push(value);
+                    } else {
+                        data[key] = [data[key], value];
+                    }
+                } else {
+                    data[key] = value;
+                }
+            }
+            
+            outputDiv.textContent = JSON.stringify(data, null, 2);
+            console.log('Form data serialized to JSON:', data);
+        });
+        
+        // URL serialization
+        urlBtn.addEventListener('click', function() {
+            const formData = new FormData(form);
+            const params = new URLSearchParams();
+            
+            for (let [key, value] of formData.entries()) {
+                params.append(key, value);
+            }
+            
+            outputDiv.textContent = params.toString();
+            console.log('Form data serialized to URL:', params.toString());
+        });
+    });
+    
+    console.log('Form serialization setup complete');
 }
 
 // Test your function
@@ -184,3 +500,13 @@ console.log("1. Review your solutions");
 console.log("2. Try the exercises again with different values");
 console.log("3. Move on to Exercise 4: Dynamic Content");
 console.log("4. Ask questions if you need help");
+
+console.log("\n🎉 Exercise 3 Complete!");
+console.log("=====================");
+console.log("Great job! You've practiced form processing.");
+console.log("Key concepts practiced:");
+console.log("- Basic form handling and data extraction");
+console.log("- Real-time form validation");
+console.log("- Dynamic form field management");
+console.log("- Form data serialization");
+console.log("- Error handling and user feedback");

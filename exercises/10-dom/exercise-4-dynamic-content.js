@@ -6,7 +6,7 @@ console.log("============================");
 
 // Exercise 1: Dynamic content creation
 console.log("\n1. Dynamic Content Creation:");
-// TODO: Create a function called setupDynamicContentCreation that:
+// Create a function called setupDynamicContentCreation that:
 // - Creates DOM elements dynamically
 // - Adds content to elements using different methods
 // - Manages element attributes and properties
@@ -14,7 +14,78 @@ console.log("\n1. Dynamic Content Creation:");
 // Hint: Use createElement(), innerHTML, textContent, and setAttribute()
 
 function setupDynamicContentCreation() {
-    // Your code here
+    // Create a container for dynamic content
+    const container = document.createElement('div');
+    container.id = 'dynamic-content-container';
+    container.style.padding = '20px';
+    container.style.border = '2px solid #4CAF50';
+    container.style.borderRadius = '8px';
+    container.style.margin = '20px 0';
+    container.style.backgroundColor = '#f9f9f9';
+    
+    // Add title
+    const title = document.createElement('h3');
+    title.textContent = 'Dynamic Content Creation Demo';
+    title.style.color = '#4CAF50';
+    title.style.marginBottom = '15px';
+    container.appendChild(title);
+    
+    // Create different types of elements
+    const elements = [
+        { tag: 'p', content: 'This is a dynamically created paragraph', className: 'dynamic-paragraph' },
+        { tag: 'div', content: '<strong>Bold text</strong> with <em>emphasis</em>', className: 'dynamic-div' },
+        { tag: 'button', content: 'Click me!', className: 'dynamic-button' },
+        { tag: 'ul', content: '<li>Item 1</li><li>Item 2</li><li>Item 3</li>', className: 'dynamic-list' }
+    ];
+    
+    elements.forEach((elementData, index) => {
+        const element = document.createElement(elementData.tag);
+        element.className = elementData.className;
+        element.id = `dynamic-${elementData.tag}-${index}`;
+        
+        // Set content based on element type
+        if (elementData.tag === 'ul') {
+            element.innerHTML = elementData.content;
+        } else if (elementData.tag === 'button') {
+            element.textContent = elementData.content;
+            element.style.padding = '8px 16px';
+            element.style.backgroundColor = '#2196F3';
+            element.style.color = 'white';
+            element.style.border = 'none';
+            element.style.borderRadius = '4px';
+            element.style.cursor = 'pointer';
+            element.style.margin = '5px';
+            
+            // Add click event
+            element.addEventListener('click', function() {
+                console.log(`Button ${index} clicked!`);
+                this.style.backgroundColor = '#ff9800';
+                setTimeout(() => {
+                    this.style.backgroundColor = '#2196F3';
+                }, 1000);
+            });
+        } else {
+            element.innerHTML = elementData.content;
+        }
+        
+        // Add some styling
+        element.style.margin = '10px 0';
+        element.style.padding = '10px';
+        element.style.border = '1px solid #ddd';
+        element.style.borderRadius = '4px';
+        
+        // Add data attributes
+        element.setAttribute('data-created', new Date().toISOString());
+        element.setAttribute('data-type', elementData.tag);
+        
+        container.appendChild(element);
+    });
+    
+    // Add container to page
+    document.body.appendChild(container);
+    
+    console.log('Dynamic content creation setup complete');
+    console.log('Created elements:', elements.length);
 }
 
 // Test your function
@@ -182,5 +253,15 @@ console.log("- Content performance monitoring and analysis");
 console.log("\n📝 Next Steps:");
 console.log("1. Review your solutions");
 console.log("2. Try the exercises again with different values");
-console.log("3. Move on to Exercise 5: Animation and Effects");
+console.log("3. Move on to Exercise 5: Animation Effects");
 console.log("4. Ask questions if you need help");
+
+console.log("\n🎉 Exercise 4 Complete!");
+console.log("=====================");
+console.log("Great job! You've practiced dynamic content creation.");
+console.log("Key concepts practiced:");
+console.log("- Dynamic element creation");
+console.log("- Content templating and cloning");
+console.log("- Content filtering and searching");
+console.log("- Dynamic styling and animations");
+console.log("- Content state management");

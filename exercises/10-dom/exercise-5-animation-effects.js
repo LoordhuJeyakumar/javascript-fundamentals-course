@@ -6,7 +6,7 @@ console.log("==================================");
 
 // Exercise 1: CSS transitions
 console.log("\n1. CSS Transitions:");
-// TODO: Create a function called setupCSSTransitions that:
+// Create a function called setupCSSTransitions that:
 // - Applies CSS transitions to elements
 // - Triggers transitions with JavaScript
 // - Manages transition timing and easing
@@ -14,7 +14,81 @@ console.log("\n1. CSS Transitions:");
 // Hint: Use CSS transition properties and transition events
 
 function setupCSSTransitions() {
-    // Your code here
+    // Create a demo container
+    const container = document.createElement('div');
+    container.id = 'transition-demo';
+    container.style.padding = '20px';
+    container.style.border = '2px solid #FF9800';
+    container.style.borderRadius = '8px';
+    container.style.margin = '20px 0';
+    container.style.backgroundColor = '#fff3e0';
+    
+    // Add title
+    const title = document.createElement('h3');
+    title.textContent = 'CSS Transitions Demo';
+    title.style.color = '#FF9800';
+    title.style.marginBottom = '15px';
+    container.appendChild(title);
+    
+    // Create transition elements
+    const transitionBox = document.createElement('div');
+    transitionBox.id = 'transition-box';
+    transitionBox.style.width = '100px';
+    transitionBox.style.height = '100px';
+    transitionBox.style.backgroundColor = '#2196F3';
+    transitionBox.style.borderRadius = '8px';
+    transitionBox.style.margin = '10px';
+    transitionBox.style.cursor = 'pointer';
+    transitionBox.style.transition = 'all 0.3s ease-in-out';
+    
+    // Add transition event listeners
+    transitionBox.addEventListener('transitionstart', function() {
+        console.log('Transition started');
+    });
+    
+    transitionBox.addEventListener('transitionend', function() {
+        console.log('Transition ended');
+    });
+    
+    // Add click handler to trigger transitions
+    transitionBox.addEventListener('click', function() {
+        // Randomize properties
+        this.style.width = Math.random() * 200 + 50 + 'px';
+        this.style.height = Math.random() * 200 + 50 + 'px';
+        this.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 50%)`;
+        this.style.transform = `rotate(${Math.random() * 360}deg)`;
+    });
+    
+    container.appendChild(transitionBox);
+    
+    // Add control buttons
+    const controls = document.createElement('div');
+    controls.style.marginTop = '15px';
+    
+    const resetBtn = document.createElement('button');
+    resetBtn.textContent = 'Reset';
+    resetBtn.style.padding = '8px 16px';
+    resetBtn.style.marginRight = '10px';
+    resetBtn.style.backgroundColor = '#4CAF50';
+    resetBtn.style.color = 'white';
+    resetBtn.style.border = 'none';
+    resetBtn.style.borderRadius = '4px';
+    resetBtn.style.cursor = 'pointer';
+    
+    resetBtn.addEventListener('click', function() {
+        transitionBox.style.width = '100px';
+        transitionBox.style.height = '100px';
+        transitionBox.style.backgroundColor = '#2196F3';
+        transitionBox.style.transform = 'rotate(0deg)';
+    });
+    
+    controls.appendChild(resetBtn);
+    container.appendChild(controls);
+    
+    // Add to page
+    document.body.appendChild(container);
+    
+    console.log('CSS transitions setup complete');
 }
 
 // Test your function
@@ -184,3 +258,13 @@ console.log("1. Review your solutions");
 console.log("2. Try the exercises again with different values");
 console.log("3. Move on to Exercise 6: Advanced DOM Techniques");
 console.log("4. Ask questions if you need help");
+
+console.log("\n🎉 Exercise 5 Complete!");
+console.log("=====================");
+console.log("Great job! You've practiced animation and effects.");
+console.log("Key concepts practiced:");
+console.log("- CSS transitions and animations");
+console.log("- JavaScript animations with requestAnimationFrame");
+console.log("- Animation timing and easing");
+console.log("- Animation events and callbacks");
+console.log("- Performance optimization for animations");
