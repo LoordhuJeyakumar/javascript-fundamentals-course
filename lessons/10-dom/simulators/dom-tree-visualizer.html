@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Tree Visualizer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            min-height: 700px;
+        }
+
+        .html-editor {
+            background: #f8f9fa;
+            padding: 30px;
+            border-right: 2px solid #e9ecef;
+        }
+
+        .tree-visualizer {
+            background: #ffffff;
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+
+        .html-input {
+            width: 100%;
+            height: 300px;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+            background: #f8f9fa;
+        }
+
+        .html-input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .tree-container {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            max-height: 500px;
+            overflow: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+
+        .tree-node {
+            margin: 5px 0;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tree-node:hover {
+            background: #e8f5e8;
+        }
+
+        .tree-node.selected {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .tree-node.element {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+        }
+
+        .tree-node.text {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            color: #e65100;
+        }
+
+        .tree-node.comment {
+            background: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+            color: #6a1b9a;
+        }
+
+        .tree-node.attribute {
+            background: #e8f5e8;
+            border-left: 4px solid #4CAF50;
+            color: #2e7d32;
+        }
+
+        .tree-indent {
+            display: inline-block;
+            width: 20px;
+        }
+
+        .node-info {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+
+        .node-info h4 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .node-info pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .controls button {
+            background: linear-gradient(45deg, #ff9800, #f57c00);
+            font-size: 12px;
+            padding: 8px 15px;
+        }
+
+        .highlight {
+            background: #ffeb3b !important;
+            animation: highlight 1s ease-in-out;
+        }
+
+        @keyframes highlight {
+            0% { background: #ffeb3b; }
+            100% { background: transparent; }
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .stat-card {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .stat-card .value {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .html-editor {
+                border-right: none;
+                border-bottom: 2px solid #e9ecef;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌳 DOM Tree Visualizer</h1>
+            <p>Visualize HTML structure as a DOM tree</p>
+        </div>
+
+        <div class="main-content">
+            <div class="html-editor">
+                <div class="section">
+                    <h3>📝 HTML Editor</h3>
+                    <textarea class="html-input" id="htmlInput" placeholder="Enter your HTML here...">
+<div class="container">
+    <header>
+        <h1>My Website</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <h2>Welcome</h2>
+            <p>This is a sample HTML structure.</p>
+        </section>
+        <section class="content">
+            <article>
+                <h3>Article Title</h3>
+                <p>Article content goes here.</p>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 My Website</p>
+    </footer>
+</div>
+                    </textarea>
+                    <div class="button-group">
+                        <button onclick="parseHTML()">Parse HTML</button>
+                        <button onclick="clearTree()">Clear Tree</button>
+                        <button onclick="loadSample()">Load Sample</button>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>📊 Tree Statistics</h3>
+                    <div class="stats">
+                        <div class="stat-card">
+                            <div>Elements</div>
+                            <div class="value" id="element-count">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div>Text Nodes</div>
+                            <div class="value" id="text-count">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div>Comments</div>
+                            <div class="value" id="comment-count">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div>Attributes</div>
+                            <div class="value" id="attribute-count">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>🎯 Tree Navigation</h3>
+                    <div class="controls">
+                        <button onclick="expandAll()">Expand All</button>
+                        <button onclick="collapseAll()">Collapse All</button>
+                        <button onclick="highlightElements()">Highlight Elements</button>
+                        <button onclick="highlightText()">Highlight Text</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tree-visualizer">
+                <div class="section">
+                    <h3>🌳 DOM Tree Structure</h3>
+                    <div class="tree-container" id="treeContainer">
+                        <div style="text-align: center; color: #666; padding: 50px;">
+                            Enter HTML in the editor and click "Parse HTML" to visualize the DOM tree
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>ℹ️ Node Information</h3>
+                    <div class="node-info" id="nodeInfo">
+                        <h4>Click on any node to see its details</h4>
+                        <p>Node information will appear here when you select a tree node.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let treeData = null;
+        let selectedNode = null;
+        let expandedNodes = new Set();
+
+        // Sample HTML templates
+        const samples = {
+            basic: `<div class="container">
+    <h1>Hello World</h1>
+    <p>This is a paragraph.</p>
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+    </ul>
+</div>`,
+            form: `<form class="contact-form">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <button type="submit">Submit</button>
+</form>`,
+            complex: `<article class="blog-post">
+    <header>
+        <h1>Understanding the DOM</h1>
+        <div class="meta">
+            <span class="author">John Doe</span>
+            <span class="date">2024-01-15</span>
+        </div>
+    </header>
+    <div class="content">
+        <p>The Document Object Model (DOM) is a programming interface...</p>
+        <blockquote>
+            <p>"The DOM is the foundation of web development."</p>
+            <cite>- Web Developer</cite>
+        </blockquote>
+    </div>
+    <footer>
+        <div class="tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">DOM</span>
+            <span class="tag">Web Development</span>
+        </div>
+    </footer>
+</article>`
+        };
+
+        function parseHTML() {
+            const htmlInput = document.getElementById('htmlInput').value.trim();
+            if (!htmlInput) {
+                alert('Please enter some HTML content');
+                return;
+            }
+
+            try {
+                // Create a temporary container to parse HTML
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = htmlInput;
+                
+                // Parse the DOM tree
+                treeData = parseNode(tempDiv);
+                
+                // Render the tree
+                renderTree();
+                
+                // Update statistics
+                updateStatistics();
+                
+            } catch (error) {
+                alert('Error parsing HTML: ' + error.message);
+            }
+        }
+
+        function parseNode(node, depth = 0) {
+            const nodeInfo = {
+                element: node,
+                nodeType: node.nodeType,
+                nodeName: node.nodeName,
+                nodeValue: node.nodeValue,
+                textContent: node.textContent,
+                depth: depth,
+                children: [],
+                attributes: []
+            };
+
+            // Parse attributes
+            if (node.attributes) {
+                for (let attr of node.attributes) {
+                    nodeInfo.attributes.push({
+                        name: attr.name,
+                        value: attr.value
+                    });
+                }
+            }
+
+            // Parse children
+            for (let child of node.childNodes) {
+                if (child.nodeType === Node.ELEMENT_NODE || 
+                    child.nodeType === Node.TEXT_NODE || 
+                    child.nodeType === Node.COMMENT_NODE) {
+                    nodeInfo.children.push(parseNode(child, depth + 1));
+                }
+            }
+
+            return nodeInfo;
+        }
+
+        function renderTree() {
+            const container = document.getElementById('treeContainer');
+            container.innerHTML = '';
+            
+            if (treeData) {
+                renderNode(treeData, container);
+            }
+        }
+
+        function renderNode(node, container) {
+            const nodeDiv = document.createElement('div');
+            nodeDiv.className = 'tree-node';
+            
+            // Set node type class
+            if (node.nodeType === Node.ELEMENT_NODE) {
+                nodeDiv.classList.add('element');
+            } else if (node.nodeType === Node.TEXT_NODE) {
+                nodeDiv.classList.add('text');
+            } else if (node.nodeType === Node.COMMENT_NODE) {
+                nodeDiv.classList.add('comment');
+            }
+
+            // Create indentation
+            const indent = '&nbsp;'.repeat(node.depth * 4);
+            
+            // Create node content
+            let content = '';
+            if (node.nodeType === Node.ELEMENT_NODE) {
+                content = `${indent}&lt;${node.nodeName.toLowerCase()}`;
+                
+                // Add attributes
+                if (node.attributes.length > 0) {
+                    node.attributes.forEach(attr => {
+                        content += ` ${attr.name}="${attr.value}"`;
+                    });
+                }
+                
+                content += '&gt;';
+                
+                // Add expand/collapse button if has children
+                if (node.children.length > 0) {
+                    const expandBtn = document.createElement('span');
+                    expandBtn.innerHTML = ' ▼';
+                    expandBtn.style.cursor = 'pointer';
+                    expandBtn.style.color = '#666';
+                    expandBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        toggleNode(node, nodeDiv);
+                    };
+                    nodeDiv.appendChild(expandBtn);
+                }
+            } else if (node.nodeType === Node.TEXT_NODE) {
+                const text = node.textContent.trim();
+                if (text) {
+                    content = `${indent}"${text}"`;
+                } else {
+                    return; // Skip empty text nodes
+                }
+            } else if (node.nodeType === Node.COMMENT_NODE) {
+                content = `${indent}&lt;!-- ${node.textContent} --&gt;`;
+            }
+
+            nodeDiv.innerHTML = content;
+            
+            // Add click handler
+            nodeDiv.onclick = () => selectNode(node, nodeDiv);
+            
+            container.appendChild(nodeDiv);
+            
+            // Render children if expanded
+            if (expandedNodes.has(node) && node.children.length > 0) {
+                node.children.forEach(child => {
+                    renderNode(child, container);
+                });
+            }
+        }
+
+        function toggleNode(node, nodeDiv) {
+            if (expandedNodes.has(node)) {
+                expandedNodes.delete(node);
+            } else {
+                expandedNodes.add(node);
+            }
+            renderTree();
+        }
+
+        function selectNode(node, nodeDiv) {
+            // Clear previous selection
+            document.querySelectorAll('.tree-node').forEach(n => {
+                n.classList.remove('selected');
+            });
+            
+            // Select current node
+            nodeDiv.classList.add('selected');
+            selectedNode = node;
+            
+            // Show node information
+            showNodeInfo(node);
+        }
+
+        function showNodeInfo(node) {
+            const infoDiv = document.getElementById('nodeInfo');
+            
+            const info = {
+                nodeType: node.nodeType,
+                nodeName: node.nodeName,
+                nodeValue: node.nodeValue,
+                textContent: node.textContent,
+                depth: node.depth,
+                childrenCount: node.children.length,
+                attributes: node.attributes
+            };
+            
+            infoDiv.innerHTML = `
+                <h4>Node Information</h4>
+                <pre>${JSON.stringify(info, null, 2)}</pre>
+            `;
+        }
+
+        function updateStatistics() {
+            if (!treeData) return;
+            
+            let elementCount = 0;
+            let textCount = 0;
+            let commentCount = 0;
+            let attributeCount = 0;
+            
+            function countNodes(node) {
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    elementCount++;
+                    attributeCount += node.attributes.length;
+                } else if (node.nodeType === Node.TEXT_NODE) {
+                    if (node.textContent.trim()) {
+                        textCount++;
+                    }
+                } else if (node.nodeType === Node.COMMENT_NODE) {
+                    commentCount++;
+                }
+                
+                node.children.forEach(countNodes);
+            }
+            
+            countNodes(treeData);
+            
+            document.getElementById('element-count').textContent = elementCount;
+            document.getElementById('text-count').textContent = textCount;
+            document.getElementById('comment-count').textContent = commentCount;
+            document.getElementById('attribute-count').textContent = attributeCount;
+        }
+
+        function clearTree() {
+            document.getElementById('treeContainer').innerHTML = 
+                '<div style="text-align: center; color: #666; padding: 50px;">Enter HTML in the editor and click "Parse HTML" to visualize the DOM tree</div>';
+            document.getElementById('nodeInfo').innerHTML = 
+                '<h4>Click on any node to see its details</h4><p>Node information will appear here when you select a tree node.</p>';
+            treeData = null;
+            selectedNode = null;
+            expandedNodes.clear();
+        }
+
+        function loadSample() {
+            const sample = samples.complex;
+            document.getElementById('htmlInput').value = sample;
+            parseHTML();
+        }
+
+        function expandAll() {
+            if (!treeData) return;
+            
+            function expandNode(node) {
+                expandedNodes.add(node);
+                node.children.forEach(expandNode);
+            }
+            
+            expandNode(treeData);
+            renderTree();
+        }
+
+        function collapseAll() {
+            expandedNodes.clear();
+            renderTree();
+        }
+
+        function highlightElements() {
+            document.querySelectorAll('.tree-node.element').forEach(node => {
+                node.classList.add('highlight');
+                setTimeout(() => node.classList.remove('highlight'), 1000);
+            });
+        }
+
+        function highlightText() {
+            document.querySelectorAll('.tree-node.text').forEach(node => {
+                node.classList.add('highlight');
+                setTimeout(() => node.classList.remove('highlight'), 1000);
+            });
+        }
+
+        // Initialize with sample
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSample();
+        });
+    </script>
+</body>
+</html>

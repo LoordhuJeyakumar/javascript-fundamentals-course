@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const phase = e.eventPhase === 1 ? 'Capture' :
                      e.eventPhase === 2 ? 'Target' : 'Bubble';
         
-        logWithTime(`${e.currentTarget.className.split(' ')[1]} - ${phase} phase`);
+        logWithTime(`${e.currentTarget.className.split(' ')[1]} - ${phase} phase`, propagationLog);
         
         if (stopPropagation.checked) {
             e.stopPropagation();
@@ -32,7 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Visual feedback
         e.currentTarget.classList.add('highlight');
         setTimeout(() => {
-            e.currentTarget.classList.remove('highlight');
+            
+            e.target.classList.remove('highlight');
         }, 500);
     }
 
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         propagationLog.innerHTML = '';
         logWithTime('Event listeners reset - ' + 
-                   (useCapture.checked ? 'Capture' : 'Bubble') + ' phase');
+                   (useCapture.checked ? 'Capture' : 'Bubble') + ' phase', propagationLog);
     }
 
     useCapture.addEventListener('change', setupPropagationListeners);
@@ -65,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="delete"><i class="fas fa-trash"></i></button>
         `;
         delegationList.appendChild(li);
-        logWithTime(`Added item ${itemCount}`, delegationLog);
+        logWithTime(`Added item ${itemCount}`, delegationLog, 'info');
     });
 
     delegationList.addEventListener('click', (e) => {
@@ -79,14 +80,14 @@ document.addEventListener('DOMContentLoaded', () => {
             li.style.opacity = '0';
             setTimeout(() => {
                 li.remove();
-                logWithTime(`Deleted ${li.textContent.trim()}`, delegationLog, 'error');
+                logWithTime(`Deleted ${li.textContent.trim()}`, delegationLog, 'warning');
             }, 300);
         } else if (action === 'edit') {
             const text = li.firstChild.textContent.trim();
             const newText = prompt('Edit item:', text);
             if (newText && newText !== text) {
                 li.firstChild.textContent = newText;
-                logWithTime(`Edited: ${text} → ${newText}`, delegationLog, 'warning');
+                logWithTime(`Edited: ${text} → ${newText}`, delegationLog, 'info');
             }
         }
     });
@@ -171,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('input', (e) => {
         if (e.target.tagName === 'INPUT') {
             validateField(e.target);
-            logWithTime(`${e.target.id} field changed`, formLog);
+            logWithTime(`${e.target.id} field changed`, formLog, 'info');
         }
     });
 
@@ -187,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (isValid) {
-            logWithTime('Form submitted successfully!', formLog, 'success');
+            logWithTime('Form submitted successfully!', formLog, 'info');
             // Simulate API call
             setTimeout(() => {
                 form.reset();

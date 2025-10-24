@@ -18,6 +18,8 @@ if (age >= 18) {
     console.log("You are an adult");
 }
 
+
+
 // if/else statement
 if (age >= 18) {
     console.log("You can vote");
@@ -86,7 +88,7 @@ switch (day) {
 console.log(`${day} is day number ${dayNumber}`);
 
 // Switch with fall-through
-let month = "February";
+let month = "a";
 let daysInMonth;
 
 switch (month) {
@@ -190,7 +192,7 @@ console.log("------------------");
 console.log("Do-while loops execute at least once:");
 
 // Basic do-while loop
-let counter = 1;
+let counter = 4;
 console.log("Basic do-while loop:");
 do {
     console.log(`Counter: ${counter}`);
@@ -250,7 +252,7 @@ for (let number of numbers) {
 }
 
 // For...of with string
-let text = "Hello";
+let text = "eHllo";
 console.log("For...of with string:");
 for (let char of text) {
     console.log(`Character: ${char}`);

@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Playground - Interactive Simulator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #2196F3, #21CBF3);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            min-height: 600px;
+        }
+
+        .playground {
+            background: #f8f9fa;
+            padding: 30px;
+            border-right: 2px solid #e9ecef;
+        }
+
+        .controls {
+            background: #ffffff;
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #2196F3;
+            padding-bottom: 5px;
+        }
+
+        .demo-element {
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .demo-element:hover {
+            border-color: #2196F3;
+            background: #e3f2fd;
+        }
+
+        .demo-element.highlighted {
+            border-color: #ff9800;
+            background: #fff3e0;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #2196F3, #21CBF3);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #2196F3;
+        }
+
+        .code-output {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+
+        .log {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 5px;
+            border-radius: 4px;
+        }
+
+        .log-entry.info {
+            background: #e6fffa;
+            color: #234e52;
+        }
+
+        .log-entry.success {
+            background: #f0fff4;
+            color: #22543d;
+        }
+
+        .log-entry.warning {
+            background: #fffbeb;
+            color: #92400e;
+        }
+
+        .log-entry.error {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-card h4 {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .value {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .playground {
+                border-right: none;
+                border-bottom: 2px solid #e9ecef;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 DOM Playground</h1>
+            <p>Interactive DOM Manipulation Simulator</p>
+        </div>
+
+        <div class="main-content">
+            <div class="playground">
+                <div class="section">
+                    <h3>🎯 Interactive Elements</h3>
+                    <div id="playground-area">
+                        <div class="demo-element" id="element1" data-type="box">
+                            <strong>Element 1</strong> - Click me!
+                        </div>
+                        <div class="demo-element" id="element2" data-type="card">
+                            <strong>Element 2</strong> - I'm interactive!
+                        </div>
+                        <div class="demo-element" id="element3" data-type="item">
+                            <strong>Element 3</strong> - Try selecting me!
+                        </div>
+                        <div id="dynamic-container">
+                            <!-- Dynamic elements will be added here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>📊 Live Statistics</h3>
+                    <div class="stats">
+                        <div class="stat-card">
+                            <h4>Elements</h4>
+                            <div class="value" id="element-count">3</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Events</h4>
+                            <div class="value" id="event-count">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Modifications</h4>
+                            <div class="value" id="modification-count">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>📝 Activity Log</h3>
+                    <div class="log" id="activity-log">
+                        <div class="log-entry info">DOM Playground initialized</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="section">
+                    <h3>🔍 Element Selection</h3>
+                    <div class="button-group">
+                        <button onclick="selectById()">Select by ID</button>
+                        <button onclick="selectByClass()">Select by Class</button>
+                        <button onclick="selectByTag()">Select by Tag</button>
+                        <button onclick="selectByQuery()">Query Selector</button>
+                    </div>
+                    <div class="input-group">
+                        <label for="selector-input">Custom Selector:</label>
+                        <input type="text" id="selector-input" placeholder="e.g., #element1, .demo-element">
+                        <button onclick="customSelect()">Execute</button>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>🎨 Element Manipulation</h3>
+                    <div class="button-group">
+                        <button onclick="changeText()">Change Text</button>
+                        <button onclick="addClass()">Add Class</button>
+                        <button onclick="removeClass()">Remove Class</button>
+                        <button onclick="toggleClass()">Toggle Class</button>
+                    </div>
+                    <div class="input-group">
+                        <label for="text-input">New Text:</label>
+                        <input type="text" id="text-input" placeholder="Enter new text">
+                    </div>
+                    <div class="input-group">
+                        <label for="class-input">CSS Class:</label>
+                        <input type="text" id="class-input" placeholder="e.g., highlighted">
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>➕ Dynamic Content</h3>
+                    <div class="button-group">
+                        <button onclick="createElement()">Create Element</button>
+                        <button onclick="removeElement()">Remove Selected</button>
+                        <button onclick="cloneElement()">Clone Selected</button>
+                    </div>
+                    <div class="input-group">
+                        <label for="element-type">Element Type:</label>
+                        <select id="element-type">
+                            <option value="div">Div</option>
+                            <option value="p">Paragraph</option>
+                            <option value="span">Span</option>
+                            <option value="button">Button</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>🎪 Event Handling</h3>
+                    <div class="button-group">
+                        <button onclick="addClickListener()">Add Click Listener</button>
+                        <button onclick="addHoverListener()">Add Hover Listener</button>
+                        <button onclick="removeListeners()">Remove Listeners</button>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>🔧 Advanced Operations</h3>
+                    <div class="button-group">
+                        <button onclick="showParent()">Show Parent</button>
+                        <button onclick="showChildren()">Show Children</button>
+                        <button onclick="showSiblings()">Show Siblings</button>
+                        <button onclick="resetPlayground()">Reset All</button>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>💻 Generated Code</h3>
+                    <div class="code-output" id="code-output">
+                        // Your DOM operations will appear here
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let selectedElement = null;
+        let eventCount = 0;
+        let modificationCount = 0;
+        let codeHistory = [];
+
+        // Initialize playground
+        document.addEventListener('DOMContentLoaded', function() {
+            logActivity('info', 'DOM Playground initialized');
+            updateStats();
+            
+            // Add click listeners to all demo elements
+            document.querySelectorAll('.demo-element').forEach(element => {
+                element.addEventListener('click', function() {
+                    selectElement(this);
+                });
+            });
+        });
+
+        // Utility functions
+        function logActivity(type, message) {
+            const log = document.getElementById('activity-log');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function updateStats() {
+            document.getElementById('element-count').textContent = 
+                document.querySelectorAll('.demo-element').length;
+            document.getElementById('event-count').textContent = eventCount;
+            document.getElementById('modification-count').textContent = modificationCount;
+        }
+
+        function selectElement(element) {
+            // Clear previous selection
+            document.querySelectorAll('.demo-element').forEach(el => {
+                el.classList.remove('highlighted');
+            });
+            
+            selectedElement = element;
+            element.classList.add('highlighted');
+            logActivity('success', `Selected element: ${element.id || element.tagName}`);
+            generateCode(`document.querySelector('${element.id ? '#' + element.id : '.' + element.className}')`);
+        }
+
+        function generateCode(code) {
+            codeHistory.push(code);
+            document.getElementById('code-output').textContent = codeHistory.join('\n');
+        }
+
+        // Selection functions
+        function selectById() {
+            const element = document.getElementById('element1');
+            if (element) {
+                selectElement(element);
+                generateCode("document.getElementById('element1')");
+            }
+        }
+
+        function selectByClass() {
+            const elements = document.getElementsByClassName('demo-element');
+            if (elements.length > 0) {
+                selectElement(elements[0]);
+                generateCode("document.getElementsByClassName('demo-element')[0]");
+            }
+        }
+
+        function selectByTag() {
+            const elements = document.getElementsByTagName('div');
+            if (elements.length > 0) {
+                selectElement(elements[0]);
+                generateCode("document.getElementsByTagName('div')[0]");
+            }
+        }
+
+        function selectByQuery() {
+            const element = document.querySelector('.demo-element');
+            if (element) {
+                selectElement(element);
+                generateCode("document.querySelector('.demo-element')");
+            }
+        }
+
+        function customSelect() {
+            const selector = document.getElementById('selector-input').value;
+            if (!selector) return;
+            
+            try {
+                const element = document.querySelector(selector);
+                if (element) {
+                    selectElement(element);
+                    generateCode(`document.querySelector('${selector}')`);
+                } else {
+                    logActivity('error', `No element found for selector: ${selector}`);
+                }
+            } catch (e) {
+                logActivity('error', `Invalid selector: ${selector}`);
+            }
+        }
+
+        // Manipulation functions
+        function changeText() {
+            if (!selectedElement) {
+                logActivity('warning', 'Please select an element first');
+                return;
+            }
+            
+            const newText = document.getElementById('text-input').value;
+            if (newText) {
+                selectedElement.textContent = newText;
+                modificationCount++;
+                updateStats();
+                logActivity('success', `Changed text to: "${newText}"`);
+                generateCode(`element.textContent = '${newText}'`);
+            }
+        }
+
+        function addClass() {
+            if (!selectedElement) {
+                logActivity('warning', 'Please select an element first');
+                return;
+            }
+            
+            const className = document.getElementById('class-input').value;
+            if (className) {
+                selectedElement.classList.add(className);
+                modificationCount++;
+                updateStats();
+                logActivity('success', `Added class: ${className}`);
+                generateCode(`element.classList.add('${className}')`);
+            }
+        }
+
+        function removeClass() {
+            if (!selectedElement) {
+                logActivity('warning', 'Please select an element first');
+                return;
+            }
+            
+            const className = document.getElementById('class-input').value;
+            if (className) {
+                selectedElement.classList.remove(className);
+                modificationCount++;
+                updateStats();
+                logActivity('success', `Removed class: ${className}`);
+                generateCode(`element.classList.remove('${className}')`);
+            }
+        }
+
+        function toggleClass() {
+            if (!selectedElement) {
+                logActivity('warning', 'Please select an element first');
+                return;
+            }
+            
+            const className = document.getElementById('class-input').value || 'highlighted';
+            selectedElement.classList.toggle(className);
+            modificationCount++;
+            updateStats();
+            logActivity('success', `Toggled class: ${className}`);
+            generateCode(`element.classList.toggle('${className}')`);
+        }
+
+        // Dynamic content functions
+        function createElement() {
+            const elementType = document.getElementById('element-type').value;
+            const newElement = document.createElement(elementType);
+            newElement.textContent = `New ${elementType}`;
+            newElement.className = 'demo-element';
+            newElement.id = `element${Date.now()}`;
+            
+            // Add click listener
+            newElement.addEventListener('click', function() {
+                selectElement(this);
+            });
+            
+            document.getElementById('dynamic-container').appendChild(newElement);
+            modificationCount++;
+            updateStats();
+            logActivity('success', `Created new ${elementType} element`);
+            generateCode(`const newElement = document.createElement('${elementType}');\nelement.appendChild(newElement);`);
+        }
+
+        function removeElement() {
+            if (!selectedElement) {
+                logActivity('warning', 'Please select an element first');
+                return;
+            }
+            
+            const elementId = selectedElement.id;
+            selectedElement.remove();
+            selectedElement = null;
+            modificationCount++;
+            updateStats();
+            logActivity('success', `Removed element: ${elementId}`);
+            generateCode(`element.remove()`);
+        }
+
+        function cloneElement() {
+            if (!selectedElement) {
+                logActivity('warning', 'Please select an element first');
+                return;
+            }
+            
+            const clonedElement = selectedElement.cloneNode(true);
+            clonedElement.id = `cloned_${Date.now()}`;
+            clonedElement.addEventListener('click', function() {
+                selectElement(this);
+            });
+            
+            selectedElement.parentNode.insertBefore(clonedElement, selectedElement.nextSibling);
+            modificationCount++;
+            updateStats();
+            logActivity('success', 'Cloned selected element');
+            generateCode(`const cloned = element.cloneNode(true);\nelement.parentNode.insertBefore(cloned, element.nextSibling);`);
+        }
+
+        // Event handling functions
+        function addClickListener() {
+            if (!selectedElement) {
+                logActivity('warning', 'Please select an element first');
+                return;
+            }
+            
+            selectedElement.addEventListener('click', function() {
+                eventCount++;
+                updateStats();
+                logActivity('info', `Click event fired on ${this.id || this.tagName}`);
+            });
+            
+            logActivity('success', 'Added click listener');
+            generateCode(`element.addEventListener('click', function() {\n    console.log('Clicked!');\n});`);
+        }
+
+        function addHoverListener() {
+            if (!selectedElement) {
+                logActivity('warning', 'Please select an element first');
+                return;
+            }
+            
+            selectedElement.addEventListener('mouseenter', function() {
+                eventCount++;
+                updateStats();
+                logActivity('info', `Mouse entered ${this.id || this.tagName}`);
+            });
+            
+            selectedElement.addEventListener('mouseleave', function() {
+                eventCount++;
+                updateStats();
+                logActivity('info', `Mouse left ${this.id || this.tagName}`);
+            });
+            
+            logActivity('success', 'Added hover listeners');
+            generateCode(`element.addEventListener('mouseenter', function() {\n    console.log('Mouse entered!');\n});`);
+        }
+
+        function removeListeners() {
+            if (!selectedElement) {
+                logActivity('warning', 'Please select an element first');
+                return;
+            }
+            
+            // Clone element to remove all event listeners
+            const newElement = selectedElement.cloneNode(true);
+            selectedElement.parentNode.replaceChild(newElement, selectedElement);
+            selectedElement = newElement;
+            
+            // Re-add click listener for selection
+            selectedElement.addEventListener('click', function() {
+                selectElement(this);
+            });
+            
+            logActivity('success', 'Removed all event listeners');
+            generateCode(`// Clone element to remove listeners\nconst newElement = element.cloneNode(true);\nelement.parentNode.replaceChild(newElement, element);`);
+        }
+
+        // Advanced operations
+        function showParent() {
+            if (!selectedElement) {
+                logActivity('warning', 'Please select an element first');
+                return;
+            }
+            
+            const parent = selectedElement.parentElement;
+            if (parent) {
+                selectElement(parent);
+                logActivity('info', `Parent element: ${parent.tagName}`);
+                generateCode(`element.parentElement`);
+            } else {
+                logActivity('warning', 'No parent element found');
+            }
+        }
+
+        function showChildren() {
+            if (!selectedElement) {
+                logActivity('warning', 'Please select an element first');
+                return;
+            }
+            
+            const children = selectedElement.children;
+            if (children.length > 0) {
+                logActivity('info', `Found ${children.length} child elements`);
+                generateCode(`element.children`);
+            } else {
+                logActivity('warning', 'No child elements found');
+            }
+        }
+
+        function showSiblings() {
+            if (!selectedElement) {
+                logActivity('warning', 'Please select an element first');
+                return;
+            }
+            
+            const siblings = Array.from(selectedElement.parentElement.children)
+                .filter(child => child !== selectedElement);
+            
+            logActivity('info', `Found ${siblings.length} sibling elements`);
+            generateCode(`Array.from(element.parentElement.children).filter(child => child !== element)`);
+        }
+
+        function resetPlayground() {
+            // Reset all elements
+            document.querySelectorAll('.demo-element').forEach(element => {
+                element.classList.remove('highlighted');
+                element.textContent = element.textContent.replace(/^New \w+/, 'Element');
+            });
+            
+            // Clear dynamic container
+            document.getElementById('dynamic-container').innerHTML = '';
+            
+            // Reset counters
+            selectedElement = null;
+            eventCount = 0;
+            modificationCount = 0;
+            codeHistory = [];
+            
+            // Update display
+            updateStats();
+            document.getElementById('code-output').textContent = '// Your DOM operations will appear here';
+            logActivity('info', 'Playground reset');
+            
+            // Re-add click listeners to original elements
+            document.querySelectorAll('.demo-element').forEach(element => {
+                element.addEventListener('click', function() {
+                    selectElement(this);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
