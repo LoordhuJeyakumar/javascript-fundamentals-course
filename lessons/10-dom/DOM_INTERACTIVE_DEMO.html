@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Made Simple - Interactive Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #4CAF50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        
+        .demo-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .color-btn {
+            background-color: #2196F3;
+        }
+        
+        .color-btn:hover {
+            background-color: #1976D2;
+        }
+        
+        #demo-box {
+            width: 200px;
+            height: 100px;
+            border: 2px solid #333;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            background-color: white;
+        }
+        
+        #dynamic-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        #dynamic-list li {
+            background-color: #e8f5e8;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        #dynamic-list li:hover {
+            background-color: #d4edda;
+        }
+        
+        input[type="text"] {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 200px;
+        }
+        
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        
+        .counter {
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+        }
+        
+        .highlight {
+            background-color: yellow;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .success {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .error {
+            color: #f44336;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌟 DOM Made Simple - Interactive Demo</h1>
+        
+        <div class="demo-section">
+            <h2>1. Finding Elements</h2>
+            <p>Click the button to find and highlight elements:</p>
+            <button onclick="findElements()">Find Elements</button>
+            <p id="find-result">Click the button to see what happens!</p>
+        </div>
+        
+        <div class="demo-section">
+            <h2>2. Changing Content</h2>
+            <p>Click buttons to change the text and style:</p>
+            <button onclick="changeText()">Change Text</button>
+            <button onclick="changeStyle()">Change Style</button>
+            <button onclick="resetContent()">Reset</button>
+            <p id="content-demo">This is the original text.</p>
+        </div>
+        
+        <div class="demo-section">
+            <h2>3. Color Changer</h2>
+            <p>Click buttons to change the box color:</p>
+            <button class="color-btn" onclick="changeColor('red')">Red</button>
+            <button class="color-btn" onclick="changeColor('green')">Green</button>
+            <button class="color-btn" onclick="changeColor('blue')">Blue</button>
+            <button class="color-btn" onclick="changeColor('yellow')">Yellow</button>
+            <button onclick="resetColor()">Reset</button>
+            <div id="demo-box">Click a button to change my color!</div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>4. Counter App</h2>
+            <p>Use buttons to increase, decrease, or reset the counter:</p>
+            <button onclick="increment()">+</button>
+            <button onclick="decrement()">-</button>
+            <button onclick="resetCounter()">Reset</button>
+            <div class="counter" id="counter">0</div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>5. Dynamic List</h2>
+            <p>Add items to the list and click them to remove:</p>
+            <input type="text" id="list-input" placeholder="Enter item name">
+            <button onclick="addListItem()">Add Item</button>
+            <ul id="dynamic-list"></ul>
+        </div>
+        
+        <div class="demo-section">
+            <h2>6. Creating New Elements</h2>
+            <p>Click the button to create new elements dynamically:</p>
+            <button onclick="createNewElement()">Create New Element</button>
+            <div id="new-elements"></div>
+        </div>
+    </div>
+
+    <script>
+        // Wait for page to load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded! DOM is ready.');
+            
+            // Add Enter key support for list input
+            document.getElementById('list-input').addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    addListItem();
+                }
+            });
+        });
+        
+        // 1. Finding Elements Demo
+        function findElements() {
+            let result = document.getElementById('find-result');
+            let elements = document.querySelectorAll('button');
+            
+            result.innerHTML = `Found <span class="highlight">${elements.length}</span> buttons on this page!`;
+            result.className = 'success';
+        }
+        
+        // 2. Changing Content Demo
+        function changeText() {
+            let demo = document.getElementById('content-demo');
+            demo.textContent = 'Text changed! This is new content.';
+            demo.className = 'success';
+        }
+        
+        function changeStyle() {
+            let demo = document.getElementById('content-demo');
+            demo.style.color = 'blue';
+            demo.style.fontSize = '20px';
+            demo.style.fontWeight = 'bold';
+            demo.className = 'success';
+        }
+        
+        function resetContent() {
+            let demo = document.getElementById('content-demo');
+            demo.textContent = 'This is the original text.';
+            demo.style.color = '';
+            demo.style.fontSize = '';
+            demo.style.fontWeight = '';
+            demo.className = '';
+        }
+        
+        // 3. Color Changer Demo
+        function changeColor(color) {
+            let box = document.getElementById('demo-box');
+            box.style.backgroundColor = color;
+            box.textContent = `I am ${color}!`;
+            
+            // Change text color for better visibility
+            if (color === 'yellow') {
+                box.style.color = 'black';
+            } else {
+                box.style.color = 'white';
+            }
+        }
+        
+        function resetColor() {
+            let box = document.getElementById('demo-box');
+            box.style.backgroundColor = 'white';
+            box.style.color = 'black';
+            box.textContent = 'Click a button to change my color!';
+        }
+        
+        // 4. Counter Demo
+        let counterValue = 0;
+        
+        function increment() {
+            counterValue++;
+            updateCounter();
+        }
+        
+        function decrement() {
+            counterValue--;
+            updateCounter();
+        }
+        
+        function resetCounter() {
+            counterValue = 0;
+            updateCounter();
+        }
+        
+        function updateCounter() {
+            let counter = document.getElementById('counter');
+            counter.textContent = counterValue;
+            
+            // Change color based on value
+            if (counterValue > 0) {
+                counter.style.color = 'green';
+            } else if (counterValue < 0) {
+                counter.style.color = 'red';
+            } else {
+                counter.style.color = '#333';
+            }
+        }
+        
+        // 5. Dynamic List Demo
+        function addListItem() {
+            let input = document.getElementById('list-input');
+            let itemText = input.value.trim();
+            
+            if (itemText === '') {
+                alert('Please enter an item name!');
+                return;
+            }
+            
+            let list = document.getElementById('dynamic-list');
+            let li = document.createElement('li');
+            li.textContent = itemText;
+            
+            // Add click to remove
+            li.addEventListener('click', function() {
+                this.remove();
+            });
+            
+            list.appendChild(li);
+            input.value = '';
+        }
+        
+        // 6. Creating New Elements Demo
+        let elementCount = 0;
+        
+        function createNewElement() {
+            elementCount++;
+            
+            let container = document.getElementById('new-elements');
+            let newDiv = document.createElement('div');
+            newDiv.textContent = `New Element #${elementCount}`;
+            newDiv.style.backgroundColor = '#e8f5e8';
+            newDiv.style.padding = '10px';
+            newDiv.style.margin = '5px';
+            newDiv.style.borderRadius = '5px';
+            newDiv.style.border = '1px solid #4CAF50';
+            newDiv.style.cursor = 'pointer';
+            
+            // Add click to remove
+            newDiv.addEventListener('click', function() {
+                this.remove();
+            });
+            
+            container.appendChild(newDiv);
+        }
+    </script>
+</body>
+</html>

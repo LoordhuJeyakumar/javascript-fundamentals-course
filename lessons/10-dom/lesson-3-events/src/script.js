@@ -229,3 +229,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
+/* Event Flow  */
+/* 
+ 1. Capturing Phase
+    - The event starts at the top of the DOM tree and travels down to the target element.
+    - The event is captured by the target element.
+ 2. Bubbling Phase
+    - The event starts at the target element and travels up to the top of the DOM tree.
+    - The event is bubbled up to the top of the DOM tree.
+    - The event is captured by the top of the DOM tree.
+
+ 3. Target Phase
+    - The event is captured by the target element.
+    - The event is bubbled up to the top of the DOM tree.
+    - The event is captured by the top of the DOM tree.
+
+*/
+
+
+/* Event Delegation */
+/* 
+ 1. Event Delegation - Efficient handling of multiple elements
+    - The event is captured by the top of the DOM tree.
+    - The event is bubbled up to the target element.
+    - The event is captured by the target element.
+    - The event is bubbled up to the top of the DOM tree.
+    - The event is captured by the top of the DOM tree.
+*/
