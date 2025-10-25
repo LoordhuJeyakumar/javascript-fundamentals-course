@@ -350,3 +350,6 @@ solutions/*
 solutions/**
 solutions/**/*
 
+
+lessons/10-dom/materials/resources/**/*
+lessons/10-dom/materials/resources/**

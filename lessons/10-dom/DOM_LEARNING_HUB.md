@@ -9,15 +9,15 @@ If you're feeling confused about DOM (Document Object Model), you're in the righ
 ## 📚 Your Learning Path
 
 ### **🚀 Start Here (Beginner)**
-1. **[DOM Simple Guide](./DOM_SIMPLE_GUIDE.md)** - Complete overview of DOM concepts
+1. **[DOM Simple Guide](./teaching-materials/student-materials/DOM_SIMPLE_GUIDE.md)** - Complete overview of DOM concepts
 2. **[DOM Lesson 1: The Basics](./DOM_LESSON_1_SIMPLE.md)** - Your first DOM lesson
-3. **[DOM Practice Exercises](./DOM_PRACTICE_EXERCISES.md)** - Hands-on practice with solutions
+3. **[DOM Practice Exercises](./teaching-materials/student-materials/DOM_PRACTICE_EXERCISES.md)** - Hands-on practice with solutions
 
 ### **🎨 Visual Learning**
-4. **[DOM Visual Guide](./DOM_VISUAL_GUIDE.md)** - See how DOM works with diagrams and examples
+4. **[DOM Visual Guide](./teaching-materials/student-materials/DOM_VISUAL_GUIDE.md)** - See how DOM works with diagrams and examples
 
 ### **🛠️ When You Get Stuck**
-5. **[DOM Troubleshooting Guide](./DOM_TROUBLESHOOTING_GUIDE.md)** - Fix common problems and errors
+5. **[DOM Troubleshooting Guide](./teaching-materials/student-materials/DOM_TROUBLESHOOTING_GUIDE.md)** - Fix common problems and errors
 
 ---
 
@@ -94,7 +94,7 @@ element.classList.add('highlight');
 ## 📖 Study Materials
 
 ### **📚 Complete Study Guide**
-**[DOM Simple Guide](./DOM_SIMPLE_GUIDE.md)**
+**[DOM Simple Guide](./teaching-materials/student-materials/DOM_SIMPLE_GUIDE.md)**
 - Complete overview of DOM concepts
 - Step-by-step learning path
 - Common patterns and examples
@@ -108,21 +108,21 @@ element.classList.add('highlight');
 - Common mistakes to avoid
 
 ### **🎯 Practice Exercises**
-**[DOM Practice Exercises](./DOM_PRACTICE_EXERCISES.md)**
+**[DOM Practice Exercises](./teaching-materials/student-materials/DOM_PRACTICE_EXERCISES.md)**
 - 5 hands-on exercises
 - Complete solutions provided
 - Start simple, build up complexity
 - Real-world examples
 
 ### **🎨 Visual Learning**
-**[DOM Visual Guide](./DOM_VISUAL_GUIDE.md)**
+**[DOM Visual Guide](./teaching-materials/student-materials/DOM_VISUAL_GUIDE.md)**
 - See how DOM works with diagrams
 - Visual examples and patterns
 - Step-by-step process flows
 - Common patterns illustrated
 
 ### **🛠️ Troubleshooting**
-**[DOM Troubleshooting Guide](./DOM_TROUBLESHOOTING_GUIDE.md)**
+**[DOM Troubleshooting Guide](./teaching-materials/student-materials/DOM_TROUBLESHOOTING_GUIDE.md)**
 - Fix common errors and problems
 - Debugging steps and techniques
 - Prevention tips
@@ -133,19 +133,19 @@ element.classList.add('highlight');
 ## 🎯 Quick Start Guide
 
 ### **Step 1: Read the Overview**
-Start with the **[DOM Simple Guide](./DOM_SIMPLE_GUIDE.md)** to understand the big picture.
+Start with the **[DOM Simple Guide](./teaching-materials/student-materials/DOM_SIMPLE_GUIDE.md)** to understand the big picture.
 
 ### **Step 2: Take Your First Lesson**
 Follow **[DOM Lesson 1: The Basics](./DOM_LESSON_1_SIMPLE.md)** step by step.
 
 ### **Step 3: Practice**
-Work through the **[DOM Practice Exercises](./DOM_PRACTICE_EXERCISES.md)** to build confidence.
+Work through the **[DOM Practice Exercises](./teaching-materials/student-materials/DOM_PRACTICE_EXERCISES.md)** to build confidence.
 
 ### **Step 4: Use Visual Aids**
-Check the **[DOM Visual Guide](./DOM_VISUAL_GUIDE.md)** when you need to see how things work.
+Check the **[DOM Visual Guide](./teaching-materials/student-materials/DOM_VISUAL_GUIDE.md)** when you need to see how things work.
 
 ### **Step 5: Troubleshoot**
-Use the **[DOM Troubleshooting Guide](./DOM_TROUBLESHOOTING_GUIDE.md)** when you get stuck.
+Use the **[DOM Troubleshooting Guide](./teaching-materials/student-materials/DOM_TROUBLESHOOTING_GUIDE.md)** when you get stuck.
 
 ---
 
