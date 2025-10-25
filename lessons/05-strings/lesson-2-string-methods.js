@@ -19,7 +19,7 @@ console.log("toUpperCase():", upperCase);
 let lowerCase = text.toLowerCase();
 console.log("toLowerCase():", lowerCase);
 
-// toLocaleUpperCase() and toLocaleLowerCase()
+// toLocaleUpperCase() and toLocaleLowerCase() = works with the local language
 let localeUpper = text.toLocaleUpperCase();
 let localeLower = text.toLocaleLowerCase();
 console.log("toLocaleUpperCase():", localeUpper);
@@ -45,7 +45,7 @@ let trimmedEnd = messyText.trimEnd();
 console.log("trimEnd():", `"${trimmedEnd}"`);
 
 // 3. Padding Methods
-console.log("\n📚 3. Padding Methods");
+console.log("\n📚 3. Padding Methods"); // padding is adding whitespace to the beginning or end of a string
 console.log("-------------------");
 
 let number = "42";
@@ -72,16 +72,16 @@ console.log("----------------------------");
 let word = "JavaScript";
 console.log("Word:", word);
 
-// charAt() - get character at index
+// charAt() - get character at index = returns the character at the specified index
 console.log("charAt(0):", word.charAt(0));
 console.log("charAt(4):", word.charAt(4));
 console.log("charAt(10):", word.charAt(10)); // Returns empty string
 
-// charCodeAt() - get character code
-console.log("charCodeAt(0):", word.charCodeAt(0)); // 'J' = 74
+// charCodeAt() - get character code = returns the ASCII code of the character at the specified index
+console.log("charCodeAt(0):", word.charCodeAt(0)); // 'J' = 74 = ASCII code
 console.log("charCodeAt(1):", word.charCodeAt(1)); // 'a' = 97
 
-// fromCharCode() - create character from code
+// fromCharCode() - create character from code = returns the character from the specified ASCII code
 let charFromCode = String.fromCharCode(74, 97, 118, 97);
 console.log("fromCharCode(74, 97, 118, 97):", charFromCode);
 
@@ -97,14 +97,14 @@ console.log("String comparison:");
 console.log(`"${str1}" === "${str2}":`, str1 === str2);
 console.log(`"${str1}" === "${str3}":`, str1 === str3);
 
-// localeCompare() - compare strings according to locale
+// localeCompare() - compare strings according to locale = compares two strings and returns a number indicating which string comes first in the sort order
 let comparison1 = str1.localeCompare(str2);
 let comparison2 = str2.localeCompare(str1);
 let comparison3 = str1.localeCompare(str1);
 
-console.log(`"${str1}".localeCompare("${str2}"):`, comparison1); // -1 (str1 < str2)
-console.log(`"${str2}".localeCompare("${str1}"):`, comparison2); // 1 (str2 > str1)
-console.log(`"${str1}".localeCompare("${str1}"):`, comparison3); // 0 (equal)
+console.log(`"${str1}".localeCompare("${str2}"):`, comparison1); // -1 (str1 < str2) = str1 comes before str2
+console.log(`"${str2}".localeCompare("${str1}"):`, comparison2); // 1 (str2 > str1) = str2 comes after str1
+console.log(`"${str1}".localeCompare("${str1}"):`, comparison3); // 0 (equal) = str1 is equal to str1
 
 // 6. String Search Methods
 console.log("\n📚 6. String Search Methods");
@@ -114,13 +114,13 @@ let text2 = "Hello World Hello JavaScript";
 console.log("Text:", text2);
 
 // indexOf() - find first occurrence
-let index1 = text2.indexOf("Hello");
-let index2 = text2.indexOf("World");
-let index3 = text2.indexOf("Python"); // Not found
+let index1 = text2.indexOf("Hello");// returns the index of the first occurrence of the specified substring
+let index2 = text2.indexOf("World");// returns the index of the first occurrence of the specified substring
+let index3 = text2.indexOf("Python"); // Not found = returns -1 if the substring is not found
 
-console.log("indexOf('Hello'):", index1);
-console.log("indexOf('World'):", index2);
-console.log("indexOf('Python'):", index3);
+console.log("indexOf('Hello'):", index1); // returns the index of the first occurrence of the specified substring
+console.log("indexOf('World'):", index2); // returns the index of the first occurrence of the specified substring
+console.log("indexOf('Python'):", index3); // returns -1 if the substring is not found
 
 // lastIndexOf() - find last occurrence
 let lastIndex = text2.lastIndexOf("Hello");
@@ -197,7 +197,7 @@ console.log("-------------------------------");
 let fullText = "JavaScript Programming";
 console.log("Full text:", fullText);
 
-// substring() - extract substring
+// substring() - extract substring = returns a new string that is a substring of the original string
 let sub1 = fullText.substring(0, 10);
 let sub2 = fullText.substring(11);
 console.log("substring(0, 10):", sub1);

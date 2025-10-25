@@ -74,8 +74,8 @@ let original = "Hello";
 console.log("Original string:", original);
 
 // Strings are immutable - you can't change them directly
-// original[0] = 'h'; // This won't work
-// console.log("After trying to change:", original);
+ original[0] = 'h'; // This won't work
+ console.log("After trying to change:", original);
 
 // To "change" a string, you create a new one
 let modified = original.replace("H", "h");

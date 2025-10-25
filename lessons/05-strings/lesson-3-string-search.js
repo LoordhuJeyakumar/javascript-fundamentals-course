@@ -86,7 +86,7 @@ console.log("Formatted data:", formattedData);
 
 // Replace multiple patterns
 let text2 = "Hello 123 World 456";
-let cleanedText = text2.replace(/\d+/g, "NUMBER");
+let cleanedText = text2.replace(/\d+/g, "NUMBER");// replaces all occurrences of the specified substring with the specified replacement = /\d+/g is a regular expression that matches all occurrences of one or more digits
 console.log("Replace numbers:", cleanedText);
 
 // 5. String Splitting
@@ -164,7 +164,7 @@ console.log("Mixed case:", mixedCase);
 let upperCase = mixedCase.toUpperCase();
 let lowerCase = mixedCase.toLowerCase();
 let titleCase = mixedCase.replace(/\w\S*/g, (txt) => {
-    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();// returns a new string with the first character converted to uppercase and the rest of the string converted to lowercase
 });
 
 console.log("Uppercase:", upperCase);
