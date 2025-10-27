@@ -83,6 +83,10 @@ console.log("-----------------------------");
 
 // Custom tag function
 function highlight(strings, ...values) {
+    console.log(strings);
+    console.log(values);
+    
+    
     return strings.reduce((result, string, i) => {
         return result + string + (values[i] ? `<mark>${values[i]}</mark>` : '');
     }, '');

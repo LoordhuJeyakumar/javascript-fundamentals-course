@@ -48,10 +48,10 @@ console.log("--------------------");
 
 function validateEmail(email) {
     // Basic email regex
-    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // for example: user@example.com
     
     // More strict email regex
-    let strictEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    let strictEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/; // for example: user@example.com, test.email@domain.co.uk, invalid-email, @domain.com, user@, user@domain, user.name@domain.com, user+tag@domain.com
     
     return {
         isValid: emailRegex.test(email),
@@ -89,7 +89,8 @@ function validatePhone(phone) {
         us: /^\(\d{3}\)\s?\d{3}-\d{4}$/,
         usSimple: /^\d{3}-\d{3}-\d{4}$/,
         international: /^\+?[\d\s\-\(\)]{10,}$/,
-        digitsOnly: /^\d{10}$/
+        digitsOnly: /^\d{10}$/, // for example: 5551234567
+        india: /^\+?[\d\s\-\(\)]{10,}$/ // for example: +91 9876543210
     };
     
     return {
@@ -98,7 +99,8 @@ function validatePhone(phone) {
         isValidInternational: formats.international.test(phone),
         isValidDigitsOnly: formats.digitsOnly.test(phone),
         hasDigits: /\d/.test(phone),
-        digitCount: (phone.match(/\d/g) || []).length
+        digitCount: (phone.match(/\d/g) || []).length,
+        isValidIndia: formats.india.test(phone)
     };
 }
 
@@ -110,7 +112,8 @@ let phones = [
     "123-456-7890",
     "invalid-phone",
     "555-123",
-    "+44 20 7946 0958"
+    "+44 20 7946 0958",
+    "+91 9876543210"
 ];
 
 phones.forEach(phone => {

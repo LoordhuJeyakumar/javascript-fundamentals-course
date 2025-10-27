@@ -19,7 +19,7 @@ console.log("Arithmetic operations:");
 console.log(`${a} + ${b} =`, a + b); // Addition
 console.log(`${a} - ${b} =`, a - b); // Subtraction
 console.log(`${a} * ${b} =`, a * b); // Multiplication
-console.log(`${a} / ${b} =`, a / b); // Division ()
+console.log(`${a} / ${b} =`, a / b); // Division (Quotient)
 console.log(`${a} % ${b} =`, a % b); // Modulus (remainder)
 console.log(`${a} ** ${b} =`, a ** b); // Exponentiation
 
@@ -232,6 +232,14 @@ console.log("'5' + '3' =", '5' + '3'); // "53"
 console.log("'5' + 3 =", '5' + 3); // "53"
 console.log("5 + '3' =", 5 + '3'); // "53"
 console.log("5 + 3 =", 5 + 3); // 8
+
+
+console.log("String concatenation vs subtraction:");
+console.log("'5' - '3' =", '5' - '3'); // 2
+console.log("'5' - 3 =", '5' - 3); // 2
+console.log("5 - '3' =", 5 - '3'); // 2
+console.log("5 - 3 =", 5 - 3); // 2
+
 
 // Type coercion examples
 console.log("Type coercion examples:");

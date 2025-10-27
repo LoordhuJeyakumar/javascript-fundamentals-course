@@ -4,6 +4,12 @@
 console.log("📝 Welcome to Strings Lesson 6: Regular Expressions Basics!");
 console.log("=========================================================");
 
+/* 
+Regular expressions are patterns that are used to match and manipulate strings.
+They are a powerful tool for string pattern matching, searching, and manipulation.
+Regular expressions are a sequence of characters that form a search pattern.
+*/
+
 // 1. Basic Regular Expression Syntax
 console.log("\n📚 1. Basic Regular Expression Syntax");
 console.log("------------------------------------");
@@ -12,15 +18,27 @@ let text = "The quick brown fox jumps over the lazy dog";
 console.log("Text:", text);
 
 // Literal pattern
-let foxRegex = /fox/;
+
+/* 
+ syntax: /pattern/modifiers
+ pattern: the pattern to match
+ modifiers: optional modifiers
+ modifiers: 
+ i: case insensitive search
+ g: global search (find all matches)
+
+*/
+let foxRegex = /fox/; // This is a literal pattern = > /fox/ is a regular expression that matches the string "fox".
 console.log("foxRegex.test(text):", foxRegex.test(text));
 
 // Case insensitive
-let quickRegex = /quick/i;
+let quickRegex = /QUICK/i; // This is a case insensitive pattern = > /QUICK/i is a regular expression that matches the string "QUICK" in a case insensitive manner.
 console.log("quickRegex.test('QUICK'):", quickRegex.test('QUICK'));
+console.log("quickRegex.test('QUICK'):", quickRegex.test(text));
 
 // Global search
-let theRegex = /the/gi;
+let theRegex = /the/gi; // This is a global search pattern = > /the/gi is a regular expression that matches the string "the" in a global manner.
+
 let matches = text.match(theRegex);
 console.log("theRegex matches:", matches);
 
@@ -32,23 +50,49 @@ let sampleText = "Hello World 123!";
 console.log("Sample text:", sampleText);
 
 // Digit character class
-let digitRegex = /\d/;
+/* 
+syntax: \d
+description: matches any digit (0-9)
+example: /\d/ matches "123"
+*/
+let digitRegex = /\d/; // This is a digit character class = > /\d/ is a regular expression that matches any digit.
 console.log("Contains digits:", digitRegex.test(sampleText));
 
 // Non-digit character class
-let nonDigitRegex = /\D/;
+
+/* 
+syntax: \D
+description: matches any non-digit (0-9)
+example: /\D/ matches "Hello"
+*/
+let nonDigitRegex = /\D/; // This is a non-digit character class = > /\D/ is a regular expression that matches any non-digit.
 console.log("Contains non-digits:", nonDigitRegex.test(sampleText));
 
 // Word character class
-let wordRegex = /\w/;
+/* 
+syntax: \w
+description: matches any word character (a-z, A-Z, 0-9, _)
+example: /\w/ matches "Hello"
+*/
+let wordRegex = /\w/; // This is a word character class = > /\w/ is a regular expression that matches any word character.
 console.log("Contains word characters:", wordRegex.test(sampleText));
 
 // Non-word character class
-let nonWordRegex = /\W/;
+/* 
+syntax: \W
+description: matches any non-word character (a-z, A-Z, 0-9, _)
+example: /\W/ matches "123"
+*/
+let nonWordRegex = /\W/; // This is a non-word character class = > /\W/ is a regular expression that matches any non-word character.
 console.log("Contains non-word characters:", nonWordRegex.test(sampleText));
 
 // Whitespace character class
-let whitespaceRegex = /\s/;
+/* 
+syntax: \s
+description: matches any whitespace character (space, tab, newline, etc.)
+example: /\s/ matches " "
+*/
+let whitespaceRegex = /\s/; // This is a whitespace character class = > /\s/ is a regular expression that matches any whitespace character.
 console.log("Contains whitespace:", whitespaceRegex.test(sampleText));
 
 // 3. Quantifiers
@@ -59,22 +103,36 @@ let numbers = "123 4567 89 0";
 console.log("Numbers:", numbers);
 
 // Zero or more
-let zeroOrMoreRegex = /\d*/g;
+// syntax: *
+// description: matches zero or more of the preceding element
+// example: /\d*/ matches "123", "4567", "89", "0"
+
+let zeroOrMoreRegex = /\d*/g; // This is a zero or more quantifier = > /\d*/g is a regular expression that matches any digit zero or more times.
 let zeroOrMoreMatches = numbers.match(zeroOrMoreRegex);
 console.log("Zero or more digits:", zeroOrMoreMatches);
 
 // One or more
-let oneOrMoreRegex = /\d+/g;
+// syntax: +
+// description: matches one or more of the preceding element
+// example: /\d+/ matches "123", "4567", "89", "0"
+
+let oneOrMoreRegex = /\d+/g; // This is a one or more quantifier = > /\d+/g is a regular expression that matches any digit one or more times.
 let oneOrMoreMatches = numbers.match(oneOrMoreRegex);
 console.log("One or more digits:", oneOrMoreMatches);
 
 // Zero or one
-let zeroOrOneRegex = /\d?/g;
+// syntax: ?
+// description: matches zero or one of the preceding element
+// example: /\d?/ matches "123", "4567", "89", "0"
+let zeroOrOneRegex = /\d?/g; // This is a zero or one quantifier = > /\d?/g is a regular expression that matches any digit zero or one times.
 let zeroOrOneMatches = numbers.match(zeroOrOneRegex);
 console.log("Zero or one digit:", zeroOrOneMatches);
 
 // Exact count
-let exactCountRegex = /\d{3}/g;
+// syntax: {n}
+// description: matches exactly n of the preceding element
+// example: /\d{3}/ matches "123"
+let exactCountRegex = /\d{3}/g; // This is an exact count quantifier = > /\d{3}/g is a regular expression that matches any digit exactly 3 times.
 let exactCountMatches = numbers.match(exactCountRegex);
 console.log("Exactly 3 digits:", exactCountMatches);
 
@@ -96,23 +154,32 @@ let sentencesArray = [
 ];
 
 // Start anchor
-let startRegex = /^Hello/;
+// syntax: ^
+// description: matches the start of the string
+// example: /^Hello/ matches "Hello World"
+let startRegex = /^Hello/; // This is a start anchor = > /^Hello/ is a regular expression that matches the string "Hello" at the start of the string.
 console.log("Starts with 'Hello':");
 sentencesArray.forEach(sentence => {
     console.log(`"${sentence}": ${startRegex.test(sentence)}`);
 });
 
 // End anchor
-let endRegex = /World$/;
+// syntax: $
+// description: matches the end of the string
+// example: /World$/ matches "Hello World"
+let endRegex = /World$/; // This is an end anchor = > /World$/ is a regular expression that matches the string "World" at the end of the string.
 console.log("Ends with 'World':");
-sentences.forEach(sentence => {
+sentencesArray.forEach(sentence => {
     console.log(`"${sentence}": ${endRegex.test(sentence)}`);
 });
 
 // Word boundary
-let wordBoundaryRegex = /\bHello\b/;
+// syntax: \b
+// description: matches a word boundary
+// example: /\bHello\b matches "Hello"
+let wordBoundaryRegex = /\bHello\b/; // This is a word boundary = > /\bHello\b is a regular expression that matches the string "Hello" at the start or end of a word.
 console.log("Contains word 'Hello':");
-sentences.forEach(sentence => {
+sentencesArray.forEach(sentence => {
     console.log(`"${sentence}": ${wordBoundaryRegex.test(sentence)}`);
 });
 
@@ -124,7 +191,11 @@ let emailText = "Contact us at support@example.com or sales@company.org";
 console.log("Email text:", emailText);
 
 // Capture groups
-let emailRegex = /(\w+)@(\w+\.\w+)/g;
+// syntax: (pattern)
+// description: captures the matched pattern
+// example: /(\w+)@(\w+\.\w+)/ matches "support@example.com"
+
+let emailRegex = /(\w+)@(\w+\.\w+)/g; // This is a capture group = > /(\w+)@(\w+\.\w+)/g is a regular expression that matches the string "support@example.com" and captures the username and domain.
 let emailMatches = emailText.matchAll(emailRegex);
 
 console.log("Email matches:");
@@ -142,17 +213,26 @@ let colorText = "I like red, blue, and green colors";
 console.log("Color text:", colorText);
 
 // Alternation
-let colorRegex = /red|blue|green/g;
+// syntax: |
+// description: matches either the pattern on the left or the pattern on the right
+// example: /red|blue|green/ matches "red", "blue", "green"
+let colorRegex = /red|blue|green/g; // This is an alternation = > /red|blue|green/g is a regular expression that matches the string "red", "blue", or "green".
 let colorMatches = colorText.match(colorRegex);
 console.log("Color matches:", colorMatches);
 
 // Character sets
-let vowelRegex = /[aeiou]/gi;
+// syntax: [characters]
+// description: matches any character in the set
+// example: /[aeiou]/ matches "a", "e", "i", "o", "u"
+let vowelRegex = /[aeiou]/gi; // This is a character set = > /[aeiou]/gi is a regular expression that matches any vowel.
 let vowelMatches = colorText.match(vowelRegex);
 console.log("Vowel matches:", vowelMatches);
 
 // Negated character sets
-let consonantRegex = /[^aeiou\s]/gi;
+// syntax: [^characters]
+// description: matches any character not in the set
+// example: /[^aeiou\s]/ matches "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"
+let consonantRegex = /[^aeiou\s]/gi; // This is a negated character set = > /[^aeiou\s]/gi is a regular expression that matches any consonant.
 let consonantMatches = colorText.match(consonantRegex);
 console.log("Consonant matches:", consonantMatches);
 
@@ -161,6 +241,9 @@ console.log("\n📚 7. Common Patterns");
 console.log("-------------------");
 
 // Email pattern
+// syntax: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+// description: matches an email address
+// example: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ matches "user@example.com"
 let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 let emails = [
     "user@example.com",

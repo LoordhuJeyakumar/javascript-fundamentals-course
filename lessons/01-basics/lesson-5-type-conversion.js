@@ -209,6 +209,15 @@ console.log("+'hello' =", +strInvalid);
 console.log("+true =", +boolTrue);
 console.log("+false =", +boolFalse);
 
+ //object and array
+ console.log("Object and array conversion:");
+ console.log("{name: 'John'} =", parseInt({name: 'John'}));
+ console.log("[1, 2, 3] =", parseInt([2, 2, 3]));
+ console.log("['1', '2', '3'] =", parseInt(['10', '2', '3']));
+ console.log("['1', '2', '3'] =", parseInt(['0', '2', '3']));
+
+  console.log("['APPLE', 'BANANA', 'CHERRY'] =", parseInt(['APPLE', 'BANANA', 'CHERRY']));
+
 // 7. Boolean Conversion Methods
 console.log("\n📚 7. Boolean Conversion Methods");
 console.log("-----------------------------");
