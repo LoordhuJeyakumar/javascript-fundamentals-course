@@ -88,11 +88,11 @@ switch (day) {
 console.log(`${day} is day number ${dayNumber}`);
 
 // Switch with fall-through
-let month = "a";
+let month = "June";
 let daysInMonth;
 
 switch (month) {
-    case "January":
+    case "January": // arrayOfMonths.includes("January")
     case "March":
     case "May":
     case "July":
@@ -179,7 +179,7 @@ while (attempts < maxAttempts && !success) {
     attempts++;
     console.log(`Attempt ${attempts}`);
     // Simulate success on third attempt
-    if (attempts === 3) {
+    if (attempts === 5) {
         success = true;
         console.log("Success!");
     }
@@ -200,7 +200,7 @@ do {
 } while (counter <= 3);
 
 // Do-while with condition
-let userInput = "yes";
+let userInput = "no";
 let attempts2 = 0;
 console.log("Do-while with user input simulation:");
 do {
@@ -230,6 +230,7 @@ console.log("For...in with object:");
 for (let key in person) {
     console.log(`${key}: ${person[key]}`);
 }
+
 
 // For...in with array (not recommended)
 let colors = ["red", "green", "blue"];
