@@ -1,4 +1,4 @@
-console.log("💪 Exercise 3: String Search and Extraction");
+console.log("Exercise 3: String Search and Extraction");
 // Exercise 1: Find all occurrences of a substring
 console.log("\n1. Find All Occurrences:");
 
@@ -70,6 +70,22 @@ console.log("Replace 'the' with 'a':", replaceAll(sentence, "the", "a"));
 // Exercise 4: Extract words from a string
 console.log("\n4. Extract Words:");
 
+function extractWords(str) {
+    let spaced = str.replace(/([a-z])([A-Z])/g, "$1 $2");
+    let clean = spaced.replace(/[^\w\s']/g, " ");
+    let words = clean.split(/\s+/).filter(Boolean);
+    return words;
+}
+let paragraph = "Hello, world! How are you today? I'm fine, thank you.";
+let camelCase = "helloWorldHowAreYou";
+let withNumbers = "There are 5 apples and 3 oranges.";
+console.log("Paragraph:", paragraph);
+console.log("Words:", extractWords(paragraph));
+console.log("Camel case:", camelCase);
+console.log("Words:", extractWords(camelCase));
+console.log("With numbers:", withNumbers);
+console.log("Words:", extractWords(withNumbers));
+
 // Exercise 5: Find the longest word in a string
 console.log("\n5. Find Longest Word:");
 
@@ -89,3 +105,54 @@ console.log("Short text:", shortText);
 console.log("Longest word:", findLongestWord(shortText));
 console.log("Tie text:", tieText);
 console.log("Longest word:", findLongestWord(tieText));
+
+// Exercise 6: Extract email addresses
+console.log("\n6. Extract Email Addresses:");
+
+function extractEmails(str) {
+    const matches = str.match(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g);
+    return matches || [];
+}
+let emailText = "Contact us at john@example.com or jane@company.org. Also try admin@site.net";
+let noEmailText = "This text has no email addresses";
+let multipleEmails = "Send to: user1@test.com, user2@test.com, user3@test.com";
+console.log("Email text:", emailText);
+console.log("Emails found:", extractEmails(emailText));
+console.log("No email text:", noEmailText);
+console.log("Emails found:", extractEmails(noEmailText));
+console.log("Multiple emails:", multipleEmails);
+console.log("Emails found:", extractEmails(multipleEmails));
+
+// Exercise 7: Extract phone numbers
+console.log("\n7. Extract Phone Numbers:");
+
+function extractPhoneNumbers(str) {
+    const matches = str.match(/\(?\d{3}\)?[ .-]?\d{3}[ .-]?\d{4}/g);
+    return matches || [];
+}
+let phoneText = "Call us at (555) 123-4567 or 555-987-6543. Also try 555.111.2222";
+let noPhoneText = "This text has no phone numbers";
+let multiplePhones = "Phone 1: (111) 222-3333, Phone 2: 444-555-6666";
+console.log("Phone text:", phoneText);
+console.log("Phone numbers found:", extractPhoneNumbers(phoneText));
+console.log("No phone text:", noPhoneText);
+console.log("Phone numbers found:", extractPhoneNumbers(noPhoneText));
+console.log("Multiple phones:", multiplePhones);
+console.log("Phone numbers found:", extractPhoneNumbers(multiplePhones));
+
+// Exercise 8: Extract URLs
+console.log("\n8. Extract URLs:");
+
+function extractUrls(str) {
+    const matches = str.match(/\b((https?:\/\/|ftp:\/\/|www\.)[^\s]+)/g);
+    return matches || [];
+}
+let urlText = "Visit https://www.example.com or http://test.org. Also try www.google.com";
+let noUrlText = "This text has no URLs";
+let multipleUrls = "Site 1: https://site1.com, Site 2: http://site2.org, Site 3: www.site3.net";
+console.log("URL text:", urlText);
+console.log("URLs found:", extractUrls(urlText));
+console.log("No URL text:", noUrlText);
+console.log("URLs found:", extractUrls(noUrlText));
+console.log("Multiple URLs:", multipleUrls);
+console.log("URLs found:", extractUrls(multipleUrls));
