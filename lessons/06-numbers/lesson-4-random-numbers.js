@@ -41,7 +41,7 @@ for (let i = 0; i < 5; i++) {
 console.log("\n📚 3. Random Number Distributions");
 console.log("--------------------------------");
 
-// Uniform distribution
+// Uniform distribution => Equal probability across range
 function uniformDistribution(min, max, count) {
     let numbers = [];
     for (let i = 0; i < count; i++) {
@@ -50,7 +50,7 @@ function uniformDistribution(min, max, count) {
     return numbers;
 }
 
-// Normal distribution (Box-Muller transform)
+// Normal distribution (Box-Muller transform) => Bell curve distribution with mean and standard deviation
 function normalDistribution(mean, stdDev, count) {
     let numbers = [];
     for (let i = 0; i < count; i++) {
@@ -62,7 +62,7 @@ function normalDistribution(mean, stdDev, count) {
     return numbers;
 }
 
-// Exponential distribution
+// Exponential distribution => Decreasing probability as value increases 
 function exponentialDistribution(lambda, count) {
     let numbers = [];
     for (let i = 0; i < count; i++) {
@@ -81,7 +81,7 @@ console.log("Exponential distribution (λ=1):", exponentialDistribution(1, 5));
 console.log("\n📚 4. Seeded Random Numbers");
 console.log("-------------------------");
 
-// Simple Linear Congruential Generator
+// Simple Linear Congruential Generator (SLUG) for seeded random numbers
 class SeededRandom {
     constructor(seed) {
         this.seed = seed;

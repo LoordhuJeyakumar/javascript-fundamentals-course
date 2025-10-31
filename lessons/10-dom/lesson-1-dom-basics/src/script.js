@@ -62,8 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
         logEvent('Blur', 'Input field lost focus');
     });
 
-    // Event delegation example
+    // Event delegation example = > when you have a lot of elements, you can use event delegation to handle the events for all the elements at once.
     demoList.addEventListener('click', (e) => {
+        console.log('Event delegation');
+        console.log('Event',e);
+        console.log(e.target);
+        console.log(e.target.tagName);
         if (e.target.tagName === 'LI') {
             logEvent('Click', `Clicked on: ${e.target.textContent}`);
         }

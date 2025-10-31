@@ -60,6 +60,7 @@ console.log("--------------------------------");
 
 function multiply(x, y) {
     return x * y;
+    return x + y; // This line will never be reached
 }
 
 function isEven(number) {

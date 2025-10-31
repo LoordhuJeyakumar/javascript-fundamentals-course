@@ -1,0 +1,20 @@
+{
+  "name": "js",
+  "version": "1.0.0",
+  "description": "[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)\r [![Course](https://img.shields.io/badge/Course-Complete-green.svg)](https://github.com/LoordhuJeyakumar/javascript-fundamentals-course)\r [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)",
+  "homepage": "https://github.com/LoordhuJeyakumar/javascript-fundamentals-course#readme",
+  "bugs": {
+    "url": "https://github.com/LoordhuJeyakumar/javascript-fundamentals-course/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LoordhuJeyakumar/javascript-fundamentals-course.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

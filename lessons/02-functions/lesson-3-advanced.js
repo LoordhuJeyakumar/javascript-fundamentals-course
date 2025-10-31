@@ -50,7 +50,7 @@ console.log("double(5):", double(5));
 console.log("triple(5):", triple(5));
 console.log("quadruple(5):", quadruple(5));
 
-// 2. Callback Functions
+// 2. Callback Functions => Functions passed as arguments
 console.log("\n📚 2. Callback Functions");
 console.log("----------------------");
 
@@ -58,12 +58,16 @@ console.log("Callbacks are functions passed as arguments to other functions");
 console.log("They are called back at a specific time or event");
 
 // Simulating asynchronous operations with callbacks
-function fetchData(callback) {
+function fetchData(displayData, displayError) {
     console.log("Fetching data...");
     // Simulate delay
     setTimeout(() => {
         const data = { name: "John", age: 30, city: "New York" };
-        callback(data);
+        displayData(data);
+        if(!data) {
+            console.error("Error: No data received");
+            displayError("No data available");
+        }
     }, 1000);
 }
 

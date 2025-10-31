@@ -11,21 +11,21 @@ console.log("-----------------------------------");
 let number = 1234.5678;
 console.log("Original number:", number);
 
-// toFixed() - Fixed decimal places
+// toFixed() - Fixed decimal places => Rounds the number to a specified number of decimal places
 console.log("toFixed() method:");
 console.log("toFixed(0):", number.toFixed(0));
 console.log("toFixed(1):", number.toFixed(1));
 console.log("toFixed(2):", number.toFixed(2));
 console.log("toFixed(4):", number.toFixed(4));
 
-// toPrecision() - Significant digits
+// toPrecision() - Significant digits => Formats the number to a specified number of significant digits 
 console.log("toPrecision() method:");
 console.log("toPrecision(2):", number.toPrecision(2));
 console.log("toPrecision(4):", number.toPrecision(4));
 console.log("toPrecision(6):", number.toPrecision(6));
 console.log("toPrecision(8):", number.toPrecision(8));
 
-// toExponential() - Scientific notation
+// toExponential() - Scientific notation => Represents the number in exponential notation
 console.log("toExponential() method:");
 console.log("toExponential():", number.toExponential());
 console.log("toExponential(2):", number.toExponential(2));
