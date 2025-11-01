@@ -162,7 +162,7 @@ let lastIndex = searchArray.lastIndexOf(2);
 console.log("lastIndexOf(2):", lastIndex);
 
 // Element not found
-let notFound = searchArray.indexOf(10);
+let notFound = searchArray.indexOf(10); 
 console.log("indexOf(10):", notFound);
 
 // 10. includes() Method - Check if Element Exists

@@ -14,6 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Event Propagation Demo
+
+    /* 
+    Event Propagation:
+    - Event propagation is the process of events flowing through the DOM tree.
+    - Event propagation is used to handle events for nested elements.
+    - Event propagation is used to handle events for elements that are nested inside other elements.
+
+    */
     const propagationDemo = document.getElementById('propagation-demo');
     const propagationLog = propagationDemo.querySelector('.log-content');
     const useCapture = document.getElementById('useCapture');
@@ -53,6 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
     setupPropagationListeners();
 
     // Event Delegation Demo
+    /* 
+    Event Delegation:
+    - Event delegation is a technique of handling events on a parent element instead of individual child elements.
+    - Event delegation is used to handle events for elements that are nested inside other elements.
+    - Event delegation is used to handle events for elements that are dynamically added to the DOM.
+    */
     const delegationList = document.getElementById('delegationList');
     const delegationLog = document.getElementById('delegationLog').querySelector('.log-content');
     let itemCount = 1;
@@ -70,10 +84,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     delegationList.addEventListener('click', (e) => {
+        console.log("event delegation", e);
         const button = e.target.closest('button');
         if (!button) return;
 
+        console.log("button");
+        console.dir(button)
+
         const li = button.closest('li');
+        console.log("li");
+        console.dir(li);
+
         const action = button.classList.contains('edit') ? 'edit' : 'delete';
 
         if (action === 'delete') {

@@ -76,6 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function analyzeNodeTypes(element) {
         const nodes = Array.from(element.childNodes);
         return nodes.map(node => {
+
+            console.log(node);
+
             const type = node.nodeType === 1 ? 'ELEMENT_NODE' :
                         node.nodeType === 3 ? 'TEXT_NODE' :
                         node.nodeType === 8 ? 'COMMENT_NODE' : 'OTHER';
@@ -120,6 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (selectedListItem) {
             const parent = selectedListItem.closest('ul');
+            console.dir(parent);
             parent.insertBefore(newItem, selectedListItem.nextSibling);
         } else {
             dynamicList.appendChild(newItem);
@@ -129,7 +133,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Move item up
     document.getElementById('moveUp').addEventListener('click', () => {
         if (!selectedListItem) return;
+        console.dir("selcted list item from move up", selectedListItem);
+        console.dir(selectedListItem)
         const previousSibling = selectedListItem.previousElementSibling;
+        console.dir(previousSibling);
         if (previousSibling) {
             selectedListItem.parentNode.insertBefore(selectedListItem, previousSibling);
         }

@@ -96,27 +96,36 @@ let specificEmployees = employees.filter(emp =>
 );
 console.log("Employees with names starting with A or C:", specificEmployees);
 
-// 5. reduce() Method - Aggregate Values
+// 5. reduce() Method - Aggregate Values = > reduce is used to reduce the array to a single value.
 console.log("\n📚 5. reduce() Method - Aggregate Values");
 console.log("---------------------------------------");
 
-let numbers2 = [1, 2, 3, 4, 5];
+    let numbers2 = [1, 2, 3, 4, 5];
 console.log("Numbers:", numbers2);
 
 // Sum all numbers
-let sum = numbers2.reduce((total, num) => total + num, 0);
+let sum = numbers2.reduce((total, num) => total + num, 10);
 console.log("Sum:", sum);
+
+// sum2 is the same as sum, but without the initial value of 0.
+let sum2 = numbers2.reduce((total, num) => total + num);
+console.log("Sum2:", sum2);
 
 // Product of all numbers
 let product = numbers2.reduce((total, num) => total * num, 1);
 console.log("Product:", product);
 
+// product2 is the same as product, but without the initial value of 1.
+let product2 = numbers2.reduce((total, num) => total * num);
+console.log("Product2:", product2);
+
+
 // Find maximum number
 
 let max = numbers2.reduce((max, num) => num > max ? num : max, numbers2[0]);
 
-let min = numbers2.reduce((min, num) =>{
-    let min = numbers2[0];
+let minimum = numbers2.reduce((min, num) =>{
+    min = numbers2[0];
     return num < min ? num : min;
 }, numbers2[0]);
 
@@ -171,6 +180,57 @@ let students = [
     { name: "Eve", grade: 96, subject: "Science" }
 ];
 console.log("All students:", students);
+
+// In a Node.js script, you can get input from the user using the 'readline' module.
+// Here's an example of how you might ask the user for a subject and print matching student names:
+
+// Uncomment below to try user input (in Node.js):
+
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+rl.question('Enter subject to list student names (math, science, english): ', (input) => {
+    let subject = input.trim().toLowerCase();
+    let subjectNames = students
+        .filter(student => student.subject.toLowerCase() === subject)
+        .map(student => student.name)
+        .sort();
+    if (subjectNames.length > 0) {
+        console.log(`${subject.charAt(0).toUpperCase() + subject.slice(1)} student names (sorted):`, subjectNames);
+    } else {
+        console.log('Invalid input or no students found for this subject.');
+    }
+    rl.close();
+});
+
+
+
+const cliInput = process.argv[2];
+if (cliInput === "math") {
+    let mathStudentNames = students
+        .filter(student => student.subject === "Math")
+        .map(student => student.name)
+        .sort();
+    console.log("Math student names (sorted):", mathStudentNames);
+} else if (cliInput === "science") {
+    let scienceStudentNames = students
+        .filter(student => student.subject === "Science")
+        .map(student => student.name)
+        .sort();
+    console.log("Science student names (sorted):", scienceStudentNames);
+} else if (cliInput === "english") {
+    let englishStudentNames = students
+        .filter(student => student.subject === "English")
+        .map(student => student.name)
+        .sort();
+    console.log("English student names (sorted):", englishStudentNames);
+} else {
+    console.log("Invalid input, please enter math, science, or english");
+}
+
 
 // Chain: filter Math students, get names, sort alphabetically
 let mathStudentNames = students

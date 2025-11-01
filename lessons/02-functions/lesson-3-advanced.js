@@ -239,7 +239,7 @@ console.log("calculator.add(2, 3):", calculator.add(2, 3));
 console.log("calculator.multiply(4, 5):", calculator.multiply(4, 5));
 console.log("History:", calculator.getHistory());
 
-// 5. Recursion
+// 5. Recursion => Functions that call themselves
 console.log("\n📚 5. Recursion");
 console.log("---------------");
 
@@ -248,7 +248,12 @@ console.log("Every recursive function needs:");
 console.log("1. A base case (stopping condition)");
 console.log("2. A recursive case (function calls itself)");
 
-// Factorial function
+// Factorial function => A function that calls itself
+/* 
+    Factorial of a number is the product of all positive integers less than or equal to that number.
+    For example, factorial of 5 is 5 * 4 * 3 * 2 * 1 = 120.
+    n * f(n - 1)
+*/
 function factorial(n) {
     // Base case
     if (n <= 1) {
@@ -258,13 +263,29 @@ function factorial(n) {
     return n * factorial(n - 1);
 }
 
+/* call stack */
+
+    /* 
+    factorial(5) => 5 * factorial(4) => 5 * 4 * factorial(3) => 5 * 4 * 3 * factorial(2) => 5 * 4 * 3 * 2 * factorial(1) => 5 * 4 * 3 * 2 * 1 => 120
+    factorial(4)
+    factorial(3) => 3 * factorial(2) => 3 * 2 * factorial(1) => 3 * 2 * 1 => 6
+    factorial(2) => 2 * factorial(1) => 2 * 1 => 2
+    factorial(1) => 1
+    
+    */
+
 console.log("Factorial examples:");
 console.log("factorial(0):", factorial(0));
 console.log("factorial(1):", factorial(1));
 console.log("factorial(5):", factorial(5));
 console.log("factorial(10):", factorial(10));
 
-// Fibonacci function
+// Fibonacci function => A function that calls itself
+/* 
+    Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones, starting from 0 and 1.
+    For example, the first 10 numbers in the Fibonacci sequence are: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34.
+    f(n) = f(n - 1) + f(n - 2)
+*/
 function fibonacci(n) {
     // Base cases
     if (n <= 0) return 0;
@@ -330,10 +351,11 @@ eventHandler.trigger("Hello World");
 // Example 2: Function memoization (caching)
 function memoize(fn) {
     const cache = {};
+    console.log("Cache:", cache);
     
     return function(...args) {
         const key = JSON.stringify(args);
-        
+        console.log("Key:", key);
         if (cache[key]) {
             console.log("Cache hit for", args);
             return cache[key];
@@ -358,12 +380,13 @@ const expensiveFunction = memoize(function(n) {
 console.log("\nMemoization example:");
 console.log("First call:", expensiveFunction(5));
 console.log("Second call (cached):", expensiveFunction(5));
-console.log("Third call (cached):", expensiveFunction(5));
+console.log("Third call:", expensiveFunction(3));
+console.log("Fourth call (cached):", expensiveFunction(5));
 
 // Example 3: Function pipeline
 function createPipeline(...functions) {
     return function(value) {
-        return functions.reduce((acc, fn) => fn(acc), value);
+        return functions.reduce((acc, fwn) => fn(acc), value);
     };
 }
 
@@ -410,11 +433,11 @@ function partial(fn, ...presetArgs) {
     };
 }
 
-function multiply(a, b, c) {
+function multiply2(a, b, c) {
     return a * b * c;
 }
 
-const multiplyBy2And3 = partial(multiply, 2, 3);
+const multiplyBy2And3 = partial(multiply2, 2, 3);
 console.log("\nPartial application:");
 console.log("multiplyBy2And3(4):", multiplyBy2And3(4)); // 2 * 3 * 4 = 24
 
