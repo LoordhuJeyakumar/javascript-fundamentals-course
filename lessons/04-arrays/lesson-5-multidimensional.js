@@ -118,7 +118,7 @@ console.log("-------------------------------");
 
 let matrix = [
     [1, 2, 3],
-    [4, 5, 6],
+    [4, 15, 6],
     [7, 8, 9]
 ];
 
@@ -126,7 +126,10 @@ let matrix = [
 let max = matrix[0][0];
 for (let row of matrix) {
     for (let value of row) {
-        if (value > max) max = value;
+        if (value > max){
+            max = value;
+        } 
+    
     }
 }
 console.log("Maximum value:", max);
@@ -135,7 +138,7 @@ console.log("Maximum value:", max);
 let sum = 0;
 for (let row of matrix) {
     for (let value of row) {
-        sum += value;
+        sum += value;//sum = sum + value
     }
 }
 console.log("Sum of all elements:", sum);

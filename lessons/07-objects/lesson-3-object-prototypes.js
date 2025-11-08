@@ -1,5 +1,9 @@
 // Lesson 3: Object Prototypes
 // Understanding prototype chains, inheritance, and prototype manipulation
+/* 
+Prototype-based programming is a powerful feature of JavaScript that allows objects to inherit properties and methods from other objects. This lesson explores the concept of prototypes, how to create and manipulate them, and practical examples of their use.
+
+*/
 
 console.log("📚 Lesson 3: Object Prototypes");
 console.log("=============================");
@@ -69,7 +73,10 @@ console.log("dog.hasOwnProperty('name'):", dog.hasOwnProperty('name'));
 console.log("dog.hasOwnProperty('makeSound'):", dog.hasOwnProperty('makeSound'));
 console.log("'makeSound' in dog:", 'makeSound' in dog);
 
-// 📚 3. Constructor Functions
+// 📚 3. Constructor Functions => 
+    /* 
+   Constructor functions are a way to create multiple instances of similar objects. They use the 'this' keyword to set properties for the new object being created.
+   */
 console.log("\n📚 3. Constructor Functions");
 console.log("-------------------------");
 
@@ -211,7 +218,10 @@ console.log("New method:", finalObject.newMethod());
 console.log("\n📚 6. Object.create() Patterns");
 console.log("-----------------------------");
 
-// Factory function with prototype
+// Factory function with prototype =>
+        /* 
+    Object.create() allows for creating objects with a specified prototype, enabling clean inheritance patterns without the need for constructor functions.
+    */
 function createVehicle(type, brand, model) {
     let vehicle = Object.create(vehiclePrototype);
     vehicle.type = type;

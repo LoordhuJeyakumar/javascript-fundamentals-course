@@ -24,7 +24,7 @@ let notFound = numbers.indexOf(10);
 console.log("indexOf(10):", notFound);
 
 // Search from specific index = > start from index 2 and find the first occurrence of 2
-let fromIndex = numbers.indexOf(3,4);
+let fromIndex = numbers.indexOf(2, 2);
 console.log("indexOf(2, 2):", fromIndex);
 
 // 2. includes() Method - Check Element Existence
@@ -92,8 +92,14 @@ console.log("Ages:", ages);
 console.log("Any age > 40:", ages.some(age => age > 40));
 console.log("Any age < 20:", ages.some(age => age < 20));
 
+
+const students2 = [
+     { name: "Alice", grade: 95 },
+    { name: "Bob", grade: 87 },
+    { name: "Charlie", grade: 92 },
+    { name: "Diana", grade: 78 }];
 // Check if any student has grade A
-let hasGradeA = students.some(student => student.grade >= 90);
+let hasGradeA = students2.some(student => student.grade >= 90);
 console.log("Any student has grade A:", hasGradeA);
 
 // 6. every() Method - Check if All Elements Match

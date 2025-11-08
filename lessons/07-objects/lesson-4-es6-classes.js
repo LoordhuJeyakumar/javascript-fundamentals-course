@@ -8,7 +8,14 @@ console.log("=======================");
 console.log("\n📚 1. Class Syntax and Structure");
 console.log("-------------------------------");
 
+
 // Basic class declaration
+
+//this keyword inside methods refers to the instance
+/* 
+    In JavaScript, the `this` keyword inside class methods refers to the instance of the class that is calling the method. When you create an instance of a class and call a method on that instance, `this` inside the method points to that specific instance.
+*/
+
 class Person {
     constructor(firstName, lastName, age) {
         this.firstName = firstName;
@@ -64,6 +71,10 @@ console.log("Animal sound:", dog.makeSound());
 // 📚 2. Constructor Methods
 console.log("\n📚 2. Constructor Methods");
 console.log("------------------------");
+
+/* 
+    The constructor method is a special method in a class that is called when a new instance of the class is created. It is used to initialize the properties of the object. The constructor method can take parameters to set initial values for the object's properties.
+*/
 
 class BankAccount {
     constructor(accountNumber, initialBalance = 0) {
@@ -135,7 +146,7 @@ console.log("Initial balance:", account.getBalance());
 
 try {
     console.log(account.deposit(500));
-    console.log(account.withdraw(200));
+    console.log(account.withdraw(2000));
     console.log("Current balance:", account.getBalance());
     console.log("Statement:", account.getStatement());
 } catch (error) {
@@ -145,6 +156,13 @@ try {
 // 📚 3. Instance and Static Methods
 console.log("\n📚 3. Instance and Static Methods");
 console.log("--------------------------------");
+
+
+/* 
+    Instance methods are functions defined within a class that operate on instances of the class. They can access and modify instance properties using the `this` keyword.
+
+    Static methods, on the other hand, are functions defined on the class itself rather than on instances of the class. They are called on the class directly and do not have access to instance properties.
+*/
 
 class MathUtils {
     // Static method
@@ -200,11 +218,15 @@ console.log("MathUtils.multiply(4, 6):", MathUtils.multiply(4, 6));
 console.log("MathUtils.isEven(8):", MathUtils.isEven(8));
 console.log("MathUtils.factorial(5):", MathUtils.factorial(5));
 
+//MathUtils.double(10); // This will throw an error since double is not a static method
+
 console.log("Instance methods:");
 let mathInstance = new MathUtils(7);
 console.log("mathInstance.double():", mathInstance.double());
 console.log("mathInstance.square():", mathInstance.square());
 console.log("mathInstance.isPrime():", mathInstance.isPrime());
+
+// mathInstance.add(2, 3); // This will throw an error since add is not an instance method
 
 // 📚 4. Class Inheritance
 console.log("\n📚 4. Class Inheritance");
@@ -242,6 +264,9 @@ class Vehicle {
 class Car extends Vehicle {
     constructor(brand, model, year, doors, fuelType) {
         super(brand, model, year); // Call parent constructor
+        /* 
+            The `super` keyword is used to call the constructor of the parent class. In the `Car` class, `super(brand, model, year);` invokes the constructor of the `Vehicle` class, allowing the `Car` class to inherit and initialize the properties defined in the `Vehicle` class. This ensures that the `brand`, `model`, and `year` properties are properly set for instances of the `Car` class, in addition to any properties specific to the `Car` class itself.
+        */
         this.doors = doors;
         this.fuelType = fuelType;
         this.type = "car";
@@ -313,6 +338,16 @@ console.log("car instanceof Object:", car instanceof Object);
 // 📚 5. Getters and Setters in Classes
 console.log("\n📚 5. Getters and Setters in Classes");
 console.log("----------------------------------");
+
+/* 
+    Getters and setters are special methods in a class that allow you to define how to access and modify the properties of an object. Getters are used to retrieve the value of a property, while setters are used to set or update the value of a property. They provide a way to encapsulate the internal representation of an object and control how its properties are accessed and modified.
+
+    why use them?
+    1. Encapsulation: Getters and setters allow you to encapsulate the internal representation of an object. You can control how properties are accessed and modified, which helps maintain the integrity of the object's state.
+    2. Validation: Getters and setters can be used to validate the value of a property before it is set. This can help ensure that the property is in a valid state.
+    3. Abstraction: Getters and setters allow you to hide the internal implementation of an object, making it easier to use and understand.
+
+*/
 
 class User {
     constructor(firstName, lastName, email) {

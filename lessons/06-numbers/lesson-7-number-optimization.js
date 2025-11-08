@@ -28,17 +28,17 @@ console.log(`Math.pow(2, 3): ${powTime.toFixed(2)}ms`);
 console.log(`2 ** 3: ${expTime.toFixed(2)}ms`);
 
 // Rounding
-let roundTime = benchmark(() => Math.round(4.7));
-let floorTime = benchmark(() => Math.floor(4.7));
-let ceilTime = benchmark(() => Math.ceil(4.7));
+let roundTime = benchmark(() => Math.round(4.7));//=> 5
+let floorTime = benchmark(() => Math.floor(4.7));//=> 4
+let ceilTime = benchmark(() => Math.ceil(4.7));//=> 5
 console.log(`Math.round(): ${roundTime.toFixed(2)}ms`);
 console.log(`Math.floor(): ${floorTime.toFixed(2)}ms`);
 console.log(`Math.ceil(): ${ceilTime.toFixed(2)}ms`);
 
 // Math operations
-let addTime = benchmark(() => 5 + 3);
-let multiplyTime = benchmark(() => 5 * 3);
-let divideTime = benchmark(() => 5 / 3);
+let addTime = benchmark(() => 5 + 3);//=> 8
+let multiplyTime = benchmark(() => 5 * 3);//=> 15
+let divideTime = benchmark(() => 5 / 3);//=> 1.6666666666666667
 console.log(`Addition: ${addTime.toFixed(2)}ms`);
 console.log(`Multiplication: ${multiplyTime.toFixed(2)}ms`);
 console.log(`Division: ${divideTime.toFixed(2)}ms`);
@@ -50,10 +50,11 @@ console.log("------------------------");
 // Number storage optimization
 function testNumberStorage() {
     let numbers = [];
-    let startMemory = performance.memory ? performance.memory.usedJSHeapSize : 0;
+    let startMemory = process.memoryUsage().heapUsed;
+    console.log("startMemory", startMemory);
     
     // Create large array of numbers
-    for (let i = 0; i < 100000; i++) {
+    for (let i = 0; i < 10000000; i++) {
         numbers.push(Math.random());
     }
     
@@ -84,15 +85,15 @@ console.log("0.1 + 0.2 === 0.3:", 0.1 + 0.2 === 0.3);
 
 // Safe floating point operations
 function safeAdd(a, b) {
-    let precision = Math.max(getDecimalPlaces(a), getDecimalPlaces(b));
-    let multiplier = Math.pow(10, precision);
-    return (Math.round(a * multiplier) + Math.round(b * multiplier)) / multiplier;
+    let precision = Math.max(getDecimalPlaces(a), getDecimalPlaces(b)); // 1 or 2 = 2
+    let multiplier = Math.pow(10, precision); // 10^1 = 10
+    return (Math.round(a * multiplier) + Math.round(b * multiplier)) / multiplier; // (10 + 20) / 10 = 0.3
 }
 
 function getDecimalPlaces(num) {
     let str = num.toString();
     let decimalIndex = str.indexOf('.');
-    return decimalIndex === -1 ? 0 : str.length - decimalIndex - 1;
+    return decimalIndex === -1 ? 0 : str.length - decimalIndex - 1; // 3 - 1 - 1 = 1
 }
 
 function safeMultiply(a, b) {
@@ -109,12 +110,12 @@ console.log("safeMultiply(0.1, 0.2) =", safeMultiply(0.1, 0.2));
 console.log("\n📚 4. Number Validation Optimization");
 console.log("-----------------------------------");
 
-// Fast number validation
+// Fast number validation = Check if the value is a number, not NaN, and not Infinity
 function isNumberFast(value) {
     return typeof value === 'number' && !isNaN(value) && isFinite(value);
 }
 
-// Optimized number parsing
+// Optimized number parsing = Convert a string to a number
 function parseNumberFast(str) {
     if (typeof str !== 'string') return NaN;
     
@@ -143,7 +144,7 @@ validationTests.forEach(test => {
 console.log("\n📚 5. Mathematical Function Optimization");
 console.log("--------------------------------------");
 
-// Fast power function for small integers
+// Fast power function for small integers = Calculate the power of a number
 function fastPower(base, exponent) {
     if (exponent === 0) return 1;
     if (exponent === 1) return base;
@@ -244,6 +245,10 @@ console.log("Min/Max:", fastArrayMinMax(testArray));
 console.log("\n📚 7. Caching and Memoization");
 console.log("----------------------------");
 
+/* Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones, starting from 0 and 1.
+n = 5 => 0, 1, 1, 2, 3 => f(n) = f(n - 1) + f(n - 2)
+*/
+
 // Memoized Fibonacci
 let fibonacciCache = new Map();
 function memoizedFibonacci(n) {
@@ -258,32 +263,34 @@ function memoizedFibonacci(n) {
     return result;
 }
 
-// Memoized prime checking
+
+
+// Memoized prime checking 
 let primeCache = new Map();
 function isPrimeMemoized(n) {
-    if (n < 2) return false;
-    if (n === 2) return true;
-    if (n % 2 === 0) return false;
-    
     if (primeCache.has(n)) {
         return primeCache.get(n);
     }
     
-    let sqrt = Math.sqrt(n);
-    for (let i = 3; i <= sqrt; i += 2) {
+    if (n < 2) return false;
+    if (n === 2) return true;
+    if (n % 2 !== 0) {
+        primeCache.set(n, false);
+        return false;
+    }
+    for (let i = 3; i <= Math.sqrt(n); i += 2) {
         if (n % i === 0) {
             primeCache.set(n, false);
             return false;
         }
     }
-    
     primeCache.set(n, true);
     return true;
 }
 
 console.log("Memoization examples:");
-console.log("Fibonacci(10):", memoizedFibonacci(10));
-console.log("Fibonacci(20):", memoizedFibonacci(20));
+console.log("Fibonacci(10):", memoizedFibonacci(10));// => 1 + 1 + 2 + 3 + 5 + 8 + 13 + 21 + 34 = 55
+console.log("Fibonacci(20):", memoizedFibonacci(20));// => 1 + 1 + 2 + 3 + 5 + 8 + 13 + 21 + 34 + 55 + 89 + 144 + 233 + 377 + 610 + 987 + 1597 + 2584 + 4181 + 6765 = 10946
 console.log("isPrime(17):", isPrimeMemoized(17));
 console.log("isPrime(25):", isPrimeMemoized(25));
 

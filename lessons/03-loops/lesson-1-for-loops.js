@@ -158,6 +158,24 @@ function factorial(n) {
     return result;
 }
 
+
+//retry machanism server connection
+
+
+
+const maxAttempts = 3;
+let attempts = 4;
+
+do {
+    attempts++;
+    if(attempts === 2){
+        console.log("Server connection success");
+        break;
+    }
+    console.log(attempts)
+  
+} while (attempts < maxAttempts);
+
 let fact5 = factorial(5);
 console.log(`5! = ${fact5}`);
 

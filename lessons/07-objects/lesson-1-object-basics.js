@@ -146,7 +146,7 @@ person.address = {
 
 console.log("Person with new properties:", person);
 
-// 📚 4. Object Enumeration
+// 📚 4. Object Enumeration - List all the properties of an object
 console.log("\n📚 4. Object Enumeration");
 console.log("----------------------");
 
@@ -168,7 +168,7 @@ for (let key in person) {
     console.log(`${key}: ${person[key]}`);
 }
 
-// Object.hasOwnProperty() - check if property exists
+// Object.hasOwnProperty() - check if property exists in the object itself, not in the prototype chain
 console.log("Property checks:");
 console.log("person.hasOwnProperty('name'):", person.hasOwnProperty('name'));
 console.log("person.hasOwnProperty('phone'):", person.hasOwnProperty('phone'));
@@ -180,7 +180,7 @@ console.log("'name' in person:", 'name' in person);
 console.log("'phone' in person:", 'phone' in person);
 console.log("'salary' in person:", 'salary' in person);
 
-// 📚 5. Object Property Descriptors
+// 📚 5. Object Property Descriptors - Control the behavior of a property (writable, enumerable, configurable)
 console.log("\n📚 5. Object Property Descriptors");
 console.log("--------------------------------");
 
@@ -222,7 +222,7 @@ let assigned = Object.assign(target, source);
 console.log("Object.assign result:", assigned);
 console.log("Target object:", target);
 
-// Object.create() - create object with specified prototype
+// Object.create() - create object with specified prototype object and properties
 let prototypeObject = {
     greet: function() {
         return `Hello, I'm ${this.name}`;
@@ -236,13 +236,13 @@ newPerson.age = 25;
 console.log("Object.create result:", newPerson);
 console.log("Greet method:", newPerson.greet());
 
-// Object.freeze() - make object immutable
+// Object.freeze() - make object immutable (no properties can be added, modified, or deleted)
 let freezeObject = { value: 42 };
 Object.freeze(freezeObject);
 freezeObject.value = 100; // This won't work
 console.log("Frozen object value:", freezeObject.value);
 
-// Object.seal() - prevent adding/removing properties
+// Object.seal() - prevent adding/removing properties (no properties can be added or deleted, but properties can be modified)
 let sealObject = { value: 42 };
 Object.seal(sealObject);
 sealObject.value = 100; // This will work

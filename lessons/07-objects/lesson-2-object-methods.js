@@ -75,8 +75,8 @@ let anotherPerson = {
 
 // Borrowing methods
 console.log("Method borrowing:");
-console.log("Another person greet:", person.greet.call(anotherPerson));
-console.log("Another person introduce:", person.introduce.apply(anotherPerson));
+console.log("Another person greet:", person.greet.call(anotherPerson)); // call the greet method on the person object and pass the anotherPerson object as the this context
+console.log("Another person introduce:", person.introduce.apply(anotherPerson)); // apply the introduce method on the person object and pass the anotherPerson object as the this context
 
 // 📚 2. Property Descriptors
 console.log("\n📚 2. Property Descriptors");
@@ -290,7 +290,7 @@ console.log("Dog move:", dog.move());
 
 // Object.freeze() - make immutable
 let freezeObject = { value: 42, nested: { a: 1 } };
-Object.freeze(freezeObject);
+Object.freeze();
 freezeObject.value = 100; // Won't work
 freezeObject.nested.a = 2; // Will work (shallow freeze)
 console.log("Frozen object:", freezeObject);

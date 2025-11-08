@@ -62,6 +62,14 @@ console.log("All scores:", scores);
 let passingScores = scores.filter(score => score >= 80);
 console.log("Passing scores (>= 80):", passingScores);
 
+
+let passingScoreMap = scores.map((score) => {
+    if(score >= 80){
+        return score;
+    }
+});
+console.log("Passing score map (>= 80):", passingScoreMap);
+
 // Filter high scores (>= 90)
 let highScores = scores.filter(score => score >= 90);
 console.log("High scores (>= 90):", highScores);

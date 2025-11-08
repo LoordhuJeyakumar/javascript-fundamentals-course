@@ -17,10 +17,14 @@ function calculateMean(numbers) {
     return sum / numbers.length;
 }
 
-// Median
+// Median = Middle value of the dataset formula: (sorted[middle - 1] + sorted[middle]) / 2
+// If the dataset is odd, return the middle value
+// If the dataset is even, return the average of the two middle values
+
 function calculateMedian(numbers) {
-    let sorted = [...numbers].sort((a, b) => a - b);
-    let middle = Math.floor(sorted.length / 2);
+    let sorted = [...numbers].sort((a, b) => a - b); // Sort the dataset in ascending order 
+
+    let middle = Math.floor(sorted.length / 2); //=> Middle index of the dataset 5
     
     if (sorted.length % 2 === 0) {
         return (sorted[middle - 1] + sorted[middle]) / 2;
@@ -29,10 +33,23 @@ function calculateMedian(numbers) {
     }
 }
 
-// Mode
+// Mode = Most frequent value in the dataset
 function calculateMode(numbers) {
     let frequency = {};
+    /* 
+    frequency = {
+        12: 1,
+        15: 1,
+        18: 1,
+        20: 1,
+        22: 1,
+        25: 1,
+        28: 1,
+        30: 1,
+    
+    */
     numbers.forEach(num => {
+        // Count the frequency of each value in the dataset
         frequency[num] = (frequency[num] || 0) + 1;
     });
     
@@ -59,19 +76,19 @@ console.log("Range:", calculateRange(dataset));
 console.log("\n📚 2. Measures of Spread");
 console.log("----------------------");
 
-// Variance
+// Variance = Average of the squared differences from the mean
 function calculateVariance(numbers) {
     let mean = calculateMean(numbers);
     let squaredDiffs = numbers.map(num => Math.pow(num - mean, 2));
-    return calculateMean(squaredDiffs);
+    return calculateMean(squaredDiffs); //=> Average of the squared differences from the mean
 }
 
-// Standard Deviation
+// Standard Deviation => Square root of the variance
 function calculateStandardDeviation(numbers) {
-    return Math.sqrt(calculateVariance(numbers));
+    return Math.sqrt(calculateVariance(numbers)); //=> Square root of the variance
 }
 
-// Population vs Sample variance
+// Population vs Sample variance = Population variance is the variance of the entire population
 function calculatePopulationVariance(numbers) {
     let mean = calculateMean(numbers);
     let squaredDiffs = numbers.map(num => Math.pow(num - mean, 2));
@@ -94,22 +111,25 @@ console.log("Sample variance:", calculateSampleVariance(dataset).toFixed(2));
 console.log("\n📚 3. Percentiles and Quartiles");
 console.log("----------------------------");
 
-// Percentile calculation
+// Percentile calculation = The value below which a certain percentage of the data falls
 function calculatePercentile(numbers, percentile) {
-    let sorted = [...numbers].sort((a, b) => a - b);
-    let index = (percentile / 100) * (sorted.length - 1);
+    let sorted = [...numbers].sort((a, b) => a - b); //= [12, 15, 18, 20, 22, 25, 28, 30, 32, 35]
+    let index = (percentile / 100) * (sorted.length - 1); //=> Index of the percentile in the sorted dataset 9 * 0.25 = 2.25
     
     if (Number.isInteger(index)) {
         return sorted[index];
     } else {
-        let lower = Math.floor(index);
-        let upper = Math.ceil(index);
-        let weight = index - lower;
-        return sorted[lower] * (1 - weight) + sorted[upper] * weight;
+        let lower = Math.floor(index); //=> Lower index of the percentile in the sorted dataset
+        let upper = Math.ceil(index); //=> Upper index of the percentile in the sorted dataset
+        let weight = index - lower; //=> Weight of the percentile in the sorted dataset
+        return sorted[lower] * (1 - weight) + sorted[upper] * weight; //=> 18 * (1 - 0.25) + 20 * 0.25 = 18 * 0.75 + 20 * 0.25 = 13.5 + 5 = 18.5
     }
 }
 
-// Quartiles
+// Quartiles = The values that divide the dataset into four equal parts
+// Q1 = 25th percentile
+// Q2 = 50th percentile = Median
+// Q3 = 75th percentile
 function calculateQuartiles(numbers) {
     return {
         Q1: calculatePercentile(numbers, 25),
@@ -118,10 +138,10 @@ function calculateQuartiles(numbers) {
     };
 }
 
-// Interquartile Range (IQR)
+// Interquartile Range (IQR) = The range of the middle 50% of the data
 function calculateIQR(numbers) {
     let quartiles = calculateQuartiles(numbers);
-    return quartiles.Q3 - quartiles.Q1;
+    return quartiles.Q3 - quartiles.Q1; //=> Q3 - Q1 = 30 - 12 = 18
 }
 
 console.log("Percentiles and quartiles:");
@@ -140,16 +160,23 @@ let xValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 let yValues = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
 
 // Pearson correlation coefficient
+
+/* 
+
+    Pearson correlation coefficient formula:
+    r = (n * sumXY - sumX * sumY) / sqrt((n * sumX2 - sumX * sumX) * (n * sumY2 - sumY * sumY))
+
+*/
 function calculateCorrelation(x, y) {
     let n = x.length;
     let sumX = x.reduce((a, b) => a + b, 0);
     let sumY = y.reduce((a, b) => a + b, 0);
-    let sumXY = x.reduce((sum, xi, i) => sum + xi * y[i], 0);
-    let sumX2 = x.reduce((sum, xi) => sum + xi * xi, 0);
-    let sumY2 = y.reduce((sum, yi) => sum + yi * yi, 0);
+    let sumXY = x.reduce((sum, xi, i) => sum + xi * y[i], 0); //=> sum of the product of x and y
+    let sumX2 = x.reduce((sum, xi) => sum + xi * xi, 0); //=> sum of the square of x
+    let sumY2 = y.reduce((sum, yi) => sum + yi * yi, 0); //=> sum of the square of y
     
-    let numerator = n * sumXY - sumX * sumY;
-    let denominator = Math.sqrt((n * sumX2 - sumX * sumX) * (n * sumY2 - sumY * sumY));
+    let numerator = n * sumXY - sumX * sumY; //=> n * sumXY - sumX * sumY = 10 * 220 - 55 * 110 = 2200 - 6050 = -3850
+    let denominator = Math.sqrt((n * sumX2 - sumX * sumX) * (n * sumY2 - sumY * sumY)); //=> Math.sqrt((10 * 385 - 55 * 55) * (10 * 385 - 110 * 110)) = Math.sqrt((3850 - 3025) * (3850 - 12100)) = Math.sqrt(825 * 2640) = Math.sqrt(2178000) = 1475.806
     
     return numerator / denominator;
 }

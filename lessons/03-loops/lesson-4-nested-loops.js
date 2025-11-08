@@ -26,7 +26,7 @@ console.log("Triangle pattern:");
 for (let i = 1; i <= 5; i++) {
     let pattern = "";
     for (let j = 1; j <= i; j++) {
-        pattern += j + " ";
+        pattern += j + " "; // pattern = pattern + j + " ";
     }
     console.log(pattern);
 }
@@ -53,11 +53,7 @@ for (let i = 1; i <= 5; i++) {
 console.log("\n📚 3. Multi-dimensional Arrays");
 console.log("-----------------------------");
 
-let matrix = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9]
-];
+let matrix = [ [1, 2, 3], [4, 5, 6], [7, 8, 9] ];
 
 console.log("Matrix traversal:");
 for (let i = 0; i < matrix.length; i++) {
@@ -135,7 +131,7 @@ function printDiamond(size) {
 }
 
 console.log("Diamond pattern (size 4):");
-printDiamond(4);
+printDiamond(8);
 
 // 6. Complex Patterns: Spiral
 console.log("\n📚 6. Complex Patterns: Spiral");
@@ -149,6 +145,8 @@ function printSpiral(size) {
             matrix[i][j] = 0;
         }
     }
+
+    console.log(matrix);
     
     let num = 1;
     let top = 0, bottom = size - 1, left = 0, right = size - 1;

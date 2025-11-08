@@ -12,7 +12,7 @@ let colors = ["red", "green", "blue", "yellow", "purple"];
 console.log("Colors array:", colors);
 
 // Basic destructuring
-let [firstColor, secondColor, thirdColor, , someColor] = colors;
+let [,firstColor, secondColor, thirdColor, , someColor] = colors;
 console.log("First color:", firstColor);
 console.log("Second color:", secondColor);
 console.log("Third color:", thirdColor);
@@ -49,7 +49,7 @@ console.log("Start:", startNum, "Second:", secondNum);
 console.log("\n📚 3. Default Values");
 console.log("------------------");
 
-let shortArray = ["apple"];
+let shortArray = ["apple", "grape"];
 console.log("Short array:", shortArray);
 
 // Provide default values
