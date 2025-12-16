@@ -158,7 +158,7 @@ function level2() {
 
 function level3() {
     console.log("Level 3: Starting");
-    //throw new Error("Error in level 3");
+    throw new Error("Error in level 3");
     console.log("Level 3: Completed");
 }
 

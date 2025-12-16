@@ -69,7 +69,7 @@ handleAsyncOperation().then(result => {
     console.log("Final result:", result);
 });
 
-// 📚 3. Promise.all Error Handling
+// 📚 3. Promise.all Error Handling => 
 console.log("\n📚 3. Promise.all Error Handling");
 console.log("--------------------------------");
 
@@ -140,6 +140,18 @@ handlePromiseRace();
 console.log("\n📚 5. Error Boundaries in Async Code");
 console.log("------------------------------------");
 
+function simulateAsyncOperation_2(success = true, delay = 1000) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (success) {
+                resolve({ data: "Operation successful", timestamp: new Date().toISOString() });
+            } else {
+                reject(new Error("Async operation failed"));
+            }
+        }, delay);
+    });
+}
+
 class AsyncErrorBoundary {
     constructor() {
         this.errorHandlers = new Map();
@@ -202,7 +214,7 @@ errorBoundary.setErrorHandler('api-call', async (error, context) => {
     
     // Try fallback operation
     try {
-        return await simulateAsyncOperation(true, 100);
+        return await simulateAsyncOperation_2(true, 100);
     } catch (fallbackError) {
         throw new Error(`Both primary and fallback failed: ${error.message}`);
     }
@@ -212,7 +224,7 @@ errorBoundary.setErrorHandler('api-call', async (error, context) => {
 async function testErrorBoundary() {
     try {
         let result = await errorBoundary.execute(
-            () => simulateAsyncOperation(false, 200),
+            () => simulateAsyncOperation_2(false, 200),
             { id: 'api-call' }
         );
         console.log("Error boundary result:", result);
@@ -228,7 +240,7 @@ testErrorBoundary();
 async function testRetry() {
     try {
         let result = await errorBoundary.retry(
-            () => simulateAsyncOperation(false, 100),
+            () => simulateAsyncOperation_2(false, 100),
             3,
             500
         );
@@ -260,7 +272,7 @@ simulateAsyncOperation(false, 100);
 */
 
 // Proper way to handle promises
-simulateAsyncOperation(false, 100)
+simulateAsyncOperation_2(false, 100)
     .catch(error => {
         console.log("Properly handled promise rejection:", error.message);
     });

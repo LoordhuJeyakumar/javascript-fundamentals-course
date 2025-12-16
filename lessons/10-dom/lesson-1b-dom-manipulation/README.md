@@ -43,10 +43,10 @@ element.classList.add('new-class');
 // Remove class
 element.classList.remove('old-class');
 
-// Toggle class
+// Toggle class = add if not present, remove if present
 element.classList.toggle('active');
 
-// Check if class exists
+// Check if class exists => returns boolean
 const hasClass = element.classList.contains('my-class');
 ```
 

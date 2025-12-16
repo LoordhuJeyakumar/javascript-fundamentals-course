@@ -84,7 +84,7 @@ debugLog("This is an error", "error");
 console.log("%cStyled Console Output", "color: blue; font-size: 20px; font-weight: bold;");
 console.log("%cRed text with %cblue background", "color: red;", "background-color: blue; color: white;");
 
-// Console assertions
+// Console assertions => issue warnings if condition is false 
 function validateAge(age) {
     console.assert(typeof age === 'number', "Age must be a number");
     console.assert(age >= 0, "Age must be positive");

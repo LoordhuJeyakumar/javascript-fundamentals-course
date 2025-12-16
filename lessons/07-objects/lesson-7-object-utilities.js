@@ -1,3 +1,7 @@
+// TEACHING NOTES: Module 7 — Object Utilities
+// Analogy: "Toolbox of small gadgets" — each utility is a small gadget that helps inspect, copy, or protect objects.
+// Demo: Show `Object.keys()`, `Object.freeze()`, shallow vs deep clone, and explain practical pitfalls with dates and functions.
+// Hands-on: Use `deepCloneObject()` to clone a nested object and show that modifying clone doesn't alter original.
 // Lesson 7: Object Utilities and Advanced Topics
 // Understanding object serialization, cloning, comparison, and performance optimization
 
@@ -45,7 +49,7 @@ let customJson = JSON.stringify(person, (key, value) => {
 console.log("Custom JSON:", customJson);
 
 // JSON with space for formatting
-let formattedJson = JSON.stringify(person, null, 2);
+let formattedJson = JSON.stringify(person, null, 4);
 console.log("Formatted JSON:");
 console.log(formattedJson);
 
@@ -75,7 +79,7 @@ console.log("Same nested object?", original.b === deepClone.b); // false
 console.log("Same array?", original.e === deepClone.e); // false
 
 // Deep cloning function
-function deepClone(obj) {
+function deepCloneObject(obj) {
     if (obj === null || typeof obj !== 'object') {
         return obj;
     }
@@ -85,14 +89,14 @@ function deepClone(obj) {
     }
     
     if (obj instanceof Array) {
-        return obj.map(item => deepClone(item));
+        return obj.map(item => deepCloneObject(item));
     }
     
     if (typeof obj === 'object') {
         let cloned = {};
         for (let key in obj) {
             if (obj.hasOwnProperty(key)) {
-                cloned[key] = deepClone(obj[key]);
+                cloned[key] = deepCloneObject(obj[key]);
             }
         }
         return cloned;
@@ -111,7 +115,7 @@ let complexObject = {
     }
 };
 
-let clonedComplex = deepClone(complexObject);
+let clonedComplex = deepCloneObject(complexObject);
 console.log("Deep cloning function:");
 console.log("Original:", complexObject);
 console.log("Cloned:", clonedComplex);
@@ -379,6 +383,13 @@ console.log("Second call:", expensiveFunction(5));
 console.log("Third call:", expensiveFunction(3));
 
 // Object pooling for performance
+/* 
+Object Pooling Class
+
+
+
+
+ */
 class ObjectPool {
     constructor(createFn, resetFn) {
         this.createFn = createFn;
@@ -412,6 +423,7 @@ console.log("Pooled objects:", object1, object2);
 
 pool.release(object1);
 pool.release(object2);
+console.log(object1)
 console.log("Objects released back to pool");
 
 // 📚 8. Object Debugging and Inspection
@@ -462,7 +474,7 @@ let complexObj = {
 console.log("Object inspection:");
 console.log("Inspected object:", inspectObject(complexObj, 3));
 
-// Object property enumeration
+// Object property enumeration = >
 function enumerateProperties(obj) {
     let ownProps = Object.getOwnPropertyNames(obj);
     let inheritedProps = [];

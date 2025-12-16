@@ -280,7 +280,7 @@ asyncArrowFunction().then((result) => {
     console.log("Async arrow function result:", result);
 });
 
-// 9. Await with Promise.all()
+// 9. Await with Promise.all() => waits for all promises to resolve before continuing if any fail one is failed it will be rejected 
 console.log("\n📚 9. Await with Promise.all()");
 console.log("-----------------------------");
 
@@ -308,7 +308,7 @@ awaitPromiseAll().then((results) => {
 console.log("\n📚 10. Await with Promise.race()");
 console.log("--------------------------------");
 
-// Await with Promise.race() => returns the first resolved promise
+// Await with Promise.race() => returns the first resolved promise or rejects if all promises reject 
 async function awaitPromiseRace() {
     console.log("Starting Promise.race() example");
     

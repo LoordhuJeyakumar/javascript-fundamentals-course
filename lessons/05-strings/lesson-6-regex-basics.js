@@ -33,7 +33,7 @@ console.log("foxRegex.test(text):", foxRegex.test(text));
 
 // Case insensitive
 let quickRegex = /QUICK/i; // This is a case insensitive pattern = > /QUICK/i is a regular expression that matches the string "QUICK" in a case insensitive manner.
-console.log("quickRegex.test('QUICK'):", quickRegex.test('QUICK'));
+console.log("quickRegex.test('QUICK'):", quickRegex.test('quick'));
 console.log("quickRegex.test('QUICK'):", quickRegex.test(text));
 
 // Global search
@@ -105,7 +105,7 @@ console.log("Numbers:", numbers);
 // Zero or more
 // syntax: *
 // description: matches zero or more of the preceding element
-// example: /\d*/ matches "123", "4567", "89", "0"
+// example: /\d*/ matches "123", "4567", "89", "0", and also matches empty strings between spaces
 
 let zeroOrMoreRegex = /\d*/g; // This is a zero or more quantifier = > /\d*/g is a regular expression that matches any digit zero or more times.
 let zeroOrMoreMatches = numbers.match(zeroOrMoreRegex);
@@ -113,8 +113,8 @@ console.log("Zero or more digits:", zeroOrMoreMatches);
 
 // One or more
 // syntax: +
-// description: matches one or more of the preceding element
-// example: /\d+/ matches "123", "4567", "89", "0"
+// description: matches one or more of the preceding element 
+// example: /\d+/ matches "123", "4567", "89", "0" 
 
 let oneOrMoreRegex = /\d+/g; // This is a one or more quantifier = > /\d+/g is a regular expression that matches any digit one or more times.
 let oneOrMoreMatches = numbers.match(oneOrMoreRegex);

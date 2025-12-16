@@ -248,7 +248,7 @@ typePromise
         console.log("Boolean:", value, typeof value);
     });
 
-// 8. Promise with Async Operations
+// 8. Promise with Async Operations => 
 console.log("\n📚 8. Promise with Async Operations");
 console.log("----------------------------------");
 

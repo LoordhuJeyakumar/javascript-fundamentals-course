@@ -1,3 +1,7 @@
+// TEACHING NOTES: Module 7 — Object Destructuring
+// Analogy: "Unpacking a lunchbox" — pick the items you need quickly without digging through everything.
+// Demo: Destructure a user object, show renaming and default values, then use spread to copy/update.
+// Hands-on: Given an API response, extract nested fields with defaults.
 // Lesson 5: Object Destructuring and Spread
 // Understanding object destructuring, spread operator, and rest parameters
 
@@ -314,6 +318,19 @@ let deepClone = JSON.parse(JSON.stringify(original));
 console.log("Deep cloning:");
 console.log("Deep clone:", deepClone);
 console.log("Same nested object?", original.b === deepClone.b); // false
+
+/* Shallo w vs Deep cloning explanation
+Shallow Cloning:
+- Creates a new object with the same top-level properties as the original.
+- Nested objects or arrays are still references to the same memory location.
+- Changes to nested objects in the clone will affect the original and vice versa.
+
+Deep Cloning:
+- Creates a new object with the same top-level properties as the original.
+- Nested objects or arrays are cloned recursively.
+- Changes to nested objects in the clone will not affect the original.
+
+*/
 
 // Object merging
 let defaultSettings = {

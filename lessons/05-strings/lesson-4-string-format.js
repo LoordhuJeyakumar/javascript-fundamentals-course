@@ -161,7 +161,9 @@ console.log("-------------------------------");
 let users = [
     { name: "Alice", age: 25, email: "alice@example.com" },
     { name: "Bob", age: 30, email: "bob@example.com" },
-    { name: "Charlie", age: 35, email: "charlie@example.com" }
+    { name: "Charlie", age: 35, email: "charlie@example.com" },
+    { name: "Diana", age: 28, email: "diana@example.com" },
+    { name: "Eve", age: 32, email: "eve@example.com" }
 ];
 
 // Generate HTML table

@@ -1,3 +1,7 @@
+// TEACHING NOTES: Module 7 — Object Prototypes
+// Analogy: "Library of shared features" — objects borrow behaviors from a shared library (prototype).
+// Demo: Create a prototype with `greet()` and use `Object.create()` to inherit it; show changing prototype affects instances.
+// Hands-on: Create `animalPrototype` with `speak()` and make `dog` and `cat` inherit and override it.
 // Lesson 3: Object Prototypes
 // Understanding prototype chains, inheritance, and prototype manipulation
 /* 
@@ -16,6 +20,9 @@ console.log("----------------------------------");
 let simpleObject = {};
 console.log("Simple object prototype:", Object.getPrototypeOf(simpleObject));
 console.log("Is Object.prototype:", Object.getPrototypeOf(simpleObject) === Object.prototype);
+
+console.log("Object.prototype:", Object.prototype);
+console.log("Object.getPrototypeOf(simpleObject):", Object.getPrototypeOf(simpleObject))
 
 // Prototype chain example
 let person = {

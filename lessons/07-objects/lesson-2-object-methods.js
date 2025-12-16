@@ -1,3 +1,7 @@
+// TEACHING NOTES: Module 7 — Object Methods
+// Analogy: "Toolbox" — methods are tools that operate on the stored data (tools in the box).
+// Demo: Calculator object; show `this` in regular vs arrow functions and why arrow functions differ.
+// Hands-on: Add a `reset()` method to the calculator object to reset `result` and `history`.
 // Lesson 2: Object Methods and Properties
 // Understanding object methods, property descriptors, and advanced object features
 
@@ -30,7 +34,9 @@ let calculator = {
         return this.result;
     },
     
-    // Method 4: Computed method names
+    // Method 4: Computed method names => use of square brackets
+    // This is useful for dynamic method names
+    // Example: calculator['divide'](a, b)
     ['divide'](a, b) {
         if (b === 0) return "Cannot divide by zero";
         this.result = a / b;
@@ -130,6 +136,12 @@ console.log("------------------------");
 
 // Object with getters and setters
 let user = {
+    /* The above code appears to be defining private properties in JavaScript. The properties
+    `_firstName`, `_lastName`, and `_age` are prefixed with an underscore to indicate that they are
+    intended to be private within the scope of the object or class they belong to. This is a common
+    convention in JavaScript to denote that these properties should not be accessed or modified
+    directly from outside the object or class. */
+    /* Private properties = prefix with _ */
     _firstName: "John",
     _lastName: "Doe",
     _age: 30,
@@ -170,6 +182,8 @@ let user = {
     }
 };
 
+
+
 console.log("User with getters and setters:");
 console.log("Full name:", user.fullName);
 console.log("Age:", user.age);
@@ -177,6 +191,8 @@ console.log("Info:", user.info);
 
 // Test setters
 user.fullName = "Jane Smith";
+user._firstName = "Test"; // Direct access to private property (not recommended)
+user._lastName = "Test";
 user.age = 25;
 
 console.log("After modification:");
@@ -290,9 +306,10 @@ console.log("Dog move:", dog.move());
 
 // Object.freeze() - make immutable
 let freezeObject = { value: 42, nested: { a: 1 } };
-Object.freeze();
-freezeObject.value = 100; // Won't work
-freezeObject.nested.a = 2; // Will work (shallow freeze)
+Object.freeze(freezeObject);
+Object.freeze(freezeObject.nested); // Freeze nested object as well
+freezeObject.value = 100; 
+freezeObject.nested.a = 2; 
 console.log("Frozen object:", freezeObject);
 
 // Object.seal() - prevent adding/removing properties

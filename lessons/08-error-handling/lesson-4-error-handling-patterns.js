@@ -8,7 +8,7 @@ console.log("==================================");
 console.log("\n📚 1. Error Handling Strategies");
 console.log("-------------------------------");
 
-// Strategy 1: Fail Fast
+// Strategy 1: Fail Fast => Immediately throw errors when invalid conditions are detected
 console.log("Strategy 1: Fail Fast");
 function validateInput(input) {
     if (input === null || input === undefined) {
@@ -30,7 +30,7 @@ try {
     console.log("✗ Validation failed:", error.message);
 }
 
-// Strategy 2: Graceful Degradation
+// Strategy 2: Graceful Degradation => Provide fallback mechanisms when errors occur
 console.log("\nStrategy 2: Graceful Degradation");
 function getLocalStorageData(key, fallback = null) {
     try {
@@ -135,7 +135,7 @@ function retryWithExponentialBackoff(operation, maxRetries = 5, baseDelay = 1000
     });
 }
 
-// 📚 3. Circuit Breaker Pattern
+// 📚 3. Circuit Breaker Pattern ===> the
 console.log("\n📚 3. Circuit Breaker Pattern");
 console.log("-----------------------------");
 
@@ -265,7 +265,7 @@ function withAsyncErrorBoundary(fn, fallback = null) {
     };
 }
 
-// 📚 5. Error Aggregation
+// 📚 5. Error Aggregation =>
 console.log("\n📚 5. Error Aggregation");
 console.log("----------------------");
 

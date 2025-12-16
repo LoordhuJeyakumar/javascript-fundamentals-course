@@ -1,3 +1,7 @@
+// TEACHING NOTES: Module 7 — ES6 Classes
+// Analogy: "Blueprints (class) and houses (instances)" — classes define structure, instances are built from them.
+// Demo: Create `Person` class and subclass `Student`; show `super()` and method overriding.
+// Hands-on: Implement `Student` subclass that adds `study(subject)` and track study time.
 // Lesson 4: ES6 Classes
 // Understanding ES6 class syntax, constructors, methods, and inheritance
 
@@ -21,6 +25,7 @@ class Person {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
+        console.log(`Person created: ${this.getFullName()}, Age: ${this.age}`);
     }
     
     // Instance method
@@ -136,6 +141,8 @@ class BankAccount {
             transactions: [...this.transactions]
         };
     }
+
+    destroycr
 }
 
 // Create bank account
@@ -564,6 +571,12 @@ try {
 console.log("\n📚 7. Class Composition and Mixins");
 console.log("--------------------------------");
 
+/*
+Class composition is a design principle in object-oriented programming where classes are composed of other classes or objects to achieve code reuse and modularity. Instead of relying solely on inheritance, composition allows you to build complex functionality by combining simpler, reusable components.
+
+Mixins are a way to achieve class composition by allowing classes to borrow methods and properties from other classes or objects without using inheritance. Mixins enable you to add functionality to a class by "mixing in" methods from other classes or objects, promoting code reuse and flexibility.
+*/
+
 // Mixin for logging
 let LoggingMixin = {
     log(message) {
@@ -727,3 +740,13 @@ console.log("2. Practice inheritance with extends");
 console.log("3. Use static methods and instance methods");
 console.log("4. Implement getters and setters");
 console.log("5. Practice class composition and mixins");
+
+
+const CustomArray = require('./CustomArrat');
+
+const newArray  = new CustomArray();
+
+console.log(newArray.print());
+newArray.add(10);
+newArray.add(20);
+console.log(newArray.print());

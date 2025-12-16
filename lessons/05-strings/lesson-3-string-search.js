@@ -79,6 +79,17 @@ let data = "User: john, Age: 25, City: New York";
 console.log("Data:", data);
 
 // Replace with function
+
+/* 
+This section demonstrates how to use the replace() method with a function as the replacement argument.
+/(\w+):\s*(\w+)/g
+    1. (\w+): Matches a sequence of word characters (letters, digits, or underscores) followed by a colon. This captures the key (e.g., "User", "Age", "City").
+    2. \s*: Matches any whitespace characters (spaces, tabs) that may appear after the colon.
+    3. (\w+): Matches another sequence of word characters, capturing the value associated with the key (e.g., "john", "25", "NewYork").
+    4. g: The global flag ensures that all occurrences in the string are matched, not just the first one.
+
+
+*/
 let formattedData = data.replace(/(\w+):\s*(\w+)/g, (match, key, value) => {
     return `${key.toUpperCase()}: ${value.toUpperCase()}`;
 });

@@ -41,13 +41,17 @@ console.log("-------------------------------------");
 
 // Promise.all() with one failing Promise
 let mixedPromises = [
-    createDelayedPromise("Success 1", 500),
+     new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve("Success 1");
+        }, 500);
+    }),
     new Promise((resolve, reject) => {
         setTimeout(() => {
             reject(new Error("This Promise fails"));
         }, 300);
     }),
-    createDelayedPromise("Success 3", 700)
+   
 ];
 
 Promise.all(mixedPromises)

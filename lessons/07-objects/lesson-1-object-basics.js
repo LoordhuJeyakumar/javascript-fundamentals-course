@@ -1,3 +1,7 @@
+// TEACHING NOTES: Module 7 — Object Basics
+// Analogy: "Contact card" — properties are fields (name, phone), methods are actions (message/send).
+// Live demo: Build a `person` contact card, show dot vs bracket access, modify fields live.
+// Hands-on: Create a `book` object with a `readPage()` method that advances `currentPage`.
 // Lesson 1: Object Basics
 // Understanding JavaScript objects, properties, and methods
 
@@ -27,7 +31,7 @@ let mixedObject = {
     nestedObject: {
         key: "value"
     },
-    function: function() {
+    functionName: function() {
         return "I'm a function";
     }
 };
@@ -50,6 +54,8 @@ console.log("Dynamic object:", dynamicObject);
 // 📚 2. Object Properties and Methods
 console.log("\n📚 2. Object Properties and Methods");
 console.log("----------------------------------");
+
+console.log("this keyword:", this);
 
 // Object with methods
 let calculator = {
@@ -196,6 +202,7 @@ Object.defineProperty(configurableObject, 'readOnly', {
     enumerable: true,
     configurable: false
 });
+
 
 Object.defineProperty(configurableObject, 'hidden', {
     value: "This is hidden",

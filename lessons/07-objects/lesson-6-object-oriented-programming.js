@@ -1,751 +1,212 @@
-// Lesson 6: Object-Oriented Programming
-// Understanding OOP principles, design patterns, and advanced object concepts
+// TEACHING NOTES: Module 7 — OOP Overview
+// Analogy: "Blueprints and Houses" — classes are blueprints; objects are built houses from that blueprint.
+// Demo: Show a `HouseBlueprint` class and build multiple houses with different paint colors; show encapsulation and method use.
+// Hands-on: Build a `BankAccount` class with `deposit`, `withdraw`, and a private balance (use closure or symbol).
+// Lesson 6: A Beginner-Friendly Guide to Object-Oriented Programming (OOP)
+// Welcome! This guide will help you understand OOP using simple analogies and real-world examples.
 
-console.log("📚 Lesson 6: Object-Oriented Programming");
-console.log("======================================");
+console.log("📚 Lesson 6: A Beginner-Friendly Guide to Object-Oriented Programming (OOP)");
+console.log("========================================================================");
 
-// 📚 1. Encapsulation Principles
-console.log("\n📚 1. Encapsulation Principles");
-console.log("-----------------------------");
+// What is OOP?
+// Think of it as a way to organize your code. Instead of having loose data and functions,
+// we group them together into "objects". It helps in modeling real-world things.
 
-// Encapsulation using closures
-function createBankAccount(accountNumber, initialBalance = 0) {
-    // Private variables
-    let balance = initialBalance;
-    let transactions = [];
-    
-    // Public methods
-    return {
-        getAccountNumber() {
-            return accountNumber;
-        },
-        
-        getBalance() {
-            return balance;
-        },
-        
-        deposit(amount) {
-            if (typeof amount !== 'number' || amount <= 0) {
-                throw new Error("Amount must be a positive number");
-            }
-            balance += amount;
-            transactions.push({
-                type: 'deposit',
-                amount: amount,
-                timestamp: new Date().toISOString(),
-                balance: balance
-            });
-            return `Deposited $${amount}. New balance: $${balance}`;
-        },
-        
-        withdraw(amount) {
-            if (typeof amount !== 'number' || amount <= 0) {
-                throw new Error("Amount must be a positive number");
-            }
-            if (amount > balance) {
-                throw new Error("Insufficient funds");
-            }
-            balance -= amount;
-            transactions.push({
-                type: 'withdrawal',
-                amount: amount,
-                timestamp: new Date().toISOString(),
-                balance: balance
-            });
-            return `Withdrew $${amount}. New balance: $${balance}`;
-        },
-        
-        getTransactions() {
-            return [...transactions]; // Return copy to prevent external modification
-        },
-        
-        getStatement() {
-            return {
-                accountNumber: accountNumber,
-                currentBalance: balance,
-                transactionCount: transactions.length,
-                transactions: [...transactions]
-            };
-        }
-    };
-}
+// 🌟 Analogy: The Blueprint and the Houses 🌟
+// Imagine you have a blueprint for a house. The blueprint is not a house itself, but it contains all the plans for creating a house.
+// In OOP:
+// - The Blueprint is called a CLASS.
+// - The actual Houses you build from the blueprint are called OBJECTS (or instances).
+// You can build many houses from one blueprint, and each can have its own unique details (like paint color or address).
 
-// Create bank account
-let account = createBankAccount("123456789", 1000);
+console.log("\n--- 🏛️ Let's start with a CLASS (Our Blueprint) ---");
 
-console.log("Encapsulated bank account:");
-console.log("Account number:", account.getAccountNumber());
-console.log("Initial balance:", account.getBalance());
+// This 'HouseBlueprint' class defines what every house will have.
+class HouseBlueprint {
+    // The 'constructor' is a special method that runs when you create a new house (object).
+    // It sets up the initial properties.
+    constructor(address, paintColor) {
+        console.log(`Constructing a new house at ${address}...`);
+        this.address = address;         // Each house has an address.
+        this.paintColor = paintColor;   // Each house has a paint color.
+        this.isDoorOpen = false;        // By default, the door is closed.
+    }
 
-try {
-    console.log(account.deposit(500));
-    console.log(account.withdraw(200));
-    console.log("Current balance:", account.getBalance());
-    console.log("Transactions:", account.getTransactions());
-} catch (error) {
-    console.log("Error:", error.message);
-}
+    // These are METHODS (actions the house can perform).
+    openDoor() {
+        this.isDoorOpen = true;
+        console.log(`The door of the house at ${this.address} is now open.`);
+    }
 
-// Try to access private variables (won't work)
-console.log("Private balance access:", account.balance); // undefined
-console.log("Private transactions access:", account.transactions); // undefined
+    closeDoor() {
+        this.isDoorOpen = false;
+        console.log(`The door of the house at ${this.address} is now closed.`);
+    }
 
-// 📚 2. Inheritance Patterns
-console.log("\n📚 2. Inheritance Patterns");
-console.log("-------------------------");
-
-// Base class
-class Animal {
-    constructor(name, species) {
-        this.name = name;
-        this.species = species;
-        this.isAlive = true;
-    }
-    
-    eat(food) {
-        return `${this.name} is eating ${food}`;
-    }
-    
-    sleep() {
-        return `${this.name} is sleeping`;
-    }
-    
-    makeSound() {
-        return `${this.name} makes a sound`;
-    }
-    
-    getInfo() {
-        return `${this.name} is a ${this.species}`;
-    }
-}
-
-// Derived class
-class Dog extends Animal {
-    constructor(name, breed) {
-        super(name, "dog");
-        this.breed = breed;
-        this.tricks = [];
-    }
-    
-    // Override parent method
-    makeSound() {
-        return `${this.name} barks: Woof! Woof!`;
-    }
-    
-    // New method specific to Dog
-    learnTrick(trick) {
-        this.tricks.push(trick);
-        return `${this.name} learned to ${trick}`;
-    }
-    
-    // New method specific to Dog
-    performTrick(trick) {
-        if (this.tricks.includes(trick)) {
-            return `${this.name} performs ${trick}`;
-        }
-        return `${this.name} doesn't know how to ${trick}`;
-    }
-    
-    // Override getInfo to include breed
-    getInfo() {
-        return `${this.name} is a ${this.breed} ${this.species}`;
-    }
-}
-
-// Another derived class
-class Cat extends Animal {
-    constructor(name, breed) {
-        super(name, "cat");
-        this.breed = breed;
-        this.lives = 9;
-    }
-    
-    // Override parent method
-    makeSound() {
-        return `${this.name} meows: Meow! Meow!`;
-    }
-    
-    // New method specific to Cat
-    purr() {
-        return `${this.name} purrs contentedly`;
-    }
-    
-    // New method specific to Cat
-    climb() {
-        return `${this.name} climbs up high`;
-    }
-    
-    // Override getInfo to include breed
-    getInfo() {
-        return `${this.name} is a ${this.breed} ${this.species} with ${this.lives} lives`;
-    }
-}
-
-// Create instances
-let dog = new Dog("Buddy", "Golden Retriever");
-let cat = new Cat("Whiskers", "Persian");
-
-console.log("Inheritance examples:");
-console.log("Dog info:", dog.getInfo());
-console.log("Dog sound:", dog.makeSound());
-console.log("Dog eat:", dog.eat("kibble"));
-console.log("Dog learn trick:", dog.learnTrick("sit"));
-console.log("Dog perform trick:", dog.performTrick("sit"));
-
-console.log("Cat info:", cat.getInfo());
-console.log("Cat sound:", cat.makeSound());
-console.log("Cat eat:", cat.eat("fish"));
-console.log("Cat purr:", cat.purr());
-console.log("Cat climb:", cat.climb());
-
-// 📚 3. Polymorphism Concepts
-console.log("\n📚 3. Polymorphism Concepts");
-console.log("---------------------------");
-
-// Polymorphism with different animal types
-let animals = [
-    new Dog("Rex", "German Shepherd"),
-    new Cat("Fluffy", "Maine Coon"),
-    new Animal("Generic", "unknown")
-];
-
-console.log("Polymorphism example:");
-animals.forEach(animal => {
-    console.log(`Animal: ${animal.getInfo()}`);
-    console.log(`Sound: ${animal.makeSound()}`);
-    console.log(`Eating: ${animal.eat("food")}`);
-    console.log("---");
-});
-
-// Polymorphism with different shapes
-class Shape {
-    constructor(name) {
-        this.name = name;
-    }
-    
-    getArea() {
-        return 0; // Override in subclasses
-    }
-    
-    getPerimeter() {
-        return 0; // Override in subclasses
-    }
-    
+    // This method describes the house.
     describe() {
-        return `${this.name} with area ${this.getArea()} and perimeter ${this.getPerimeter()}`;
+        return `This is a ${this.paintColor} house at ${this.address}.`;
     }
 }
 
-class Circle extends Shape {
-    constructor(radius) {
-        super("Circle");
-        this.radius = radius;
+console.log("Blueprint created: HouseBlueprint");
+
+console.log("\n--- 🏡 Now, let's build some OBJECTS (Actual Houses) from our blueprint ---");
+
+// We use the 'new' keyword to create objects from our class.
+const myHouse = new HouseBlueprint("123 Main St", "blue");
+const neighborsHouse = new HouseBlueprint("125 Main St", "white");
+
+// Now we have two separate house objects. They share the same blueprint but have different data.
+console.log(myHouse.describe());       // Output: This is a blue house at 123 Main St.
+console.log(neighborsHouse.describe()); // Output: This is a white house at 125 Main St.
+
+// We can also call their methods.
+myHouse.openDoor(); // Output: The door of the house at 123 Main St is now open.
+console.log("Is my house door open?", myHouse.isDoorOpen); // Output: true
+
+neighborsHouse.closeDoor(); // The door is already closed, but the method runs anyway.
+console.log("Is my neighbor's house door open?", neighborsHouse.isDoorOpen); // Output: false
+
+console.log("\nGreat! You now understand the basics of Classes and Objects.");
+console.log("Now, let's explore the Four Pillars of OOP.");
+
+// ===================================================================================
+// 🏛️ PILLAR 1: ENCAPSULATION (Keeping Things Bundled and Tidy)
+// ===================================================================================
+console.log("\n--- 🏛️ PILLAR 1: ENCAPSULATION ---");
+// Encapsulation means bundling the data (properties) and the methods that operate on that data
+// into a single unit (our 'HouseBlueprint' class is a perfect example!).
+// It also means hiding the internal complexity.
+
+// 🌟 Analogy: A Car's Dashboard 🌟
+// You use a steering wheel, pedals, and a gear stick to drive a car. You don't need to know
+// how the engine, transmission, or electronics work. The complex details are hidden (encapsulated)
+// from you. You just use the simple, public interface.
+
+// In our HouseBlueprint, the `address` and `paintColor` are bundled with the `openDoor` and `describe` methods.
+// We don't let people from outside directly mess with the house's internal state without using the methods we provide.
+// For example, to open the door, you should call `myHouse.openDoor()`, not try to change `isDoorOpen` directly.
+// This keeps our object's state predictable and safe.
+
+console.log("Encapsulation bundles data (like 'paintColor') and methods (like 'describe') together in our HouseBlueprint.");
+
+// ===================================================================================
+// 🏛️ PILLAR 2: INHERITANCE (Reusing and Extending Blueprints)
+// ===================================================================================
+console.log("\n--- 🏛️ PILLAR 2: INHERITANCE ---");
+// Inheritance lets us create a new class (a "child") that reuses and expands upon an existing class (a "parent").
+
+// 🌟 Analogy: Vehicles 🌟
+// Think of a general "Vehicle" blueprint. It has properties like `speed` and methods like `move()`.
+// Now, you can create more specific blueprints based on it:
+// - A 'Car' blueprint inherits everything from 'Vehicle' but adds `numberOfDoors`.
+// - A 'Bicycle' blueprint also inherits from 'Vehicle' but adds `numberOfPedals`.
+// This avoids repeating the same code.
+
+// Let's create a parent class 'Building'.
+class Building {
+    constructor(address) {
+        this.address = address;
     }
-    
-    getArea() {
-        return Math.PI * this.radius * this.radius;
-    }
-    
-    getPerimeter() {
-        return 2 * Math.PI * this.radius;
+
+    getAddress() {
+        return `Address: ${this.address}`;
     }
 }
 
-class Rectangle extends Shape {
-    constructor(width, height) {
-        super("Rectangle");
-        this.width = width;
-        this.height = height;
+// Now, let's create a 'House' class that INHERITS from 'Building'.
+// We use the 'extends' keyword.
+class House extends Building {
+    constructor(address, numberOfRooms) {
+        // 'super()' calls the constructor of the parent class ('Building').
+        // It's important to do this first!
+        super(address);
+        this.numberOfRooms = numberOfRooms;
     }
-    
-    getArea() {
-        return this.width * this.height;
-    }
-    
-    getPerimeter() {
-        return 2 * (this.width + this.height);
+
+    describeHouse() {
+        // We can use methods from the parent class AND this class.
+        return `${this.getAddress()} | Rooms: ${this.numberOfRooms}`;
     }
 }
 
-class Triangle extends Shape {
-    constructor(base, height, side1, side2) {
-        super("Triangle");
-        this.base = base;
-        this.height = height;
-        this.side1 = side1;
-        this.side2 = side2;
-    }
-    
-    getArea() {
-        return 0.5 * this.base * this.height;
-    }
-    
-    getPerimeter() {
-        return this.base + this.side1 + this.side2;
+const myNewHouse = new House("456 Oak Ave", 7);
+console.log(myNewHouse.describeHouse()); // It has access to its own methods and the parent's.
+
+// ===================================================================================
+// 🏛️ PILLAR 3: POLYMORPHISM (One Action, Many Forms)
+// ===================================================================================
+console.log("\n--- 🏛️ PILLAR 3: POLYMORPHISM ---");
+// Polymorphism means "many forms". It allows different objects to respond to the same
+// method call in their own unique way.
+
+// 🌟 Analogy: Animal Sounds 🌟
+// If you tell different animals to "make a sound":
+// - A Dog will bark.
+// - A Cat will meow.
+// - A Cow will moo.
+// The action is the same ("make a sound"), but the result is different for each animal.
+
+class Animal {
+    makeSound() {
+        console.log("Some generic animal sound");
     }
 }
 
-// Create shapes
-let shapes = [
-    new Circle(5),
-    new Rectangle(4, 6),
-    new Triangle(3, 4, 5, 5)
-];
+class Dog extends Animal {
+    // We OVERRIDE the parent's makeSound method.
+    makeSound() {
+        console.log("Woof! Woof!");
+    }
+}
 
-console.log("Shape polymorphism:");
-shapes.forEach(shape => {
-    console.log(shape.describe());
+class Cat extends Animal {
+    // We OVERRIDE it here too.
+    makeSound() {
+        console.log("Meow!");
+    }
+}
+
+const animals = [new Dog(), new Cat(), new Animal()];
+
+// We can loop through them and call the same method on each one.
+animals.forEach(animal => {
+    animal.makeSound(); // The correct sound is made for each animal object!
 });
 
-// 📚 4. Design Patterns with Objects
-console.log("\n📚 4. Design Patterns with Objects");
-console.log("---------------------------------");
+// ===================================================================================
+// 🏛️ PILLAR 4: ABSTRACTION (Hiding the Complex Stuff)
+// ===================================================================================
+console.log("\n--- 🏛️ PILLAR 4: ABSTRACTION ---");
+// Abstraction means hiding the complex implementation details and showing only the
+// essential features of the object. It's about simplifying things for the user.
 
-// Singleton Pattern
-class DatabaseConnection {
-    constructor() {
-        if (DatabaseConnection.instance) {
-            return DatabaseConnection.instance;
-        }
-        
-        this.connectionString = "localhost:5432/mydb";
-        this.isConnected = false;
-        DatabaseConnection.instance = this;
-    }
-    
-    connect() {
-        if (!this.isConnected) {
-            this.isConnected = true;
-            console.log("Connected to database");
-        }
-        return this;
-    }
-    
-    disconnect() {
-        if (this.isConnected) {
-            this.isConnected = false;
-            console.log("Disconnected from database");
-        }
-        return this;
-    }
-    
-    query(sql) {
-        if (!this.isConnected) {
-            throw new Error("Not connected to database");
-        }
-        console.log(`Executing query: ${sql}`);
-        return { rows: [], affected: 0 };
-    }
-}
+// 🌟 Analogy: A TV Remote 🌟
+// Your TV remote has simple buttons like "Volume Up", "Power On", and "Next Channel".
+// When you press "Volume Up", you don't know (or care) about the infrared signals,
+// the circuit board, or the speaker's electronics. All that complexity is hidden (abstracted) away.
+// You just know that pressing the button will increase the volume.
 
-// Test singleton
-let db1 = new DatabaseConnection();
-let db2 = new DatabaseConnection();
-console.log("Singleton pattern:");
-console.log("Same instance?", db1 === db2); // true
+// In our code, when we call `myHouse.openDoor()`, we are using abstraction.
+// We don't need to know that it's changing a variable called `isDoorOpen` from `false` to `true`.
+// The internal logic is hidden. We just know the door will be open.
+// Abstraction is often a result of good Encapsulation.
 
-db1.connect();
-db1.query("SELECT * FROM users");
-db2.query("SELECT * FROM products"); // Works because it's the same instance
-
-// Factory Pattern
-class VehicleFactory {
-    static createVehicle(type, ...args) {
-        switch (type) {
-            case 'car':
-                return new Car(...args);
-            case 'motorcycle':
-                return new Motorcycle(...args);
-            case 'truck':
-                return new Truck(...args);
-            default:
-                throw new Error(`Unknown vehicle type: ${type}`);
-        }
-    }
-}
-
-class Car {
-    constructor(brand, model, year) {
-        this.brand = brand;
-        this.model = model;
-        this.year = year;
-        this.type = 'car';
-    }
-    
-    start() {
-        return `${this.brand} ${this.model} car is starting`;
-    }
-}
-
-class Motorcycle {
-    constructor(brand, model, year) {
-        this.brand = brand;
-        this.model = model;
-        this.year = year;
-        this.type = 'motorcycle';
-    }
-    
-    start() {
-        return `${this.brand} ${this.model} motorcycle is starting`;
-    }
-}
-
-class Truck {
-    constructor(brand, model, year) {
-        this.brand = brand;
-        this.model = model;
-        this.year = year;
-        this.type = 'truck';
-    }
-    
-    start() {
-        return `${this.brand} ${this.model} truck is starting`;
-    }
-}
-
-// Test factory pattern
-console.log("Factory pattern:");
-let vehicle1 = VehicleFactory.createVehicle('car', 'Toyota', 'Camry', 2023);
-let vehicle2 = VehicleFactory.createVehicle('motorcycle', 'Honda', 'CBR', 2023);
-let vehicle3 = VehicleFactory.createVehicle('truck', 'Ford', 'F-150', 2023);
-
-console.log(vehicle1.start());
-console.log(vehicle2.start());
-console.log(vehicle3.start());
-
-// Observer Pattern
-class EventEmitter {
-    constructor() {
-        this.events = {};
-    }
-    
-    on(event, callback) {
-        if (!this.events[event]) {
-            this.events[event] = [];
-        }
-        this.events[event].push(callback);
-    }
-    
-    emit(event, data) {
-        if (this.events[event]) {
-            this.events[event].forEach(callback => callback(data));
-        }
-    }
-    
-    off(event, callback) {
-        if (this.events[event]) {
-            this.events[event] = this.events[event].filter(cb => cb !== callback);
-        }
-    }
-}
-
-// Test observer pattern
-let eventEmitter = new EventEmitter();
-
-eventEmitter.on('userLogin', (user) => {
-    console.log(`User ${user.name} logged in`);
-});
-
-eventEmitter.on('userLogin', (user) => {
-    console.log(`Sending welcome email to ${user.email}`);
-});
-
-eventEmitter.on('userLogout', (user) => {
-    console.log(`User ${user.name} logged out`);
-});
-
-console.log("Observer pattern:");
-eventEmitter.emit('userLogin', { name: 'John', email: 'john@example.com' });
-eventEmitter.emit('userLogout', { name: 'John', email: 'john@example.com' });
-
-// 📚 5. Composition over Inheritance
-console.log("\n📚 5. Composition over Inheritance");
-console.log("---------------------------------");
-
-// Composition example
-class Engine {
-    constructor(type) {
-        this.type = type;
-        this.isRunning = false;
-    }
-    
-    start() {
-        this.isRunning = true;
-        return `${this.type} engine started`;
-    }
-    
-    stop() {
-        this.isRunning = false;
-        return `${this.type} engine stopped`;
-    }
-}
-
-class Wheels {
-    constructor(count) {
-        this.count = count;
-        this.isSpinning = false;
-    }
-    
-    spin() {
-        this.isSpinning = true;
-        return `${this.count} wheels are spinning`;
-    }
-    
-    stop() {
-        this.isSpinning = false;
-        return `${this.count} wheels stopped`;
-    }
-}
-
-class VehicleComposed {
-    constructor(brand, model, engine, wheels) {
-        this.brand = brand;
-        this.model = model;
-        this.engine = engine;
-        this.wheels = wheels;
-    }
-    
-    start() {
-        return `${this.brand} ${this.model}: ${this.engine.start()}, ${this.wheels.spin()}`;
-    }
-    
-    stop() {
-        return `${this.brand} ${this.model}: ${this.engine.stop()}, ${this.wheels.stop()}`;
-    }
-    
-    getInfo() {
-        return `${this.brand} ${this.model} with ${this.engine.type} engine and ${this.wheels.count} wheels`;
-    }
-}
-
-// Create composed vehicle
-let carEngine = new Engine("V6");
-let carWheels = new Wheels(4);
-let composedCar = new VehicleComposed("Toyota", "Camry", carEngine, carWheels);
-
-console.log("Composition example:");
-console.log(composedCar.getInfo());
-console.log(composedCar.start());
-console.log(composedCar.stop());
-
-// 📚 6. Advanced Object Concepts
-console.log("\n📚 6. Advanced Object Concepts");
-console.log("-----------------------------");
-
-// Mixins
-let Flyable = {
-    fly() {
-        return `${this.name} is flying`;
-    },
-    
-    land() {
-        return `${this.name} has landed`;
-    }
-};
-
-let Swimmable = {
-    swim() {
-        return `${this.name} is swimming`;
-    },
-    
-    dive() {
-        return `${this.name} is diving`;
-    }
-};
-
-// Mixin function
-function mixin(target, ...sources) {
-    sources.forEach(source => {
-        Object.getOwnPropertyNames(source).forEach(name => {
-            if (name !== 'constructor') {
-                target.prototype[name] = source[name];
-            }
-        });
-    });
-    return target;
-}
-
-// Create class with mixins
-class Bird {
-    constructor(name) {
-        this.name = name;
-    }
-    
-    chirp() {
-        return `${this.name} chirps`;
-    }
-}
-
-mixin(Bird, Flyable);
-
-class Duck {
-    constructor(name) {
-        this.name = name;
-    }
-    
-    quack() {
-        return `${this.name} quacks`;
-    }
-}
-
-mixin(Duck, Flyable, Swimmable);
-
-// Test mixins
-let bird = new Bird("Tweety");
-let duck = new Duck("Donald");
-
-console.log("Mixin examples:");
-console.log(bird.chirp());
-console.log(bird.fly());
-console.log(bird.land());
-
-console.log(duck.quack());
-console.log(duck.fly());
-console.log(duck.swim());
-console.log(duck.dive());
-
-// 📚 7. Object Serialization and Cloning
-console.log("\n📚 7. Object Serialization and Cloning");
-console.log("-----------------------------------");
-
-// Deep cloning function
-function deepClone(obj) {
-    if (obj === null || typeof obj !== 'object') {
-        return obj;
-    }
-    
-    if (obj instanceof Date) {
-        return new Date(obj.getTime());
-    }
-    
-    if (obj instanceof Array) {
-        return obj.map(item => deepClone(item));
-    }
-    
-    if (typeof obj === 'object') {
-        let cloned = {};
-        for (let key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                cloned[key] = deepClone(obj[key]);
-            }
-        }
-        return cloned;
-    }
-}
-
-// Test deep cloning
-let originalObject = {
-    name: "John",
-    age: 30,
-    address: {
-        street: "123 Main St",
-        city: "New York",
-        coordinates: {
-            lat: 40.7128,
-            lng: -74.0060
-        }
-    },
-    hobbies: ["reading", "coding", "gaming"],
-    birthDate: new Date("1990-01-01")
-};
-
-let clonedObject = deepClone(originalObject);
-
-console.log("Deep cloning:");
-console.log("Original:", originalObject);
-console.log("Cloned:", clonedObject);
-console.log("Same object?", originalObject === clonedObject); // false
-console.log("Same address?", originalObject.address === clonedObject.address); // false
-console.log("Same coordinates?", originalObject.address.coordinates === clonedObject.address.coordinates); // false
-
-// Modify cloned object
-clonedObject.name = "Jane";
-clonedObject.address.city = "Los Angeles";
-clonedObject.hobbies.push("swimming");
-
-console.log("After modification:");
-console.log("Original name:", originalObject.name);
-console.log("Cloned name:", clonedObject.name);
-console.log("Original city:", originalObject.address.city);
-console.log("Cloned city:", clonedObject.address.city);
-console.log("Original hobbies:", originalObject.hobbies);
-console.log("Cloned hobbies:", clonedObject.hobbies);
-
-// 📚 8. Object Performance and Optimization
-console.log("\n📚 8. Object Performance and Optimization");
-console.log("---------------------------------------");
-
-// Object property access optimization
-class OptimizedObject {
-    constructor() {
-        this._cache = new Map();
-        this._data = {};
-    }
-    
-    // Use Map for frequent lookups
-    set(key, value) {
-        this._data[key] = value;
-        this._cache.set(key, value);
-    }
-    
-    get(key) {
-        if (this._cache.has(key)) {
-            return this._cache.get(key);
-        }
-        return this._data[key];
-    }
-    
-    // Use Object.freeze for immutable objects
-    freeze() {
-        Object.freeze(this._data);
-        return this;
-    }
-    
-    // Use Object.seal for controlled modification
-    seal() {
-        Object.seal(this._data);
-        return this;
-    }
-}
-
-let optimized = new OptimizedObject();
-optimized.set("name", "John");
-optimized.set("age", 30);
-
-console.log("Optimized object:");
-console.log("Get name:", optimized.get("name"));
-console.log("Get age:", optimized.get("age"));
-
-// Performance comparison
-console.time("Object property access");
-for (let i = 0; i < 1000000; i++) {
-    let obj = { a: 1, b: 2, c: 3 };
-    let value = obj.a;
-}
-console.timeEnd("Object property access");
-
-console.time("Map access");
-for (let i = 0; i < 1000000; i++) {
-    let map = new Map([['a', 1], ['b', 2], ['c', 3]]);
-    let value = map.get('a');
-}
-console.timeEnd("Map access");
+console.log("When we call `myHouse.openDoor()`, we are using Abstraction.");
+console.log("We don't care HOW it opens the door, just that it does.");
 
 console.log("\n🎉 Lesson 6 Complete!");
 console.log("=====================");
 console.log("Key Takeaways:");
-console.log("- Encapsulation hides internal implementation details");
-console.log("- Inheritance allows code reuse through class hierarchies");
-console.log("- Polymorphism enables objects of different types to be treated uniformly");
-console.log("- Design patterns provide reusable solutions to common problems");
-console.log("- Composition is often preferred over inheritance");
-console.log("- Mixins provide a way to share functionality across classes");
-console.log("- Deep cloning creates independent copies of objects");
-console.log("- Performance optimization is important for large-scale applications");
+console.log("- OOP helps organize code using Classes (blueprints) and Objects (actual things).");
+console.log("- Encapsulation: Bundling data and methods together.");
+console.log("- Inheritance: Reusing code by having a child class extend a parent class.");
+console.log("- Polymorphism: Allowing different objects to have a unique response to the same method call.");
+console.log("- Abstraction: Hiding complexity to make things easier to use.");
 
 console.log("\n📝 Practice Exercises:");
-console.log("1. Implement encapsulation using closures");
-console.log("2. Create inheritance hierarchies with classes");
-console.log("3. Practice polymorphism with different object types");
-console.log("4. Implement design patterns like Singleton and Factory");
-console.log("5. Use composition to build complex objects");
+console.log("1. Create a 'Car' class with properties like 'make', 'model', and 'year'.");
+console.log("2. Add methods to your 'Car' class like 'startEngine()' and 'drive()'.");
+console.log("3. Create a 'Motorcycle' class that inherits from a general 'Vehicle' class.");
+console.log("4. Create an array of different 'Shape' objects (like Circle, Square) and have each one implement a 'draw()' method that logs what they are.");

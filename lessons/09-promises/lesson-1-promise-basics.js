@@ -36,6 +36,7 @@ let successPromise = new Promise((resolve, reject) => {
 
 console.log("Created a Promise that will resolve in 1 second");
 console.log("Promise state:", successPromise);
+setTimeout(()=> {console.log("Promise state after 1.5 seconds:", successPromise);}, 1500);
 
 // Promise with reject
 let failurePromise = new Promise((resolve, reject) => {

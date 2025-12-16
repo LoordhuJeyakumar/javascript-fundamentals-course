@@ -132,6 +132,7 @@ class StringProcessor {
     
     processString(str) {
         if (this.cache.has(str)) {
+            console.log("Cache hit for:", str);
             return this.cache.get(str);
         }
         
@@ -167,7 +168,7 @@ class StringBuilder {
         this.parts = [];
     }
     
-    append(str) {
+    add(str) {
         this.parts.push(str);
         return this;
     }
@@ -195,10 +196,10 @@ class StringBuilder {
 // Usage example
 let builder = new StringBuilder();
 let html = builder
-    .append("<div>")
-    .append("Hello ")
-    .append("World")
-    .append("</div>")
+    .add("<div>")
+    .add("Hello ")
+    .add("World")
+    .add("</div>")
     .toString();
 
 console.log("StringBuilder result:", html);

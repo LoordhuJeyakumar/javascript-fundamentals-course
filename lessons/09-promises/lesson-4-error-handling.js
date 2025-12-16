@@ -31,7 +31,7 @@ console.log("--------------------------------");
 // Error propagation example
 function createErrorChain() {
     return new Promise((resolve) => {
-        resolve(10);
+        resolve(4);
     })
     .then((value) => {
         console.log("Step 1:", value);
@@ -490,7 +490,7 @@ console.log("\n📚 11. Practical Example: API Error Handling");
 console.log("--------------------------------------------");
 
 // Simulate API with different error types
-async function simulateApiCall(endpoint, shouldFail = false, errorType = "network") {
+async function simulateApiCall(endpoint, shouldFail = true, errorType = "network") {
     console.log(`Calling API endpoint: ${endpoint}`);
     
     return new Promise((resolve, reject) => {
