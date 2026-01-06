@@ -38,7 +38,7 @@ const html = element.innerHTML;
 ### 3. Class Management
 ```javascript
 // Add class
-element.classList.add('new-class');
+element.classList.add('new-class', 'another-class');
 
 // Remove class
 element.classList.remove('old-class');

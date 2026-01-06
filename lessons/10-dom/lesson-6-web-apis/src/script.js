@@ -1,3 +1,8 @@
+//
+
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     // Storage APIs Demo
     const storageDemo = (() => {
@@ -183,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const orientationInfo = document.querySelector('#orientationInfo .info-content');
         const batteryInfo = document.querySelector('#batteryInfo .info-content');
         const networkInfo = document.querySelector('#networkInfo .info-content');
-
+        console.log("Navigator", navigator);
         // Geolocation
         document.getElementById('getLocation').addEventListener('click', () => {
             if ('geolocation' in navigator) {
@@ -220,6 +225,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Battery Status
         if ('getBattery' in navigator) {
             navigator.getBattery().then(battery => {
+
+                console.log("Battery", battery);
+                
                 function updateBatteryInfo() {
                     batteryInfo.innerHTML = `
                         Level: ${(battery.level * 100).toFixed(2)}%<br>

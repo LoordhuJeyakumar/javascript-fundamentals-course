@@ -21,7 +21,7 @@ if (element2) {
   element2.style.color = "red";
 }
 
-title.textContent = "chnage title from js";
+title.textContent = "new Title Set via textContent";
 title.style.color = "red";
 title.style.fontSize = "54px";
 
@@ -130,7 +130,10 @@ let clickCount = 0;
 
 countButton.addEventListener('click', function() {
     clickCount++;
-    counter.textContent = `Clicks: ${clickCount}`;
+    counter.innerHTML = `
+    <h4>Button clicked ${clickCount} times</h4>
+
+    `;
 });
 
 
